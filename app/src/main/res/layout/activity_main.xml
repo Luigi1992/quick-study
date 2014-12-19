@@ -1,0 +1,87 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    tools:context=".MainActivity" tools:ignore="MergeRootFrame"
+    android:background="#ffbbdefb">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:id="@+id/examNameEditText"
+            android:layout_gravity="center_horizontal|top"
+            android:hint="@string/exam_name"
+            android:autoText="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/dateOfExamEditText"
+                android:layout_gravity="center_horizontal|top"
+                android:hint="@string/date_of_exam"
+                android:editable="false"
+                android:focusable="false"
+                android:enabled="true" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/hourOfExamEditText"
+                android:layout_weight="1"
+                android:hint="@string/hour_of_exam"
+                android:enabled="true" />
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/numberOfHoursEditText"
+            android:layout_gravity="center_horizontal|top"
+            android:hint="@string/hours_per_day" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="@android:dimen/thumbnail_height"
+        android:layout_gravity="bottom"
+        android:background="#ff0d47a1"
+        android:clickable="true"
+        android:id="@+id/saveMeButton"
+        android:gravity="bottom">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/save_me_button"
+            android:id="@+id/saveMeTextView"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="50sp"
+            android:singleLine="false"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+    </LinearLayout>
+</FrameLayout>
