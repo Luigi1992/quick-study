@@ -2,6 +2,14 @@ package com.gcw_rome_2014.saveme;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -14,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -160,5 +169,47 @@ public class MainActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
+    }
+
+    /**
+     * Created by Luigi Mortaro
+     * @param view
+     * Function invoked by tapping on Save Me Button.
+     */
+    public void addEvent(View view) {
+
+        long calID = 3;
+        long startMillis = 0;
+        long endMillis = 0;
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2014, 12, 20, 7, 30);
+        startMillis = beginTime.getTimeInMillis();
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(2014, 12, 20, 8, 45);
+        endMillis = endTime.getTimeInMillis();
+        //...
+
+        ContentResolver cr = getContentResolver();
+        ContentValues values = new ContentValues();
+        values.put(CalendarContract.Events.DTSTART, startMillis);
+        values.put(CalendarContract.Events.DTEND, endMillis);
+        values.put(CalendarContract.Events.TITLE, "Jazzercise");
+        values.put(CalendarContract.Events.DESCRIPTION, "Group workout");
+        values.put(CalendarContract.Events.CALENDAR_ID, calID);
+        values.put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles");
+        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+
+        // get the event ID that is the last element in the Uri
+        long eventID = Long.parseLong(uri.getLastPathSegment());
+        //
+        // ... do something with event ID
+        //
+        //
+
+        Context context = getApplicationContext();
+        CharSequence text = "Inserted!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast.makeText(context, text, duration).show();
     }
 }
