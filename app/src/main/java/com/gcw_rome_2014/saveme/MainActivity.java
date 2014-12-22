@@ -3,6 +3,7 @@ package com.gcw_rome_2014.saveme;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,11 +19,16 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.gcw_rome_2014.saveme.calendar.AndroidCalendarProvider;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 
@@ -40,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
 
         examNameEditText = (EditText) findViewById(R.id.examNameEditText);
         dateOfExamEditText = (EditText) findViewById(R.id.dateOfExamEditText);
-        hourOfExamEditText= (EditText) findViewById(R.id.hourOfExamEditText);
+        hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
         numberOfHoursEditText = (EditText) findViewById(R.id.numberOfHoursEditText);
 
         // To prevent opening keyboard before date/time dialog
@@ -170,21 +176,46 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * This function is called when the SAVE ME Button is tapped.
+     *
      * @param view Default param.
      */
     public void addEvent(View view) {
-        AndroidCalendarProvider a = new AndroidCalendarProvider();
-        //a.queryCalendar(getContentResolver());
-        //a.getTimezones();
-        //a.queryInstance(getContentResolver());
+        AndroidCalendarProvider calendarProvider = new AndroidCalendarProvider();
+        //calendarProvider.queryCalendar(getContentResolver());
+        //calendarProvider.getTimezones();
+        //calendarProvider.queryInstance(getContentResolver());
 
-        long eventID = a.addEvent(getContentResolver());
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
+        try {
+            String examName = examNameEditText.getText().toString();
 
-        //Open a calender with an intent to show the inserted event.
-        Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
-        Intent intent = new Intent(Intent.ACTION_VIEW)
-                .setData(uri);
-        startActivity(intent);
+            if(examName.isEmpty())
+                throw new Exception();
+
+            String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
+            Date date = dateFormat.parse(dateString);
+
+            Calendar calendar = new GregorianCalendar();
+            calendar.setTime(date);
+
+            long eventID = calendarProvider.addEvent(getContentResolver(),
+                    examName, calendar, 2);
+
+            //Open calendarProvider calender with an intent to show the inserted event.
+            Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
+            Intent intent = new Intent(Intent.ACTION_VIEW)
+                    .setData(uri);
+            startActivity(intent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            Context context = getApplicationContext();
+            CharSequence text = "All fields are required";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast.makeText(context, text, duration).show();
+        }
 
     }
 }
