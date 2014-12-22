@@ -14,6 +14,7 @@ import android.util.Log;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -25,7 +26,7 @@ import java.util.TimeZone;
 public class AndroidCalendarProvider implements CalendarInterface {
     // Projection array. Creating indices for this array instead of doing
     // dynamic lookups improves performance.
-    public static final String[] EVENT_PROJECTION = new String[] {
+    public static final String[] EVENT_PROJECTION = new String[]{
             CalendarContract.Calendars._ID,                           // 0
             CalendarContract.Calendars.ACCOUNT_NAME,                  // 1
             CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,         // 2
@@ -40,7 +41,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
 
     private static final String DEBUG_TAG = "MyActivity";   //Only for debug purpose
 
-    public static final String[] INSTANCE_PROJECTION = new String[] {
+    public static final String[] INSTANCE_PROJECTION = new String[]{
             CalendarContract.Instances.EVENT_ID,      // 0
             CalendarContract.Instances.BEGIN,         // 1
             CalendarContract.Instances.TITLE          // 2
@@ -51,7 +52,8 @@ public class AndroidCalendarProvider implements CalendarInterface {
     private static final int INSTANCE_PROJECTION_TITLE_INDEX = 2;
 
     /**
-     *  This function gets the calendars that are owned by a particular user.
+     * This function gets the calendars that are owned by a particular user.
+     *
      * @param contentResolver The activity content resolver.
      */
     public void queryCalendar(ContentResolver contentResolver) {
@@ -64,7 +66,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
         String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND ("
                 + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
                 + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";
-        String[] selectionArgs = new String[] {userName, "com.google",
+        String[] selectionArgs = new String[]{userName, "com.google",
                 userOwnerName};
 
         // Submit the query and get a Cursor object back.
@@ -94,6 +96,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
 
     /**
      * Return an array containing all accounts on the phone.
+     *
      * @param context The Application context.
      */
     public Account[] getAccounts(Context context) {
@@ -101,7 +104,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
         Account[] accounts = m.getAccounts();
 
         //TODO: To Remove later.
-        for(Account a : accounts) {
+        for (Account a : accounts) {
             System.out.println("Name: " + a.name);
             System.out.println("Type: " + a.type);
         }
@@ -111,6 +114,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
 
     /**
      * Get all available timezones.
+     *
      * @return An array containing timezones.
      */
     public String[] getAvailableTimezones() {
@@ -119,19 +123,25 @@ public class AndroidCalendarProvider implements CalendarInterface {
 
     /**
      * Add an event to the calendar.
+     * Remember that months start from zero.
      * @param contentResolver The activity content resolver.
+     * @param dateAndTime A Calendar that contains both Date and Time of the Exam
+     * @param HoursPerDay An integer that indicate how many hours the student wants spend to study
      * @return Returns the added event ID.
      */
-    public long addEvent(ContentResolver contentResolver) {
-        long calID = 1;
+    public long addEvent(ContentResolver contentResolver, String eventName, Calendar dateAndTime, int HoursPerDay) {
+        long calID = 1; //TODO: This must be selected not in a fixed way.
         long startMillis = 0;
         long endMillis = 0;
         Calendar beginTime = Calendar.getInstance();
-        //Remember that months go from 0 to 11
-        beginTime.set(2014, 11, 22, 16, 30);    //TODO: It should be automatically selected by the user.
+        beginTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
+                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY),
+                dateAndTime.get(Calendar.MINUTE));
         startMillis = beginTime.getTimeInMillis();
         Calendar endTime = Calendar.getInstance();
-        endTime.set(2014, 11, 22, 16, 45);      //TODO: It should be automatically selected by the user.
+        endTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
+                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY),
+                dateAndTime.get(Calendar.MINUTE));
         endMillis = endTime.getTimeInMillis();
 
         //...
@@ -140,8 +150,8 @@ public class AndroidCalendarProvider implements CalendarInterface {
         ContentValues values = new ContentValues();
         values.put(CalendarContract.Events.DTSTART, startMillis);
         values.put(CalendarContract.Events.DTEND, endMillis);
-        values.put(CalendarContract.Events.TITLE, "Jazzercise");
-        values.put(CalendarContract.Events.DESCRIPTION, "Group workout");
+        values.put(CalendarContract.Events.TITLE, eventName);
+        values.put(CalendarContract.Events.DESCRIPTION, "SAVE ME automatic planning");
         values.put(CalendarContract.Events.CALENDAR_ID, calID);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, "Europe/Rome");
         Uri uri = contentResolver.insert(CalendarContract.Events.CONTENT_URI, values);
@@ -159,6 +169,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
 
     /**
      * Read instances from calendars.
+     *
      * @param contentResolver The activity content resolver.
      */
     public void queryInstance(ContentResolver contentResolver) {
@@ -176,7 +187,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
         // The ID of the recurring event whose instances you are searching
         // for in the Instances table
         String selection = CalendarContract.Instances.EVENT_ID + " = ?";
-        String[] selectionArgs = new String[] {"160"};
+        String[] selectionArgs = new String[]{"160"};
 
         // Construct the query with the desired date range.
         Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
@@ -184,7 +195,7 @@ public class AndroidCalendarProvider implements CalendarInterface {
         ContentUris.appendId(builder, endMillis);
 
         // Submit the query
-        cur =  contentResolver.query(builder.build(),
+        cur = contentResolver.query(builder.build(),
                 INSTANCE_PROJECTION,
                 selection,
                 selectionArgs,
