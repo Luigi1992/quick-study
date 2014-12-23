@@ -180,10 +180,10 @@ public class MainActivity extends ActionBarActivity {
      * @param view Default param.
      */
     public void addEvent(View view) {
-        AndroidCalendarProvider calendarProvider = new AndroidCalendarProvider();
-        //calendarProvider.queryCalendar(getContentResolver());
+        AndroidCalendarProvider calendarProvider = new AndroidCalendarProvider(getApplicationContext(), getContentResolver());
+
         //calendarProvider.getTimezones();
-        //calendarProvider.queryInstance(getContentResolver());
+        //calendarProvider.queryInstance();
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
         try {
@@ -198,8 +198,7 @@ public class MainActivity extends ActionBarActivity {
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
 
-            long eventID = calendarProvider.addEvent(getContentResolver(),
-                    examName, calendar, 2);
+            long eventID = calendarProvider.addEvent(examName, calendar, 2);
 
             //Open calendarProvider calender with an intent to show the inserted event.
             Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
@@ -208,8 +207,6 @@ public class MainActivity extends ActionBarActivity {
             startActivity(intent);
 
         } catch (Exception e) {
-            e.printStackTrace();
-
             Context context = getApplicationContext();
             CharSequence text = "All fields are required";
             int duration = Toast.LENGTH_SHORT;

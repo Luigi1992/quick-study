@@ -41,6 +41,8 @@ public class AndroidCalendarProvider implements CalendarInterface {
 
     private static final String DEBUG_TAG = "MyActivity";   //Only for debug purpose
 
+    //Projection array. Creating indices for this array instead of doing
+    // dynamic lookups improves performance.
     public static final String[] INSTANCE_PROJECTION = new String[]{
             CalendarContract.Instances.EVENT_ID,      // 0
             CalendarContract.Instances.BEGIN,         // 1
@@ -51,12 +53,26 @@ public class AndroidCalendarProvider implements CalendarInterface {
     private static final int INSTANCE_PROJECTION_BEGIN_INDEX = 1;
     private static final int INSTANCE_PROJECTION_TITLE_INDEX = 2;
 
+    //Instances that need to be saved.
+    Context context;
+    ContentResolver contentResolver;
+
+    /**
+     * Constructor used for saving the instance of Application Context.
+     *
+     * @param context The Application context.
+     * @param contentResolver The activity content resolver.
+     */
+    public AndroidCalendarProvider(Context context, ContentResolver contentResolver) {
+        this.context = context;
+        this.contentResolver = contentResolver;
+    }
+
     /**
      * This function gets the calendars that are owned by a particular user.
      *
-     * @param contentResolver The activity content resolver.
      */
-    public void queryCalendar(ContentResolver contentResolver) {
+    public void queryCalendar() {
         // Run query
         Cursor cur = null;
         String userName = "luigi.mortaro@gmail.com"; //TODO: Replace this with an automatic way to get the user.
@@ -124,12 +140,12 @@ public class AndroidCalendarProvider implements CalendarInterface {
     /**
      * Add an event to the calendar.
      * Remember that months start from zero.
-     * @param contentResolver The activity content resolver.
-     * @param dateAndTime A Calendar that contains both Date and Time of the Exam
-     * @param HoursPerDay An integer that indicate how many hours the student wants spend to study
+     *
+     * @param dateAndTime     A Calendar that contains both Date and Time of the Exam
+     * @param HoursPerDay     An integer that indicate how many hours the student wants spend to study
      * @return Returns the added event ID.
      */
-    public long addEvent(ContentResolver contentResolver, String eventName, Calendar dateAndTime, int HoursPerDay) {
+    public long addEvent(String eventName, Calendar dateAndTime, int HoursPerDay) {
         long calID = 1; //TODO: This must be selected not in a fixed way.
         long startMillis = 0;
         long endMillis = 0;
@@ -170,9 +186,8 @@ public class AndroidCalendarProvider implements CalendarInterface {
     /**
      * Read instances from calendars.
      *
-     * @param contentResolver The activity content resolver.
      */
-    public void queryInstance(ContentResolver contentResolver) {
+    public void queryInstance() {
         // Specify the date range you want to search for recurring
         // event instances
         Calendar beginTime = Calendar.getInstance();
