@@ -70,10 +70,10 @@
         android:gravity="bottom">
 
         <Button
+            android:id="@+id/saveMeTextView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/save_me_button"
-            android:id="@+id/saveMeTextView"
             android:textColor="@android:color/white"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="50sp"
@@ -81,7 +81,13 @@
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:onClick="addEvent"/>
+            android:onClick="addEvent"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="4"
+            />
 
     </LinearLayout>
 </FrameLayout>
