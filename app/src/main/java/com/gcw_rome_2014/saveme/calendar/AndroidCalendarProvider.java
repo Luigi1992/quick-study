@@ -23,7 +23,7 @@ import java.util.TimeZone;
  * It is mainly based on the CalendarProvider Class. So it require to be used at
  * least with Android 4.0 ICS (api 14+).
  */
-public class AndroidCalendarProvider implements CalendarInterface {
+public class AndroidCalendarProvider {
     // Projection array. Creating indices for this array instead of doing
     // dynamic lookups improves performance.
     public static final String[] EVENT_PROJECTION = new String[]{
