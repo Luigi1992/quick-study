@@ -7,6 +7,6 @@ import java.util.Calendar;
  *
  * This Interface has the scope to decouple the technology used to
  */
-public interface CalendarInterface {
-    public long addEvent(String eventName, Calendar dateAndTime, int HoursPerDay);
+public interface CalendarProvider {
+    public long addEvent(String eventName, String eventDescription, Calendar dateAndTime, int HoursPerDay);
 }

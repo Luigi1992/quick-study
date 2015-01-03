@@ -22,10 +22,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.gcw_rome_2014.saveme.calendar.AndroidCalendarProvider;
+import com.gcw_rome_2014.saveme.calendar.android.AndroidCalendar;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -181,7 +180,7 @@ public class MainActivity extends ActionBarActivity {
      * @param view Default param.
      */
     public void addEvent(View view) {
-        AndroidCalendarProvider calendarProvider = new AndroidCalendarProvider(getApplicationContext(), getContentResolver());
+        AndroidCalendar calendarProvider = new AndroidCalendar(getApplicationContext(), getContentResolver());
 
         //calendarProvider.getTimezones();
         //calendarProvider.queryInstance();
@@ -189,17 +188,19 @@ public class MainActivity extends ActionBarActivity {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
         try {
             String examName = examNameEditText.getText().toString();
+            String durationString = numberOfHoursEditText.getText().toString();
 
-            if(examName.isEmpty())
+            if(examName.isEmpty() || durationString.isEmpty())
                 throw new Exception();
 
+            int duration = Integer.valueOf(durationString);
             String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
             Date date = dateFormat.parse(dateString);
 
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
 
-            long eventID = calendarProvider.addEvent(examName, calendar, 2);
+            long eventID = calendarProvider.addEvent(examName, "SAVE ME Automatic Planner", calendar, duration);
 
             //Open calendarProvider calender with an intent to show the inserted event.
             Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
