@@ -11,6 +11,7 @@ import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -211,7 +212,9 @@ public class MainActivity extends ActionBarActivity {
             CharSequence text = "All fields are required";
             int duration = Toast.LENGTH_SHORT;
 
-            Toast.makeText(context, text, duration).show();
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
         }
 
     }
