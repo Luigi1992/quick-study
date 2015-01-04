@@ -22,7 +22,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.gcw_rome_2014.saveme.calendar.android.AndroidCalendar;
+import com.gcw_rome_2014.saveme.calendar.ScheduleManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -180,27 +180,25 @@ public class MainActivity extends ActionBarActivity {
      * @param view Default param.
      */
     public void addEvent(View view) {
-        AndroidCalendar calendarProvider = new AndroidCalendar(getApplicationContext(), getContentResolver());
-
-        //calendarProvider.getTimezones();
-        //calendarProvider.queryInstance();
+        ScheduleManager scheduleManager = new ScheduleManager(getContentResolver());
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
         try {
             String examName = examNameEditText.getText().toString();
-            String durationString = numberOfHoursEditText.getText().toString();
+            String numberOfHoursString = numberOfHoursEditText.getText().toString();
 
-            if(examName.isEmpty() || durationString.isEmpty())
+            if(examName.isEmpty() || numberOfHoursString.isEmpty())
                 throw new Exception();
 
-            int duration = Integer.valueOf(durationString);
+            int hoursOfStudy = Integer.valueOf(numberOfHoursString);
             String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
             Date date = dateFormat.parse(dateString);
 
+            //Set calendar for an easy management of time.
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
 
-            long eventID = calendarProvider.addEvent(examName, "SAVE ME Automatic Planner", calendar, duration);
+            long eventID = scheduleManager.addExam(examName, calendar, hoursOfStudy);
 
             //Open calendarProvider calender with an intent to show the inserted event.
             Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
