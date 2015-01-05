@@ -81,14 +81,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case R.id.action_settings:
                 Intent i = new Intent(this, SettingsActivity.class);
                 startActivityForResult(i, RESULT_SETTINGS);
                 break;
-
         }
-
         return true;
     }
 
@@ -204,6 +201,9 @@ public class MainActivity extends ActionBarActivity {
 
             long eventID = scheduleManager.addExam(examName, calendar, hoursOfStudy);
 
+            //Clear all fields
+            this.clearAllFields();
+
             //Open calendarProvider calender with an intent to show the inserted event.
             Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
             Intent intent = new Intent(Intent.ACTION_VIEW)
@@ -220,5 +220,15 @@ public class MainActivity extends ActionBarActivity {
             toast.show();
         }
 
+    }
+
+    /**
+     * Clear all the fields.
+     */
+    private void clearAllFields() {
+        examNameEditText.setText("");
+        dateOfExamEditText.setText("");
+        hourOfExamEditText.setText("");
+        numberOfHoursEditText.setText("");
     }
 }

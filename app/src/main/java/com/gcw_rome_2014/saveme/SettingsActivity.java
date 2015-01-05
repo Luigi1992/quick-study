@@ -1,7 +1,5 @@
 package com.gcw_rome_2014.saveme;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
@@ -14,10 +12,17 @@ public class SettingsActivity extends PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Display the fragment as the main content.
+        getFragmentManager().beginTransaction()
+                .replace(android.R.id.content, new SettingsFragment())
+                .commit();
+
+        /*
         SettingsFragment prefFragment = new SettingsFragment();
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(android.R.id.content, prefFragment);
         fragmentTransaction.commit();
+        */
     }
 }
