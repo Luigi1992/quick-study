@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -39,10 +40,15 @@ public class MainActivity extends ActionBarActivity {
     EditText hourOfExamEditText;
     EditText numberOfHoursEditText;
 
+    private static final int RESULT_SETTINGS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Set default values for settings
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         examNameEditText = (EditText) findViewById(R.id.examNameEditText);
         dateOfExamEditText = (EditText) findViewById(R.id.dateOfExamEditText);
@@ -72,20 +78,18 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            case R.id.action_settings:
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivityForResult(i, RESULT_SETTINGS);
+                break;
+
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     public void setDatePicker() {
