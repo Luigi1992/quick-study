@@ -64,8 +64,6 @@
         android:layout_width="match_parent"
         android:layout_height="@android:dimen/thumbnail_height"
         android:layout_gravity="bottom"
-        android:background="#ff0d47a1"
-        android:clickable="true"
         android:id="@+id/saveMeButton"
         android:gravity="bottom">
 

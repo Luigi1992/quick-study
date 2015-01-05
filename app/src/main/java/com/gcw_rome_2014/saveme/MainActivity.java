@@ -7,10 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,10 +23,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.gcw_rome_2014.saveme.calendar.AndroidCalendarProvider;
+import com.gcw_rome_2014.saveme.calendar.ScheduleManager;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,10 +40,15 @@ public class MainActivity extends ActionBarActivity {
     EditText hourOfExamEditText;
     EditText numberOfHoursEditText;
 
+    private static final int RESULT_SETTINGS = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Set default values for settings
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         examNameEditText = (EditText) findViewById(R.id.examNameEditText);
         dateOfExamEditText = (EditText) findViewById(R.id.dateOfExamEditText);
@@ -72,20 +78,15 @@ public class MainActivity extends ActionBarActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent i = new Intent(this, SettingsActivity.class);
+                startActivityForResult(i, RESULT_SETTINGS);
+                break;
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     public void setDatePicker() {
@@ -180,25 +181,28 @@ public class MainActivity extends ActionBarActivity {
      * @param view Default param.
      */
     public void addEvent(View view) {
-        AndroidCalendarProvider calendarProvider = new AndroidCalendarProvider(getApplicationContext(), getContentResolver());
-
-        //calendarProvider.getTimezones();
-        //calendarProvider.queryInstance();
+        ScheduleManager scheduleManager = new ScheduleManager(getContentResolver());
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
         try {
             String examName = examNameEditText.getText().toString();
+            String numberOfHoursString = numberOfHoursEditText.getText().toString();
 
-            if(examName.isEmpty())
+            if(examName.isEmpty() || numberOfHoursString.isEmpty())
                 throw new Exception();
 
+            int hoursOfStudy = Integer.valueOf(numberOfHoursString);
             String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
             Date date = dateFormat.parse(dateString);
 
+            //Set calendar for an easy management of time.
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
 
-            long eventID = calendarProvider.addEvent(examName, calendar, 2);
+            long eventID = scheduleManager.addExam(examName, calendar, hoursOfStudy);
+
+            //Clear all fields
+            this.clearAllFields();
 
             //Open calendarProvider calender with an intent to show the inserted event.
             Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
@@ -211,8 +215,20 @@ public class MainActivity extends ActionBarActivity {
             CharSequence text = "All fields are required";
             int duration = Toast.LENGTH_SHORT;
 
-            Toast.makeText(context, text, duration).show();
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.setGravity(Gravity.TOP, 0, 150);
+            toast.show();
         }
 
+    }
+
+    /**
+     * Clear all the fields.
+     */
+    private void clearAllFields() {
+        examNameEditText.setText("");
+        dateOfExamEditText.setText("");
+        hourOfExamEditText.setText("");
+        numberOfHoursEditText.setText("");
     }
 }
