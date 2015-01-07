@@ -50,7 +50,7 @@ public class ScheduleManager {
 
         if(startDate.before(endDate)) {
             startDate.add(Calendar.DATE, 1);
-            this.eventManager.addEvent("Study " + examName, "SAVE ME " + examName + "Study Session", startDate, hoursOfStudy);
+            this.eventManager.addEvent("Study " + examName, "SAVE ME " + examName + " Study Session", startDate, hoursOfStudy);
             this.addStudyEvents(examName, startDate, endDate, hoursOfStudy);
         }
 
