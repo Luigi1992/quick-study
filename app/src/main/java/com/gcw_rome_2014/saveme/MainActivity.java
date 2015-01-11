@@ -1,7 +1,6 @@
 package com.gcw_rome_2014.saveme;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.app.*;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -46,6 +45,10 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Show icon in the Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         //Set default values for settings
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -135,7 +138,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, time,
-                        myCalendar.get(Calendar.HOUR),
+                        myCalendar.get(Calendar.HOUR_OF_DAY),
                         myCalendar.get(Calendar.MINUTE), true);
                 hourOfExamEditText.setInputType(InputType.TYPE_NULL);
 
@@ -209,6 +212,7 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(Intent.ACTION_VIEW)
                     .setData(uri);
             startActivity(intent);
+
 
         } catch (Exception e) {
             Context context = getApplicationContext();
