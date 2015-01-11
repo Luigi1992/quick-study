@@ -10,31 +10,31 @@
             android:persistent="false">
             <CheckBoxPreference
                 android:key="preference_monday"
-                android:title="Monday"
+                android:title="@string/monday"
                 android:defaultValue="true"/>
             <CheckBoxPreference
                 android:key="preference_tuesday"
-                android:title="Tuesday"
+                android:title="@string/tuesday"
                 android:defaultValue="true"/>
             <CheckBoxPreference
                 android:key="preference_wednesday"
-                android:title="Wednesday"
+                android:title="@string/wednesday"
                 android:defaultValue="true"/>
             <CheckBoxPreference
                 android:key="preference_thursday"
-                android:title="Thursday"
+                android:title="@string/thursday"
                 android:defaultValue="true"/>
             <CheckBoxPreference
                 android:key="preference_friday"
-                android:title="Friday"
+                android:title="@string/friday"
                 android:defaultValue="true"/>
             <CheckBoxPreference
                 android:key="preference_saturday"
-                android:title="Saturday"
+                android:title="@string/saturday"
                 android:defaultValue="true"/>
             <CheckBoxPreference
                 android:key="preference_sunday"
-                android:title="Sunday"
+                android:title="@string/sunday"
                 android:defaultValue="true"/>
         </PreferenceScreen>
     </PreferenceCategory>

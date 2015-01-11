@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">SAVE ME</string>
+    <string name="app_name">Save Me</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="save_me_button">SAVE ME</string>
@@ -12,5 +12,13 @@
     <string name="pref_sessions">Study sessions preferences</string>
     <string name="pref_days_title">Days of the week</string>
     <string name="pref_days_summary">Choose the days of the week you want to study</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="title_activity_list">Save Me</string>
 
 </resources>

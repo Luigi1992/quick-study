@@ -31,7 +31,7 @@ public class ScheduleManager {
      * @param hoursOfStudy  An integer representing the number of hours the student want to study per day.
      */
     public long addExam(String examName, Calendar dateAndTime, int hoursOfStudy) {
-        long eventID = this.eventManager.addEvent(examName, "SAVE ME Automatic Planner", dateAndTime, 0);
+        long eventID = this.eventManager.addEvent(examName + " Exam", "SAVE ME Automatic Planner", dateAndTime, 0);
 
         Calendar now = Calendar.getInstance();
         now.set(Calendar.HOUR_OF_DAY, 9);

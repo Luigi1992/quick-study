@@ -216,7 +216,7 @@ public class MainActivity extends ActionBarActivity {
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
-            toast.setGravity(Gravity.TOP, 0, 150);
+            toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
             toast.show();
         }
 
