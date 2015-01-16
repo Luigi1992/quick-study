@@ -204,14 +204,18 @@ public class MainActivity extends ActionBarActivity {
 
             long eventID = scheduleManager.addExam(examName, calendar, hoursOfStudy);
 
+            Intent i = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(i);
+
+
             //Clear all fields
             this.clearAllFields();
 
-            //Open calendarProvider calender with an intent to show the inserted event.
+            /*//Open calendarProvider calender with an intent to show the inserted event.
             Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
             Intent intent = new Intent(Intent.ACTION_VIEW)
                     .setData(uri);
-            startActivity(intent);
+            startActivity(intent);*/
 
 
         } catch (Exception e) {
