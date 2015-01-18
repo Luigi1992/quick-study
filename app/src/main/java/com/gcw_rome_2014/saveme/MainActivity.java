@@ -204,7 +204,7 @@ public class MainActivity extends ActionBarActivity {
 
             long eventID = scheduleManager.addExam(examName, calendar, hoursOfStudy);
 
-            Intent i = new Intent(getApplicationContext(), ListActivity.class);
+            Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
             startActivity(i);
 
 

@@ -17,7 +17,11 @@ public class ExamsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.exams_recycler_view);
+
+        //Show icon in the Action Bar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -27,7 +31,7 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        String[] myDataset = {"Prova1", "Prova2"};
+        String[] myDataset = {"Prova 1", "Prova 2", "Prova 3"};
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(myDataset);
