@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.gcw_rome_2014.saveme.model.Exam;
+
 /**
  * Created by Luigi on 18/01/2015.
  */
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
-    private String[] mDataset;
+    private Exam[] exams;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -25,8 +27,8 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ExamAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    public ExamAdapter(Exam[] exams) {
+        this.exams = exams;
     }
 
     // Create new views (invoked by the layout manager)
@@ -47,13 +49,13 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset[position]);
+        holder.mTextView.setText(exams[position].getName());
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return exams.length;
     }
 }

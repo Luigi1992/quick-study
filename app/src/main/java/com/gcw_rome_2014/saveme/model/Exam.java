@@ -6,6 +6,10 @@ package com.gcw_rome_2014.saveme.model;
 public class Exam {
     String name;
 
+    public Exam(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

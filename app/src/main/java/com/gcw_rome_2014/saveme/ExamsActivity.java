@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.gcw_rome_2014.saveme.model.Exam;
+
 /**
  * Created by Luigi on 18/01/2015.
  */
@@ -31,10 +33,12 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        String[] myDataset = {"Prova 1", "Prova 2", "Prova 3"};
+        Exam[] exams = {new Exam("Ricerca Operativa"),
+                new Exam("Analisi Matematica"),
+                new Exam("Fondamenti Automatica")};
 
         // specify an adapter (see also next example)
-        mAdapter = new ExamAdapter(myDataset);
+        mAdapter = new ExamAdapter(exams);
         mRecyclerView.setAdapter(mAdapter);
     }
 
