@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-        android:layout_marginTop="@android:dimen/notification_large_icon_height"
+        android:layout_marginTop="50dp"
         android:weightSum="1">
 
         <EditText
@@ -57,35 +57,21 @@
             android:layout_gravity="center_horizontal|top"
             android:hint="@string/hours_per_day" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="@android:dimen/thumbnail_height"
-        android:layout_gravity="bottom"
-        android:id="@+id/saveMeButton"
-        android:gravity="bottom">
-
         <Button
             android:id="@+id/saveMeTextView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="@string/save_me_button"
-            android:textColor="@android:color/white"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="50sp"
-            android:singleLine="false"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
+            android:text="Save"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
             android:onClick="addEvent"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/buttonshape"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
-            android:shadowRadius="4"
-            />
+            android:shadowRadius="5" />
 
     </LinearLayout>
 </FrameLayout>

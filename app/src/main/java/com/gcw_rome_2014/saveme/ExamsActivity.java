@@ -1,9 +1,13 @@
 package com.gcw_rome_2014.saveme;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.gcw_rome_2014.saveme.model.Exam;
 
@@ -14,12 +18,23 @@ public class ExamsActivity extends ActionBarActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ImageButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final Context context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams);
         mRecyclerView = (RecyclerView) findViewById(R.id.exams_recycler_view);
+        fab = (ImageButton) findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, MainActivity.class);
+                startActivity(i);
+            }
+        });
 
         //Show icon in the Action Bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);

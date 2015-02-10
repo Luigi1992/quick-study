@@ -86,11 +86,9 @@ public class AndroidEventManager implements EventManager {
     }
 
     //TODO: Finish this method.
-    public void deleteEvent() {
+    public void deleteEvent(long eventID) {
         String DEBUG_TAG = "MyActivity";
-        //...
-        long eventID = 201;
-        //...
+
         ContentValues values = new ContentValues();
         Uri deleteUri = null;
         deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
