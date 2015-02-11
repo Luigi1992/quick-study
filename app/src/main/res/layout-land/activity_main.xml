@@ -58,23 +58,30 @@
                 android:layout_gravity="center_horizontal|top"
                 android:hint="@string/hours_per_day" />
 
-    <Button
-        android:id="@+id/saveMeTextView"
-        android:text="Save"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:onClick="addEvent"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="@drawable/buttonshape"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        android:layout_gravity="center_horizontal" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal">
 
+                <Button
+                    android:id="@+id/saveMeTextView"
+                    android:text="Save"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:onClick="addEvent"
+                    android:layout_width="130dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/buttonshape"
+                    android:shadowColor="#A8A8A8"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"/>
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
