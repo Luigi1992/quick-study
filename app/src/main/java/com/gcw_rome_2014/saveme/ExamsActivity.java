@@ -12,7 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.gcw_rome_2014.saveme.model.difficulties.Difficulty;
 import com.gcw_rome_2014.saveme.model.Exam;
+import com.gcw_rome_2014.saveme.model.difficulties.Easy;
+import com.gcw_rome_2014.saveme.model.difficulties.Hard;
+import com.gcw_rome_2014.saveme.model.difficulties.Medium;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -57,9 +61,9 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Exam[] exams = {new Exam("Ricerca Operativa"),
-                new Exam("Analisi Matematica"),
-                new Exam("Fondamenti Automatica")};
+        Exam[] exams = {new Exam("Ricerca Operativa", new Easy()),
+                new Exam("Analisi Matematica", new Hard()),
+                new Exam("Fondamenti Automatica", new Medium())};
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(exams);

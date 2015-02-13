@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gcw_rome_2014.saveme.model.Exam;
@@ -20,9 +21,11 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView mTextView;
+        public ImageView mExamImageView;
         public ViewHolder(View v) {
             super(v);
-            mTextView = (TextView) v.findViewById(R.id.info_text);
+            mTextView = (TextView) v.findViewById(R.id.exam_name_text);
+            mExamImageView = (ImageView) v.findViewById(R.id.exam_image_view);
         }
     }
 
@@ -50,7 +53,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(exams[position].getName());
-
+        holder.mExamImageView.setImageResource(exams[position].getDifficulty().getImageValue());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

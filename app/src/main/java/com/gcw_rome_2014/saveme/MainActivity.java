@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gcw_rome_2014.saveme.calendar.ScheduleManager;
+import com.gcw_rome_2014.saveme.model.Exam;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
