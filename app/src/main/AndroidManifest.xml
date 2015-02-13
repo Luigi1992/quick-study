@@ -16,7 +16,8 @@
         </activity>
         <activity android:name=".SettingsActivity">
         </activity>
-        <activity android:name=".ExamsActivity">
+        <activity android:name=".ExamsActivity"
+            android:label="@string/your_exams">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

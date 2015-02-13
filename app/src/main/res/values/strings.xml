@@ -3,6 +3,7 @@
 
     <string name="app_name">Save Me</string>
     <string name="add_new_exam">Add new exam</string>
+    <string name="your_exams">Your exams</string>
     <string name="action_settings">Settings</string>
     <string name="save_me_button">SAVE ME</string>
     <string name="date_of_exam">Date</string>
