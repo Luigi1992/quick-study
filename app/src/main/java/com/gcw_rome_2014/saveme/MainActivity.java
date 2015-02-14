@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.gcw_rome_2014.saveme.calendar.ScheduleManager;
 import com.gcw_rome_2014.saveme.model.Exam;
+import com.gcw_rome_2014.saveme.model.difficulties.Difficulty;
+import com.gcw_rome_2014.saveme.model.difficulties.Medium;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -204,7 +206,10 @@ public class MainActivity extends ActionBarActivity {
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
 
-            long eventID = scheduleManager.addExam(examName, calendar, hoursOfStudy);
+            //Creating exams object
+            Exam exam = new Exam(examName, new Medium(), calendar);
+
+            long eventID = scheduleManager.addExam(exam, hoursOfStudy);
 
             Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
             startActivity(i);
