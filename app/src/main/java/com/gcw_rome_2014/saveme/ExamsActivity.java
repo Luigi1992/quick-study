@@ -18,6 +18,8 @@ import com.gcw_rome_2014.saveme.model.difficulties.Easy;
 import com.gcw_rome_2014.saveme.model.difficulties.Hard;
 import com.gcw_rome_2014.saveme.model.difficulties.Medium;
 
+import java.util.Calendar;
+
 /**
  * Created by Luigi on 18/01/2015.
  */
@@ -61,9 +63,9 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Exam[] exams = {new Exam("Ricerca Operativa", new Easy()),
-                new Exam("Analisi Matematica", new Hard()),
-                new Exam("Fondamenti Automatica", new Medium())};
+        Exam[] exams = {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance()),
+                new Exam("Analisi Matematica", new Hard(), Calendar.getInstance()),
+                new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance())};
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(exams);
