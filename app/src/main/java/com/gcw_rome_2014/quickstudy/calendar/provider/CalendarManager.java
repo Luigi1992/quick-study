@@ -1,6 +1,4 @@
-package com.gcw_rome_2014.saveme.calendar.provider;
-
-import java.util.Calendar;
+package com.gcw_rome_2014.quickstudy.calendar.provider;
 
 /**
  * Created by Luigi Mortaro on 19/12/2014.

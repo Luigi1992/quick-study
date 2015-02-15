@@ -1,4 +1,4 @@
-package com.gcw_rome_2014.saveme;
+package com.gcw_rome_2014.quickstudy;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.gcw_rome_2014.saveme.model.difficulties.Difficulty;
-import com.gcw_rome_2014.saveme.model.Exam;
-import com.gcw_rome_2014.saveme.model.difficulties.Easy;
-import com.gcw_rome_2014.saveme.model.difficulties.Hard;
-import com.gcw_rome_2014.saveme.model.difficulties.Medium;
+import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
 import java.util.Calendar;
 

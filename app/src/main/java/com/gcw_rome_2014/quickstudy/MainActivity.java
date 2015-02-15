@@ -1,14 +1,10 @@
-package com.gcw_rome_2014.saveme;
+package com.gcw_rome_2014.quickstudy;
 
 import android.app.*;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
@@ -23,10 +19,9 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.gcw_rome_2014.saveme.calendar.ScheduleManager;
-import com.gcw_rome_2014.saveme.model.Exam;
-import com.gcw_rome_2014.saveme.model.difficulties.Difficulty;
-import com.gcw_rome_2014.saveme.model.difficulties.Medium;
+import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
+import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

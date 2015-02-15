@@ -1,4 +1,4 @@
-package com.gcw_rome_2014.saveme.account;
+package com.gcw_rome_2014.quickstudy.account;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;

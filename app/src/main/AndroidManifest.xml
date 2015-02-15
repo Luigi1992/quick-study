@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gcw_rome_2014.saveme" >
+    package="com.gcw_rome_2014.quickstudy" >
 
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
@@ -11,13 +11,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity"
+        <activity android:name="com.gcw_rome_2014.quickstudy.MainActivity"
             android:label="@string/add_new_exam">
         </activity>
-        <activity android:name=".SettingsActivity">
+        <activity android:name="com.gcw_rome_2014.quickstudy.SettingsActivity">
         </activity>
-        <activity android:name=".ExamsActivity"
-            android:label="@string/your_exams">
+        <activity android:name="com.gcw_rome_2014.quickstudy.ExamsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

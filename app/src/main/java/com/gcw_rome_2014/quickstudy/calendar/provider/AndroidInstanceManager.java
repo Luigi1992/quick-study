@@ -1,4 +1,4 @@
-package com.gcw_rome_2014.saveme.calendar.provider;
+package com.gcw_rome_2014.quickstudy.calendar.provider;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

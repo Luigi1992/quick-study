@@ -1,4 +1,4 @@
-package com.gcw_rome_2014.saveme;
+package com.gcw_rome_2014.quickstudy;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,8 +1,4 @@
-package com.gcw_rome_2014.saveme.calendar.provider;
-
-import android.content.ContentValues;
-import android.net.Uri;
-import android.provider.CalendarContract;
+package com.gcw_rome_2014.quickstudy.calendar.provider;
 
 import java.util.Calendar;
 

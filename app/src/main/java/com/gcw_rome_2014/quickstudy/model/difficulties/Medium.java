@@ -1,6 +1,6 @@
-package com.gcw_rome_2014.saveme.model.difficulties;
+package com.gcw_rome_2014.quickstudy.model.difficulties;
 
-import com.gcw_rome_2014.saveme.R;
+import com.gcw_rome_2014.quickstudy.R;
 
 /**
  * Created by Luigi on 13/02/2015.

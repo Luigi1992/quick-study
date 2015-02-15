@@ -1,4 +1,4 @@
-package com.gcw_rome_2014.saveme;
+package com.gcw_rome_2014.quickstudy;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gcw_rome_2014.saveme.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.Exam;
 
 /**
  * Created by Luigi on 18/01/2015.

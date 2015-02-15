@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SAVEME.iml" filepath="$PROJECT_DIR$/SAVEME.iml" />
+      <module fileurl="file://$PROJECT_DIR$/QuickStudy.iml" filepath="$PROJECT_DIR$/QuickStudy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/quick-study.iml" filepath="$PROJECT_DIR$/quick-study.iml" />
       <module fileurl="file://$PROJECT_DIR$/save-me.iml" filepath="$PROJECT_DIR$/save-me.iml" />
     </modules>
   </component>

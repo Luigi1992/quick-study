@@ -1,12 +1,12 @@
-package com.gcw_rome_2014.saveme.calendar;
+package com.gcw_rome_2014.quickstudy.calendar;
 
 import android.content.ContentResolver;
 
-import com.gcw_rome_2014.saveme.calendar.provider.AndroidCalendarManager;
-import com.gcw_rome_2014.saveme.calendar.provider.AndroidEventManager;
-import com.gcw_rome_2014.saveme.calendar.provider.CalendarManager;
-import com.gcw_rome_2014.saveme.calendar.provider.EventManager;
-import com.gcw_rome_2014.saveme.model.Exam;
+import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidCalendarManager;
+import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidEventManager;
+import com.gcw_rome_2014.quickstudy.calendar.provider.CalendarManager;
+import com.gcw_rome_2014.quickstudy.calendar.provider.EventManager;
+import com.gcw_rome_2014.quickstudy.model.Exam;
 
 import java.util.Calendar;
 

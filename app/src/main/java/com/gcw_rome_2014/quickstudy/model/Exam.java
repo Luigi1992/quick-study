@@ -1,7 +1,6 @@
-package com.gcw_rome_2014.saveme.model;
+package com.gcw_rome_2014.quickstudy.model;
 
-import com.gcw_rome_2014.saveme.R;
-import com.gcw_rome_2014.saveme.model.difficulties.Difficulty;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 
 import java.util.Calendar;
 
