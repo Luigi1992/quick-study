@@ -20,8 +20,15 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/exam_name_text"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/exam_date_view"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="right|center_vertical"/>
 
     </LinearLayout>
 
