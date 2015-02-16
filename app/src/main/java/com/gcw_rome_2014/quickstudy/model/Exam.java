@@ -21,11 +21,15 @@ public class Exam {
     //A flag that it is used to check if the user remembered to reserve for the exam test.
     private boolean isRegistered;
 
-    public Exam(String name, Difficulty difficulty, Calendar examDate) {
+    // Hours of studying per day
+    private int numberOfHours;
+
+    public Exam(String name, Difficulty difficulty, Calendar examDate, int numberOfHours) {
         this.name = name;
         this.difficulty = difficulty;
         this.examDate = examDate;
         this.isRegistered = false;
+        this.numberOfHours = numberOfHours;
     }
 
     public Difficulty getDifficulty() {
@@ -64,5 +68,14 @@ public class Exam {
 
     public void setRegistered(boolean isRegistered) {
         this.isRegistered = isRegistered;
+    }
+
+
+    public int getNumberOfHours() {
+        return numberOfHours;
+    }
+
+    public void setNumberOfHours(int numberOfHours) {
+        this.numberOfHours = numberOfHours;
     }
 }

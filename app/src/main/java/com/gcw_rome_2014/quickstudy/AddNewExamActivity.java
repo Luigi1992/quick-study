@@ -19,9 +19,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.Button;
 
 import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
@@ -41,6 +43,7 @@ public class AddNewExamActivity extends ActionBarActivity {
     EditText hourOfExamEditText;
     EditText numberOfHoursEditText;
     Spinner examDifficultySpinner;
+    Button saveNewExamButton;
 
 
     private static final int RESULT_SETTINGS = 1;
@@ -48,7 +51,7 @@ public class AddNewExamActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_new_exam);
 
         //Show icon in the Action Bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -62,6 +65,9 @@ public class AddNewExamActivity extends ActionBarActivity {
         hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
         numberOfHoursEditText = (EditText) findViewById(R.id.numberOfHoursEditText);
         examDifficultySpinner = (Spinner) findViewById(R.id.exam_difficulty_spinner);
+        saveNewExamButton = (Button) findViewById(R.id.saveTheExamButton);
+
+        this.clearAllFields();
 
         // To prevent opening keyboard before date/time dialog
         dateOfExamEditText.setInputType(InputType.TYPE_NULL);
@@ -85,6 +91,77 @@ public class AddNewExamActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        // Validation of fields and saving exam in new thread.
+        saveNewExamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (!isExamValid(v)) {
+                    showErrorToast();
+                } else {
+                    final Exam newExam = parseExam(v);
+                    new Thread(new Runnable() {
+                        public void run() {
+
+                            saveNewExamEvent(newExam);
+                        }
+                    }).start();
+            }
+            }
+
+        });
+    }
+
+    private boolean isExamValid(View v) {
+        String examName = examNameEditText.getText().toString();
+        String numberOfHoursString = numberOfHoursEditText.getText().toString();
+
+        if(examName.isEmpty() || numberOfHoursString.isEmpty())
+            return false;
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault()); int hoursOfStudy = Integer.valueOf(numberOfHoursString);
+        String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
+       try {
+
+       dateFormat.parse(dateString);
+       } catch (Exception e) {
+           return false;
+       }
+        return true;
+    }
+
+    private Exam parseExam(View v) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
+        String examName = examNameEditText.getText().toString();
+        String numberOfHoursString = numberOfHoursEditText.getText().toString();
+
+        int hoursOfStudy = Integer.valueOf(numberOfHoursString);
+        String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
+        Date date= new Date();
+        try {
+            date = dateFormat.parse(dateString);
+        } catch (Exception e) {
+            // The error here would be caught in isExamValid method.
+        }
+
+        //Set calendar for an easy management of time.
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+
+        String examDifficultyString = examDifficultySpinner.getSelectedItem().toString();
+
+        Difficulty difficulty;
+        switch (examDifficultyString) {
+            case "Easy":
+                difficulty = new Easy();
+            case "Medium":
+                difficulty = new  Medium();
+            case "Hard":
+                difficulty = new Hard();
+            default:
+                difficulty = new  Medium();
+        }
+        return new Exam(examName, difficulty, calendar, hoursOfStudy);
     }
 
     @Override
@@ -194,67 +271,30 @@ public class AddNewExamActivity extends ActionBarActivity {
     /**
      * This function is called when the SAVE ME Button is tapped.
      *
-     * @param view Default param.
+     * @param exam Exam to be saved.
      */
-    public void saveNewExamEvent(View view) {
+    public void saveNewExamEvent(Exam exam) {
         ScheduleManager scheduleManager = new ScheduleManager(getContentResolver());
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
-        try {
-            String examName = examNameEditText.getText().toString();
-            String numberOfHoursString = numberOfHoursEditText.getText().toString();
+        long eventID = scheduleManager.addExam(exam, exam.getNumberOfHours());
 
-            if(examName.isEmpty() || numberOfHoursString.isEmpty())
-                throw new Exception();
+        Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
+        startActivity(i);
 
-            int hoursOfStudy = Integer.valueOf(numberOfHoursString);
-            String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
-            Date date = dateFormat.parse(dateString);
+        /*//Open calendarProvider calender with an intent to show the inserted event.
+        Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
+        Intent intent = new Intent(Intent.ACTION_VIEW)
+                .setData(uri);
+        startActivity(intent);*/
+    }
 
-            //Set calendar for an easy management of time.
-            Calendar calendar = new GregorianCalendar();
-            calendar.setTime(date);
+    private void showErrorToast() {
+        Context context = getApplicationContext();
+        CharSequence text = "All fields are required";
+        int duration = Toast.LENGTH_SHORT;
 
-            String examDifficultyString = examDifficultySpinner.getSelectedItem().toString();
-
-            Exam exam;
-
-            //Creating exams object
-            switch (examDifficultyString) {
-                case "Easy":
-                    exam = new Exam(examName, new Easy(), calendar);
-                case "Medium":
-                    exam = new Exam(examName, new Medium(), calendar);
-                case "Hard":
-                    exam = new Exam(examName, new Hard(), calendar);
-                default:
-                    exam = new Exam(examName, new Medium(), calendar);
-            }
-
-            long eventID = scheduleManager.addExam(exam, hoursOfStudy);
-
-            Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
-            startActivity(i);
-
-            //Clear all fields
-            this.clearAllFields();
-
-            /*//Open calendarProvider calender with an intent to show the inserted event.
-            Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
-            Intent intent = new Intent(Intent.ACTION_VIEW)
-                    .setData(uri);
-            startActivity(intent);*/
-
-
-        } catch (Exception e) {
-            Context context = getApplicationContext();
-            CharSequence text = "All fields are required";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     /**
@@ -266,4 +306,5 @@ public class AddNewExamActivity extends ActionBarActivity {
         hourOfExamEditText.setText("");
         numberOfHoursEditText.setText("");
     }
+
 }

@@ -89,11 +89,10 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/saveMeTextView"
+            android:id="@+id/saveTheExamButton"
             android:text="Save"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            android:onClick="saveNewExamEvent"
             android:layout_width="130dp"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
