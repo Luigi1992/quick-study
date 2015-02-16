@@ -161,7 +161,7 @@ public class AddNewExamActivity extends ActionBarActivity {
             default:
                 difficulty = new  Medium();
         }
-        return new Exam(examName, difficulty, calendar, hoursOfStudy);
+        return new Exam(examName, difficulty, calendar);
     }
 
     @Override
@@ -276,7 +276,7 @@ public class AddNewExamActivity extends ActionBarActivity {
     public void saveNewExamEvent(Exam exam) {
         ScheduleManager scheduleManager = new ScheduleManager(getContentResolver());
 
-        long eventID = scheduleManager.addExam(exam, exam.getNumberOfHours());
+        long eventID = scheduleManager.addExam(exam, exam.getDifficulty().getHoursOfStudy());
 
         Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
         startActivity(i);

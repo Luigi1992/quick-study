@@ -63,9 +63,9 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Exam[] exams = {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance(), 1),
-                new Exam("Analisi Matematica", new Hard(), Calendar.getInstance(), 3),
-                new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance(), 3)};
+        Exam[] exams = {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance()),
+                new Exam("Analisi Matematica", new Hard(), Calendar.getInstance()),
+                new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance())};
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(exams);
