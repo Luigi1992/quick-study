@@ -14,13 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
+import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
 import java.text.DateFormat;
@@ -37,6 +41,8 @@ public class MainActivity extends ActionBarActivity {
     EditText dateOfExamEditText;
     EditText hourOfExamEditText;
     EditText numberOfHoursEditText;
+    Spinner examDifficultySpinner;
+
 
     private static final int RESULT_SETTINGS = 1;
 
@@ -56,12 +62,21 @@ public class MainActivity extends ActionBarActivity {
         dateOfExamEditText = (EditText) findViewById(R.id.dateOfExamEditText);
         hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
         numberOfHoursEditText = (EditText) findViewById(R.id.numberOfHoursEditText);
+        examDifficultySpinner = (Spinner) findViewById(R.id.exam_difficulty_spinner);
 
         // To prevent opening keyboard before date/time dialog
         dateOfExamEditText.setInputType(InputType.TYPE_NULL);
         dateOfExamEditText.setFocusable(false);
         hourOfExamEditText.setInputType(InputType.TYPE_NULL);
         hourOfExamEditText.setFocusable(false);
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.difficulty_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        examDifficultySpinner.setAdapter(adapter);
 
         setDatePicker();
         setHourPicker();
@@ -201,14 +216,26 @@ public class MainActivity extends ActionBarActivity {
             Calendar calendar = new GregorianCalendar();
             calendar.setTime(date);
 
+            String examDifficultyString = examDifficultySpinner.getSelectedItem().toString();
+
+            Exam exam;
+
             //Creating exams object
-            Exam exam = new Exam(examName, new Medium(), calendar);
+            switch (examDifficultyString) {
+                case "Easy":
+                    exam = new Exam(examName, new Easy(), calendar);
+                case "Medium":
+                    exam = new Exam(examName, new Medium(), calendar);
+                case "Hard":
+                    exam = new Exam(examName, new Hard(), calendar);
+                default:
+                    exam = new Exam(examName, new Medium(), calendar);
+            }
 
             long eventID = scheduleManager.addExam(exam, hoursOfStudy);
 
             Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
             startActivity(i);
-
 
             //Clear all fields
             this.clearAllFields();

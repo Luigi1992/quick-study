@@ -8,7 +8,7 @@
     <string name="date_of_exam">Date</string>
     <string name="exam_name">Exam name</string>
     <string name="hours_per_day">Hours per day</string>
-    <string name="hour_of_exam">Hour</string>
+    <string name="hour_of_exam">Time</string>
     <string name="pref_sessions">Study sessions preferences</string>
     <string name="pref_days_title">Days of the week</string>
     <string name="pref_days_summary">Choose the days of the week you want to study</string>
@@ -19,6 +19,8 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
-    <string name="title_activity_list">Save Me</string>
+    <string name="title_activity_list">QuickStudy</string>
+    <string name="exam_is_registered">Registered</string>
+    <string name="exam_not_registered">Not registered</string>
 
 </resources>

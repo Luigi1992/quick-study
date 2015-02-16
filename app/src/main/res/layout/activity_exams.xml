@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffbbdefb"
+    android:background="@color/background_color"
     tools:context=".ExamsActivity"
     tools:ignore="MergeRootFrame">
 
@@ -42,8 +42,7 @@
         android:layout_marginBottom="@dimen/add_button_margin"
         android:tint="@android:color/white"
         android:src="@android:drawable/ic_input_add"
-        android:background="@drawable/button_style">
-    </ImageButton>
+        android:background="@drawable/button_style"/>
 
 </FrameLayout>
 
