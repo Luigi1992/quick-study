@@ -10,4 +10,9 @@ public class Medium extends Difficulty {
     public Medium() {
         super("Medium", R.drawable.icon_medium_test);
     }
+
+    @Override
+    public int getHoursOfStudy() {
+        return 2;
+    }
 }

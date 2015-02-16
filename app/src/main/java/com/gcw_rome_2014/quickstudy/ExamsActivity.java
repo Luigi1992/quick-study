@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidInstanceManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
@@ -69,6 +70,10 @@ public class ExamsActivity extends ActionBarActivity {
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(exams);
         mRecyclerView.setAdapter(mAdapter);
+
+
+        AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
+        instanceManager.queryInstance();
     }
 
     @Override

@@ -10,4 +10,9 @@ public class Hard extends Difficulty {
     public Hard() {
         super("Hard", R.drawable.icon_hard_test);
     }
+
+    @Override
+    public int getHoursOfStudy() {
+        return 3;
+    }
 }

@@ -11,4 +11,8 @@ public class Easy extends Difficulty {
         super("Easy", R.drawable.icon_easy_test);
     }
 
+    @Override
+    public int getHoursOfStudy() {
+        return 1;
+    }
 }

@@ -8,28 +8,47 @@ import java.util.Calendar;
  * Created by Luigi on 18/01/2015.
  */
 public class Exam {
+    private static final long DEFAULT_ID = -1;
 
-    //The Exam name
+    // Exam Calendar Id
+    long id;
+
+    // The Exam name
     private String name;
 
-    //The exam difficulty. It is a integer representing an image.
+    // The exam difficulty. It is a integer representing an image.
     private Difficulty difficulty;
 
-    //The exam date
+    // The exam date
     private Calendar examDate;
 
-    //A flag that it is used to check if the user remembered to reserve for the exam test.
+    // A flag that it is used to check if the user remembered to reserve for the exam test.
     private boolean isRegistered;
 
-    // Hours of studying per day
-    private int numberOfHours;
-
-    public Exam(String name, Difficulty difficulty, Calendar examDate, int numberOfHours) {
+    public Exam(String name, Difficulty difficulty, Calendar examDate) {
+        this.id = DEFAULT_ID;
         this.name = name;
         this.difficulty = difficulty;
         this.examDate = examDate;
         this.isRegistered = false;
-        this.numberOfHours = numberOfHours;
+    }
+
+    public Exam(long id, String name, Difficulty difficulty, Calendar examDate, boolean isRegistered) {
+        this(name, difficulty, examDate);
+        this.id = id;
+        this.isRegistered = isRegistered;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean isDatabaseRecorded() {
+        return this.getId() != DEFAULT_ID;
     }
 
     public Difficulty getDifficulty() {
@@ -68,14 +87,5 @@ public class Exam {
 
     public void setRegistered(boolean isRegistered) {
         this.isRegistered = isRegistered;
-    }
-
-
-    public int getNumberOfHours() {
-        return numberOfHours;
-    }
-
-    public void setNumberOfHours(int numberOfHours) {
-        this.numberOfHours = numberOfHours;
     }
 }

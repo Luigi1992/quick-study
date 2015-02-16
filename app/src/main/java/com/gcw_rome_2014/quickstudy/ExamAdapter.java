@@ -66,7 +66,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         holder.mTextView.setText(exams[position].getName());
         holder.mExamImageView.setImageResource(exams[position].getDifficulty().getImageValue());
-        if (exams[position].isRegistered()==true)
+        if (exams[position].isRegistered())
             holder.mExamIsRegistered.setText(R.string.exam_is_registered);
         else
             holder.mExamIsRegistered.setText(R.string.exam_not_registered);

@@ -29,4 +29,5 @@ public abstract class Difficulty {
         this.name = name;
     }
 
+    public abstract int getHoursOfStudy();
 }

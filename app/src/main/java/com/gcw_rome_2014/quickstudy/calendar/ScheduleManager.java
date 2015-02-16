@@ -32,6 +32,7 @@ public class ScheduleManager {
      */
     public long addExam(Exam exam, int hoursOfStudy) {
         long eventID = this.eventManager.addEvent(exam.getName() + " Exam", "SAVE ME Automatic Planner", exam.getExamDate(), 0);
+        exam.setId(eventID);    //The Exam id is the Calendar Id
 
         Calendar now = this.getCurrentDate();
         this.addStudyEvents(exam, now, hoursOfStudy);
