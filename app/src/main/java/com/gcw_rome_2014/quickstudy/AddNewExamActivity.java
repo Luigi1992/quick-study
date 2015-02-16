@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,7 +34,7 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 
-public class MainActivity extends ActionBarActivity {
+public class AddNewExamActivity extends ActionBarActivity {
 
     EditText examNameEditText;
     EditText dateOfExamEditText;
@@ -124,7 +123,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePicker = new DatePickerDialog(MainActivity.this, date,
+                DatePickerDialog datePicker = new DatePickerDialog(AddNewExamActivity.this, date,
                         myCalendar.get(Calendar.YEAR),
                         myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -151,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(MainActivity.this, time,
+                TimePickerDialog timePickerDialog = new TimePickerDialog(AddNewExamActivity.this, time,
                         myCalendar.get(Calendar.HOUR_OF_DAY),
                         myCalendar.get(Calendar.MINUTE), true);
                 hourOfExamEditText.setInputType(InputType.TYPE_NULL);
@@ -197,7 +196,7 @@ public class MainActivity extends ActionBarActivity {
      *
      * @param view Default param.
      */
-    public void addEvent(View view) {
+    public void saveNewExamEvent(View view) {
         ScheduleManager scheduleManager = new ScheduleManager(getContentResolver());
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
