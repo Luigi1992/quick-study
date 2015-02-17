@@ -1,9 +1,13 @@
 package com.gcw_rome_2014.quickstudy;
 
+import android.content.ComponentName;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -95,6 +99,12 @@ public class ExamsActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_calendar:
+                //Open calendarProvider calendar with an intent.
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("content://com.android.calendar/time"));
+                startActivity(intent);
+                break;
             case R.id.action_settings:
                 Intent i = new Intent(this, SettingsActivity.class);
                 startActivityForResult(i, RESULT_SETTINGS);
