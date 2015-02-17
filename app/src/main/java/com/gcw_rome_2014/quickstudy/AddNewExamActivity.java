@@ -98,8 +98,10 @@ public class AddNewExamActivity extends ActionBarActivity {
         saveNewExamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                if (!isExamValid(v)) {
-                    showErrorToast();
+                if (!isDateValid(v)) {
+                    showErrorToast("The exam cannot be in the past.");
+                } else if (!isExamValid(v)) {
+                    showErrorToast("All fields are required");
                 } else {
                     final Exam newExam = parseExam(v);
                     new Thread(new Runnable() {
@@ -112,6 +114,26 @@ public class AddNewExamActivity extends ActionBarActivity {
             }
 
         });
+    }
+
+    private boolean isDateValid(View v) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
+        String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
+        Date date = new Date();
+        try {
+            date = dateFormat.parse(dateString);
+        } catch (Exception e) {
+            // The error here would be caught in isExamValid method.
+        }
+
+        //Set calendar for an easy management of time.
+        Calendar startDate = new GregorianCalendar();
+        startDate.setTime(date);
+
+        if(startDate.before(Calendar.getInstance())) {
+            return false;
+        }
+        return true;
     }
 
     private boolean isExamValid(View v) {
@@ -294,9 +316,9 @@ public class AddNewExamActivity extends ActionBarActivity {
         startActivity(intent);*/
     }
 
-    private void showErrorToast() {
+    private void showErrorToast(String message) {
         Context context = getApplicationContext();
-        CharSequence text = "All fields are required";
+        CharSequence text = message;
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
