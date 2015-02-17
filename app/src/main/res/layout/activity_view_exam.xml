@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".ExamDetailsActivity"
-        tools:ignore="MergeRootFrame">
+        tools:ignore="MergeRootFrame"
+        android:background="@drawable/border"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="30dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,6 +26,7 @@
                     android:layout_height="match_parent"
                     android:layout_width="wrap_content"
                     android:text="Name: "
+                    android:textStyle="bold"
                     android:textSize="18sp"/>
 
                 <TextView
@@ -44,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Date: "
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     />
 
@@ -66,6 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Difficulty: "
+                    android:textStyle="bold"
                     android:textSize="18sp"            />
 
                 <TextView
@@ -87,49 +93,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Are you registered for this exam?"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     />
-
-                <TextView
-                    android:id="@+id/details_registered"
-                    android:layout_width="wrap_content"
+                <RadioGroup
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"/>
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="30dp">
+                    <RadioButton
+                        android:id="@+id/details_registered_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yes" />
+                    <RadioButton
+                        android:id="@+id/details_registered_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No" />
+                </RadioGroup>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="30dp">
-
-                <Button
-                    android:layout_width="130dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:text="Edit"
-                    android:shadowColor="#A8A8A8"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="5"
-                    android:layout_marginRight="20dp"/>
-
-                <Button
-                    android:layout_width="130dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:text="Delete"
-                    android:shadowColor="#A8A8A8"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
-                    android:shadowRadius="5"/>
             </LinearLayout>
 
     </LinearLayout>
