@@ -2,6 +2,11 @@ package com.gcw_rome_2014.quickstudy;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
@@ -16,7 +21,8 @@ public class ViewExamActivity extends ActionBarActivity {
     private TextView name_details;
     private TextView date_details;
     private TextView difficulty_details;
-    private TextView registered_details;
+    private RadioButton registered_details_yes;
+    private RadioButton registered_details_no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +34,44 @@ public class ViewExamActivity extends ActionBarActivity {
         name_details = (TextView) findViewById(R.id.details_name);
         date_details = (TextView) findViewById(R.id.details_date);
         difficulty_details = (TextView) findViewById(R.id.details_difficulty);
-        registered_details = (TextView) findViewById(R.id.details_registered);
+        registered_details_yes = (RadioButton) findViewById(R.id.details_registered_yes);
+        registered_details_no = (RadioButton) findViewById(R.id.details_registered_no);
 
         name_details.setText(exam.getName());
         date_details.setText(new SimpleDateFormat("EEE d MMM yyyy, HH:mm", Locale.ITALIAN).format(exam.getExamDate().getTime()));
         difficulty_details.setText(exam.getDifficulty().getName());
         if (exam.isRegistered())
-            registered_details.setText("Yes");
+            registered_details_yes.toggle();
         else
-            registered_details.setText("No");
+            registered_details_no.toggle();
 
         //Show icon in the Action Bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_view_exam, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.details_registered_yes:
+                if (checked)
+                    // TODO
+                    break;
+            case R.id.details_registered_no:
+                if (checked)
+                    // TODO
+                    break;
+        }
     }
 
 }
