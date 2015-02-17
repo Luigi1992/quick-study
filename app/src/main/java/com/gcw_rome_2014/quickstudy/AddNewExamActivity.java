@@ -67,7 +67,7 @@ public class AddNewExamActivity extends ActionBarActivity {
         hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
         numberOfHoursEditText = (EditText) findViewById(R.id.numberOfHoursEditText);
         examDifficultySpinner = (Spinner) findViewById(R.id.exam_difficulty_spinner);
-        saveNewExamButton = (TextView) findViewById(R.id.saveMeTextView);
+        saveNewExamButton = (TextView) findViewById(R.id.saveTheExamButton);
 
         this.clearAllFields();
 
