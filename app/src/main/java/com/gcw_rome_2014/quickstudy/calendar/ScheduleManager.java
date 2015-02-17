@@ -34,17 +34,13 @@ public class ScheduleManager {
     /**
      * Add all the events
      * @param exam An object representing the exams.
-     * @param hoursOfStudy  An integer representing the number of hours the student want to study per day.
      */
-    public long addExam(Exam exam, int hoursOfStudy) {
+    public long addExam(Exam exam) {
         long eventID = this.eventManager.addEvent(exam.getName() + " Exam", appName + "Automatic Planner", exam.getExamDate(), 0);
         exam.setId(eventID);    // The Exam id is the Calendar Id
 
-        // Now we can save the exam
-        QuickStudy.getInstance().putExam(exam);
-
         Calendar now = this.getCurrentDate();
-        this.addStudyEvents(exam, now, hoursOfStudy);
+        this.addStudyEvents(exam, now, exam.getDifficulty().getHoursOfStudy());
 
         return eventID;
     }
@@ -62,6 +58,10 @@ public class ScheduleManager {
             this.addStudyEvents(exam, startDate, hoursOfStudy);
         }
 
+    }
+
+    public void deleteExam(Exam exam) {
+        this.eventManager.deleteEvent(exam.getId());
     }
 
     /**

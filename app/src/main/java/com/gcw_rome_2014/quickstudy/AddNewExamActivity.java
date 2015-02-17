@@ -25,6 +25,7 @@ import android.widget.Button;
 
 import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
@@ -130,9 +131,9 @@ public class AddNewExamActivity extends ActionBarActivity {
         Calendar startDate = new GregorianCalendar();
         startDate.setTime(date);
 
-        if(startDate.before(Calendar.getInstance())) {
+        if(startDate.before(Calendar.getInstance()))
             return false;
-        }
+
         return true;
     }
 
@@ -302,9 +303,7 @@ public class AddNewExamActivity extends ActionBarActivity {
      * @param exam Exam to be saved.
      */
     public void saveNewExamEvent(Exam exam) {
-        ScheduleManager scheduleManager = new ScheduleManager(getContentResolver(), getApplicationContext());
-
-        long eventID = scheduleManager.addExam(exam, exam.getDifficulty().getHoursOfStudy());
+        QuickStudy.getInstance().putExam(exam);
 
         Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
         startActivity(i);

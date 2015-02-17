@@ -60,6 +60,22 @@ public class QuickStudyDatabase {
     }
 
     /**
+     * Delete an exam from table providing his id.
+     * @param id The exam id
+     */
+    public void deleteExam(long id) {
+        // Gets the data repository in write mode
+        this.db = mDbHelper.getWritableDatabase();
+
+        // Define 'where' part of query.
+        String selection = QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = {String.valueOf(id)};
+        // Issue SQL statement.
+        db.delete(QuickStudyReaderContract.ExamEntry.TABLE_NAME, selection, selectionArgs);
+    }
+
+    /**
      * This function return the Exam object found in database with the specified id.
      * @param id The exam id
      * @return Return the instantiated Exam object.
@@ -124,7 +140,7 @@ public class QuickStudyDatabase {
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
-                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID + " DESC";
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " DESC";
 
         Cursor cursor = db.query(
                 QuickStudyReaderContract.ExamEntry.TABLE_NAME,  // The table to query

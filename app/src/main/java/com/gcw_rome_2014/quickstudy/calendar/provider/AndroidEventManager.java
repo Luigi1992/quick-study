@@ -32,7 +32,7 @@ public class AndroidEventManager implements EventManager {
      * @return Returns the added event ID.
      */
     public long addEvent(String eventName, String eventDescription, Calendar dateAndTime, int duration) {
-        long calID = 1; //TODO: change this in order to add new events on the SAVE ME calendar.
+        long calID = 1;
         long startMillis = 0;
         long endMillis = 0;
         Calendar beginTime = Calendar.getInstance();
@@ -66,7 +66,7 @@ public class AndroidEventManager implements EventManager {
         //
 
         //TODO: remove in the final version.
-        System.out.println("EventID: " + eventID);
+        Log.i("AndroidEventManager","EventID: " + eventID);
         return eventID;
     }
 
@@ -86,12 +86,12 @@ public class AndroidEventManager implements EventManager {
     }
 
     //TODO: Finish this method.
-    public void deleteEvent(long eventID) {
-        String DEBUG_TAG = "MyActivity";
+    public void deleteEvent(long eventId) {
+        String DEBUG_TAG = "Deleting Event";
 
         ContentValues values = new ContentValues();
         Uri deleteUri = null;
-        deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
+        deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
         int rows = contentResolver.delete(deleteUri, null, null);
         Log.i(DEBUG_TAG, "Rows deleted: " + rows);
     }

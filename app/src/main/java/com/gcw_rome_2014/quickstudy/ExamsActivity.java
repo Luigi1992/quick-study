@@ -31,7 +31,6 @@ public class ExamsActivity extends ActionBarActivity {
     private ExamAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageButton fab;
-    private Exam[] exams;
 
     private static final int RESULT_SETTINGS = 1;
 
@@ -67,13 +66,7 @@ public class ExamsActivity extends ActionBarActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         QuickStudy quickStudy = QuickStudy.getInstance();
-        quickStudy.init(getApplicationContext());
-
-        exams = new Exam[] {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance()),
-                            new Exam("Analisi Matematica", new Hard(), Calendar.getInstance()),
-                            new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance())};
-
-
+        quickStudy.init(getApplicationContext(), getContentResolver());
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(quickStudy.getArrayOfExams());

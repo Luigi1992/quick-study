@@ -1,7 +1,10 @@
 package com.gcw_rome_2014.quickstudy.model;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.util.Log;
 
+import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.database.QuickStudyDatabase;
 
 import java.util.Map;
@@ -16,6 +19,7 @@ import java.util.Map;
 public class QuickStudy {
     private static QuickStudy instance = new QuickStudy();
     private QuickStudyDatabase database = null;
+    ScheduleManager scheduleManager = null;
     private Map<Long, Exam> exams = null;
 
     public static QuickStudy getInstance() {
@@ -26,8 +30,9 @@ public class QuickStudy {
 
     }
 
-    public void init(Context context) {
+    public void init(Context context, ContentResolver contentResolver) {
         this.database = new QuickStudyDatabase(context);
+        this.scheduleManager = new ScheduleManager(contentResolver, context);
     }
 
     public Exam getExam(Long id) {
@@ -39,12 +44,26 @@ public class QuickStudy {
     }
 
     public void putExam(Exam exam) {
-        if(this.database == null)
+        if(this.database == null || this.scheduleManager == null)
             return;
 
         lazyLoad();
-        this.database.putExam(exam);
-        this.exams.put(exam.getId(), exam);
+        this.scheduleManager.addExam(exam);     //Into Calendar
+        this.database.putExam(exam);            //Into Database
+        this.exams.put(exam.getId(), exam);     //Into List
+
+        Log.i("QuickStudy", "Exam ID: " + exam.getId());
+    }
+
+    public void deleteExam(Exam exam) {
+        if(this.database == null || this.scheduleManager == null)
+            return;
+
+        lazyLoad();
+
+        this.scheduleManager.deleteExam(exam);      //From Calendar
+        this.database.deleteExam(exam.getId());     //From Database
+        this.exams.remove(exam.getId());            //From list
     }
 
     public Map<Long, Exam> getExams() {

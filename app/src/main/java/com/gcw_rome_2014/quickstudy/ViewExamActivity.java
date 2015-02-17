@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -24,13 +25,14 @@ public class ViewExamActivity extends ActionBarActivity {
     private TextView difficulty_details;
     private RadioButton registered_details_yes;
     private RadioButton registered_details_no;
+    private Exam exam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_exam);
 
-        Exam exam = (Exam) getIntent().getSerializableExtra("exam");
+        this.exam = (Exam) getIntent().getSerializableExtra("exam");
 
         name_details = (TextView) findViewById(R.id.details_name);
         date_details = (TextView) findViewById(R.id.details_date);
@@ -69,7 +71,7 @@ public class ViewExamActivity extends ActionBarActivity {
                 //TODO
                 return true;
             case R.id.action_delete:
-                //TODO
+                QuickStudy.getInstance().deleteExam(this.exam);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
