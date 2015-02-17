@@ -89,4 +89,26 @@ public class Exam implements Serializable {
     public void setRegistered(boolean isRegistered) {
         this.isRegistered = isRegistered;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Exam)) return false;
+
+        Exam exam = (Exam) o;
+
+        if (id != exam.id) return false;
+        if (isRegistered != exam.isRegistered) return false;
+        if (!examDate.equals(exam.examDate)) return false;
+        if (!name.equals(exam.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }

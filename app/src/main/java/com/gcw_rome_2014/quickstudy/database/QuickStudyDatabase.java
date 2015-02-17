@@ -12,7 +12,10 @@ import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by Luigi on 16/02/2015.
@@ -38,7 +41,12 @@ public class QuickStudyDatabase {
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID, exam.getId());
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_NAME, exam.getName());
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DIFFICULTY, exam.getDifficulty().getName());
-        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, exam.getExamDate().toString());
+
+        // Converting Date to string for SQLite format
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateString = sdf.format(exam.getExamDate().getTime());
+
+        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, dateString);
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED, exam.isRegistered());
 
         // Insert the new row, returning the primary key value of the new row
@@ -75,7 +83,7 @@ public class QuickStudyDatabase {
 
         // The values for the WHERE clause
         String[] selectionArgs = {
-                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID
+                String.valueOf(id)
         };
 
         // How you want the results sorted in the resulting Cursor
@@ -93,6 +101,52 @@ public class QuickStudyDatabase {
         );
 
         cursor.moveToFirst();
+        return processExam(cursor);
+    }
+
+    /**
+     * This function return the Exam object found in database with the specified id.
+     * @return Return the instantiated Exam object.
+     */
+    public Map<Long, Exam> readAllExams() {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                QuickStudyReaderContract.ExamEntry._ID,
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID,
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_NAME,
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DIFFICULTY,
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE,
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID + " DESC";
+
+        Cursor cursor = db.query(
+                QuickStudyReaderContract.ExamEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                null,                                     // The columns for the WHERE clause
+                null,                                     // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        Map<Long, Exam> exams = new HashMap<>();
+
+        while(cursor.moveToNext()) {
+            Exam exam = processExam(cursor);
+            exams.put(exam.getId(), exam);
+        }
+
+        return exams;
+    }
+
+    private Exam processExam(Cursor cursor) {
         long examId = cursor.getLong(
                 cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry._ID)
         );
@@ -114,7 +168,7 @@ public class QuickStudyDatabase {
         ));
 
         Calendar examDate = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS.SSS", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         try {
             examDate.setTime(sdf.parse(examDateString));
         } catch (ParseException e) {
@@ -131,10 +185,7 @@ public class QuickStudyDatabase {
             difficulty = new Easy();
         }
 
-        Exam exam = new Exam(examId, examName, difficulty, examDate, isRegistered);
-
-        return exam;
+        return new Exam(examId, examName, difficulty, examDate, isRegistered);
     }
-
 
 }

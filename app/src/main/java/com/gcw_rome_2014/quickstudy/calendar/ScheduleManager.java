@@ -1,12 +1,15 @@
 package com.gcw_rome_2014.quickstudy.calendar;
 
 import android.content.ContentResolver;
+import android.content.Context;
 
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidEventManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.CalendarManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.EventManager;
+import com.gcw_rome_2014.quickstudy.database.QuickStudyDatabase;
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 
 import java.util.Calendar;
 
@@ -19,10 +22,13 @@ public class ScheduleManager {
     //Manager variables
     private CalendarManager calendarManager;
     private EventManager eventManager;
+    private Context context;
+    private static final String appName = "Quick Study ";
 
-    public ScheduleManager(ContentResolver contentResolver) {
+    public ScheduleManager(ContentResolver contentResolver, Context context) {
         this.calendarManager = new AndroidCalendarManager(contentResolver);
         this.eventManager = new AndroidEventManager(contentResolver);
+        this.context = context;
     }
 
     /**
@@ -31,8 +37,11 @@ public class ScheduleManager {
      * @param hoursOfStudy  An integer representing the number of hours the student want to study per day.
      */
     public long addExam(Exam exam, int hoursOfStudy) {
-        long eventID = this.eventManager.addEvent(exam.getName() + " Exam", "SAVE ME Automatic Planner", exam.getExamDate(), 0);
-        exam.setId(eventID);    //The Exam id is the Calendar Id
+        long eventID = this.eventManager.addEvent(exam.getName() + " Exam", appName + "Automatic Planner", exam.getExamDate(), 0);
+        exam.setId(eventID);    // The Exam id is the Calendar Id
+
+        // Now we can save the exam
+        QuickStudy.getInstance().putExam(exam);
 
         Calendar now = this.getCurrentDate();
         this.addStudyEvents(exam, now, hoursOfStudy);
@@ -47,7 +56,7 @@ public class ScheduleManager {
         if(startDate.before(exam.getLastStudyDate())) {
             startDate.add(Calendar.DATE, 1);
             this.eventManager.addEvent("Study " + exam.getName(),
-                    "SAVE ME " + exam.getName() + " Study Session",
+                    appName + exam.getName() + " Study Session",
                     startDate,
                     hoursOfStudy);
             this.addStudyEvents(exam, startDate, hoursOfStudy);

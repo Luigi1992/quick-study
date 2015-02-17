@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidInstanceManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
@@ -35,7 +37,6 @@ public class ExamsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams);
         mRecyclerView = (RecyclerView) findViewById(R.id.exams_recycler_view);
@@ -65,12 +66,17 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        QuickStudy quickStudy = QuickStudy.getInstance();
+        quickStudy.init(getApplicationContext());
+
         exams = new Exam[] {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance()),
                             new Exam("Analisi Matematica", new Hard(), Calendar.getInstance()),
                             new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance())};
 
+
+
         // specify an adapter (see also next example)
-        mAdapter = new ExamAdapter(exams);
+        mAdapter = new ExamAdapter(quickStudy.getArrayOfExams());
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -81,7 +87,6 @@ public class ExamsActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
-
 
         AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
         instanceManager.queryInstance();
