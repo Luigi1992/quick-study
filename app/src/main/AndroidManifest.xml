@@ -23,7 +23,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ViewExamActivity"
-            android:label="@string/view_exam">
+            android:label="@string/view_exam"
+            android:parentActivityName="com.gcw_rome_2014.quickstudy.ExamsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
     </application>
 
