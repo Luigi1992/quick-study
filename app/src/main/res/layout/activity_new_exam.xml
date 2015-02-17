@@ -87,21 +87,5 @@
                 android:layout_gravity="center_vertical"
                 />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/saveTheExamButton"
-            android:text="Save"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/buttonshape"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5" />
-
     </LinearLayout>
 </FrameLayout>

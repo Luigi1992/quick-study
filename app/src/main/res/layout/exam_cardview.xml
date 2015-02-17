@@ -6,6 +6,8 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="1dp"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true">
 

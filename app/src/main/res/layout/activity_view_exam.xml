@@ -5,116 +5,123 @@
     android:layout_height="fill_parent"
     android:background="@color/background_color">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ExamDetailsActivity"
-        tools:ignore="MergeRootFrame"
-        android:background="@drawable/border"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="30dp">
+        android:layout_margin="16dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="1dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ExamDetailsActivity"
+            android:layout_gravity="center"
+            tools:ignore="MergeRootFrame">
 
-                <TextView
-                    android:layout_height="match_parent"
-                    android:layout_width="wrap_content"
-                    android:text="Name: "
-                    android:textStyle="bold"
-                    android:textSize="18sp"/>
-
-                <TextView
-                    android:id="@+id/details_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="18sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Date: "
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    />
-
-                <TextView
-                    android:id="@+id/details_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:textSize="18sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Difficulty: "
-                    android:textStyle="bold"
-                    android:textSize="18sp"            />
-
-                <TextView
-                    android:id="@+id/details_difficulty"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:layout_margin="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Are you registered for this exam?"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    />
-                <RadioGroup
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="30dp">
-                    <RadioButton
-                        android:id="@+id/details_registered_yes"
+                    android:gravity="center_vertical"
+                    android:layout_margin="16dp">
+
+                    <TextView
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:text="Name: "
+                        android:textStyle="bold"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/details_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_margin="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Date: "
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/details_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_margin="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Difficulty: "
+                        android:textStyle="bold"
+                        android:textSize="18sp"/>
+
+                    <TextView
+                        android:id="@+id/details_difficulty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Yes" />
-                    <RadioButton
-                        android:id="@+id/details_registered_no"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_margin="16dp">
+
+                    <TextView
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Are you registered for this exam?"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        />
+                    <RadioGroup
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="No" />
-                </RadioGroup>
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/details_registered_yes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yes" />
+                        <RadioButton
+                            android:id="@+id/details_registered_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No" />
+                    </RadioGroup>
 
-            </LinearLayout>
+                </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </ScrollView>

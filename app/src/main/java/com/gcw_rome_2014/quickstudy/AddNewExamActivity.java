@@ -59,6 +59,7 @@ public class AddNewExamActivity extends ActionBarActivity {
         //Show icon in the Action Bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Set default values for settings
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -68,7 +69,6 @@ public class AddNewExamActivity extends ActionBarActivity {
         hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
         numberOfHoursEditText = (EditText) findViewById(R.id.numberOfHoursEditText);
         examDifficultySpinner = (Spinner) findViewById(R.id.exam_difficulty_spinner);
-        saveNewExamButton = (Button) findViewById(R.id.saveTheExamButton);
 
         this.clearAllFields();
 
@@ -95,26 +95,6 @@ public class AddNewExamActivity extends ActionBarActivity {
                     .commit();
         }
 
-        // Validation of fields and saving exam in new thread.
-        saveNewExamButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                if (!isDateValid(v)) {
-                    showErrorToast("The exam cannot be in the past.");
-                } else if (!isExamValid(v)) {
-                    showErrorToast("All fields are required");
-                } else {
-                    final Exam newExam = parseExam(v);
-                    new Thread(new Runnable() {
-                        public void run() {
-
-                            saveNewExamEvent(newExam);
-                        }
-                    }).start();
-                }
-            }
-
-        });
     }
 
     private boolean isDateValid(View v) {
@@ -196,17 +176,30 @@ public class AddNewExamActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_add_exam, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                Intent i = new Intent(this, SettingsActivity.class);
-                startActivityForResult(i, RESULT_SETTINGS);
+            case R.id.action_save:
+                // Validation of fields and saving exam in new thread.
+                    View v = new View(getApplicationContext());
+                        if (!isExamValid(v)) {
+                            showErrorToast();
+                        } else {
+                            final Exam newExam = parseExam(v);
+                            new Thread(new Runnable() {
+                                public void run() {
+
+                                    saveNewExamEvent(newExam);
+                                }
+                            }).start();
+                        }
                 break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
         return true;
     }
