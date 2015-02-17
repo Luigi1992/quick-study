@@ -1,9 +1,11 @@
 package com.gcw_rome_2014.quickstudy.model.difficulties;
 
+import java.io.Serializable;
+
 /**
  * Created by Luigi on 13/02/2015.
  */
-public abstract class Difficulty {
+public abstract class Difficulty implements Serializable{
 
     private String name;
     private int imageValue;

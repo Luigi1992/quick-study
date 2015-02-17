@@ -16,12 +16,14 @@ import java.util.Locale;
  * Created by Luigi on 18/01/2015.
  */
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
+
     private Exam[] exams;
+    OnItemClickListener mItemClickListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         public TextView mTextView;
         public ImageView mExamImageView;
@@ -36,12 +38,33 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
             mExamIsRegistered = (TextView) v.findViewById(R.id.exam_registered);
             mExamDateView = (TextView) v.findViewById(R.id.exam_date_view);
             mExamTimeView = (TextView) v.findViewById(R.id.exam_time_view);
+            v.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick (View v){
+            if (mItemClickListener != null) {
+                mItemClickListener.onItemClick(v, getPosition());
+            }
+        }
+
+    }
+    //Provide ClickListener for ViewHolder
+    public interface OnItemClickListener {
+        public void onItemClick(View view , int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ExamAdapter(Exam[] exams) {
         this.exams = exams;
+    }
+
+    public Exam[] getExams() {
+        return exams;
     }
 
     // Create new views (invoked by the layout manager)
@@ -60,8 +83,6 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN);
-        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.ITALIAN);
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         holder.mTextView.setText(exams[position].getName());
@@ -70,7 +91,9 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
             holder.mExamIsRegistered.setText(R.string.exam_is_registered);
         else
             holder.mExamIsRegistered.setText(R.string.exam_not_registered);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN);
         holder.mExamDateView.setText(sdf.format(exams[position].getExamDate().getTime()));
+        SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.ITALIAN);
         holder.mExamTimeView.setText(sdf1.format(exams[position].getExamDate().getTime()));
     }
 

@@ -2,12 +2,13 @@ package com.gcw_rome_2014.quickstudy.model;
 
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * Created by Luigi on 18/01/2015.
  */
-public class Exam {
+public class Exam implements Serializable {
     private static final long DEFAULT_ID = -1;
 
     // Exam Calendar Id

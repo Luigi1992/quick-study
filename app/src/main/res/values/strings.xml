@@ -22,5 +22,6 @@
     <string name="title_activity_list">QuickStudy</string>
     <string name="exam_is_registered">Registered</string>
     <string name="exam_not_registered">Not registered</string>
+    <string name="view_exam">View exam</string>
 
 </resources>

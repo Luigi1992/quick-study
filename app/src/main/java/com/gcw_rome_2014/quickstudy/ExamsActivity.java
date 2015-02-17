@@ -17,6 +17,7 @@ import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
+import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
 
 import java.util.Calendar;
 
@@ -25,9 +26,10 @@ import java.util.Calendar;
  */
 public class ExamsActivity extends ActionBarActivity {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ExamAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageButton fab;
+    private Exam[] exams;
 
     private static final int RESULT_SETTINGS = 1;
 
@@ -63,13 +65,22 @@ public class ExamsActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Exam[] exams = {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance()),
-                new Exam("Analisi Matematica", new Hard(), Calendar.getInstance()),
-                new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance())};
+        exams = new Exam[] {new Exam("Ricerca Operativa", new Easy(), Calendar.getInstance()),
+                            new Exam("Analisi Matematica", new Hard(), Calendar.getInstance()),
+                            new Exam("Fondamenti Automatica", new Medium(), Calendar.getInstance())};
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(exams);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent i = new Intent(context, ViewExamActivity.class);
+                Exam exam = mAdapter.getExams()[position];
+                i.putExtra("exam", exam);
+                startActivity(i);
+            }
+        });
 
 
         AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
