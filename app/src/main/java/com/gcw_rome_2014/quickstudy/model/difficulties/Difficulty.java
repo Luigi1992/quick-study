@@ -32,4 +32,22 @@ public abstract class Difficulty implements Serializable{
     }
 
     public abstract int getHoursOfStudy();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Difficulty)) return false;
+
+        Difficulty that = (Difficulty) o;
+
+        if (imageValue != that.imageValue) return false;
+        if (!name.equals(that.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }

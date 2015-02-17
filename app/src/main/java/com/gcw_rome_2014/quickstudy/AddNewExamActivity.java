@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -107,7 +108,7 @@ public class AddNewExamActivity extends ActionBarActivity {
                             saveNewExamEvent(newExam);
                         }
                     }).start();
-            }
+                }
             }
 
         });
@@ -117,17 +118,17 @@ public class AddNewExamActivity extends ActionBarActivity {
         String examName = examNameEditText.getText().toString();
         String numberOfHoursString = numberOfHoursEditText.getText().toString();
 
-        if(examName.isEmpty() || numberOfHoursString.isEmpty())
+        if (examName.isEmpty() || numberOfHoursString.isEmpty())
             return false;
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault()); int hoursOfStudy = Integer.valueOf(numberOfHoursString);
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
+        int hoursOfStudy = Integer.valueOf(numberOfHoursString);
         String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
-       try {
-
-       dateFormat.parse(dateString);
-       } catch (Exception e) {
-           return false;
-       }
+        try {
+            dateFormat.parse(dateString);
+        } catch (Exception e) {
+            return false;
+        }
         return true;
     }
 
@@ -138,7 +139,7 @@ public class AddNewExamActivity extends ActionBarActivity {
 
         int hoursOfStudy = Integer.valueOf(numberOfHoursString);
         String dateString = dateOfExamEditText.getText().toString() + "-" + hourOfExamEditText.getText().toString();
-        Date date= new Date();
+        Date date = new Date();
         try {
             date = dateFormat.parse(dateString);
         } catch (Exception e) {
@@ -155,13 +156,17 @@ public class AddNewExamActivity extends ActionBarActivity {
         switch (examDifficultyString) {
             case "Easy":
                 difficulty = new Easy();
+                break;
             case "Medium":
-                difficulty = new  Medium();
+                difficulty = new Medium();
+                break;
             case "Hard":
                 difficulty = new Hard();
+                break;
             default:
-                difficulty = new  Medium();
+                difficulty = new Medium();
         }
+
         return new Exam(examName, difficulty, calendar);
     }
 
@@ -275,7 +280,7 @@ public class AddNewExamActivity extends ActionBarActivity {
      * @param exam Exam to be saved.
      */
     public void saveNewExamEvent(Exam exam) {
-        ScheduleManager scheduleManager = new ScheduleManager(getContentResolver());
+        ScheduleManager scheduleManager = new ScheduleManager(getContentResolver(), getApplicationContext());
 
         long eventID = scheduleManager.addExam(exam, exam.getDifficulty().getHoursOfStudy());
 

@@ -18,7 +18,7 @@ import java.util.Locale;
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
     private Exam[] exams;
-    OnItemClickListener mItemClickListener;
+    private OnItemClickListener mItemClickListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and

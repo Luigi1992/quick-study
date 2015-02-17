@@ -25,7 +25,7 @@ public class QuickStudyReaderDbHelper extends SQLiteOpenHelper {
                     QuickStudyReaderContract.ExamEntry.COLUMN_NAME_NAME + TEXT_TYPE + NOT_NULL_FIELD + COMMA_SEP +
                     QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DIFFICULTY + TEXT_TYPE + NOT_NULL_FIELD + COMMA_SEP +
                     QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + TEXT_TYPE + NOT_NULL_FIELD + COMMA_SEP +
-                    QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED + INTEGER_TYPE + NOT_NULL_FIELD + COMMA_SEP +
+                    QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED + INTEGER_TYPE + NOT_NULL_FIELD +
                     // Any other options for the CREATE command
                     " )";
 
