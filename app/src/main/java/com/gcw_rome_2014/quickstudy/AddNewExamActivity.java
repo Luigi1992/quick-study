@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,10 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.Button;
 
 import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
@@ -46,10 +43,6 @@ public class AddNewExamActivity extends ActionBarActivity {
     EditText hourOfExamEditText;
     EditText numberOfHoursEditText;
     Spinner examDifficultySpinner;
-    Button saveNewExamButton;
-
-
-    private static final int RESULT_SETTINGS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +180,7 @@ public class AddNewExamActivity extends ActionBarActivity {
                 // Validation of fields and saving exam in new thread.
                     View v = new View(getApplicationContext());
                         if (!isExamValid(v)) {
-                            showErrorToast();
+                            showErrorToast("All fields are required");
                         } else {
                             final Exam newExam = parseExam(v);
                             new Thread(new Runnable() {

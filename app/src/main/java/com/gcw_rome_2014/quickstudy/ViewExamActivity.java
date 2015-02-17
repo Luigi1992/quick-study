@@ -7,7 +7,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
@@ -72,6 +71,7 @@ public class ViewExamActivity extends ActionBarActivity {
                 return true;
             case R.id.action_delete:
                 QuickStudy.getInstance().deleteExam(this.exam);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
