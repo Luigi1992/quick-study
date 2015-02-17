@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.Button;
@@ -43,7 +44,7 @@ public class AddNewExamActivity extends ActionBarActivity {
     EditText hourOfExamEditText;
     EditText numberOfHoursEditText;
     Spinner examDifficultySpinner;
-    Button saveNewExamButton;
+    TextView saveNewExamButton;
 
 
     private static final int RESULT_SETTINGS = 1;
@@ -65,7 +66,7 @@ public class AddNewExamActivity extends ActionBarActivity {
         hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
         numberOfHoursEditText = (EditText) findViewById(R.id.numberOfHoursEditText);
         examDifficultySpinner = (Spinner) findViewById(R.id.exam_difficulty_spinner);
-        saveNewExamButton = (Button) findViewById(R.id.saveTheExamButton);
+        saveNewExamButton = (TextView) findViewById(R.id.saveMeTextView);
 
         this.clearAllFields();
 

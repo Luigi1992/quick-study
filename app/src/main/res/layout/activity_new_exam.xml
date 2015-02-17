@@ -9,99 +9,92 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center|top"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:weightSum="1">
 
-        <LinearLayout
+        <EditText
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-
-            <EditText
-                android:id="@+id/examNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical"
-                android:ems="10"
-                android:background="@drawable/border"
-                android:hint="@string/exam_name"
-                android:inputType="textCapSentences"/>
-
-        </LinearLayout>
+            android:layout_height="70dp"
+            android:id="@+id/examNameEditText"
+            android:layout_gravity="center_horizontal|top"
+            android:hint="@string/exam_name"
+            android:autoText="true" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
             <EditText
-                android:id="@+id/dateOfExamEditText"
-                android:layout_width="190dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:inputType="date"
-                android:ems="10"
-                android:hint="@string/date_of_exam"
-                android:focusable="false"
-                android:enabled="true"
-                android:background="@drawable/border"/>
-
-            <EditText
-                android:id="@+id/hourOfExamEditText"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_gravity="center_vertical"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
                 android:inputType="none"
                 android:ems="10"
+                android:id="@+id/dateOfExamEditText"
+                android:layout_gravity="center_horizontal|top"
+                android:hint="@string/date_of_exam"
+                android:editable="false"
+                android:focusable="false"
+                android:enabled="true" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/hourOfExamEditText"
                 android:layout_weight="1"
                 android:hint="@string/hour_of_exam"
-                android:enabled="true"
-                android:background="@drawable/border"/>
+                android:enabled="true" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
             <EditText
-                android:id="@+id/numberOfHoursEditText"
-                android:layout_width="190dp"
-                android:layout_height="35dp"
-                android:layout_marginRight="10dp"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
                 android:inputType="number"
                 android:ems="10"
-                android:layout_gravity="center_vertical"
-                android:hint="@string/hours_per_day"
-                android:background="@drawable/border"/>
+                android:id="@+id/numberOfHoursEditText"
+                android:layout_gravity="center_horizontal|top"
+                android:hint="@string/hours_per_day" />
             <Spinner
                 android:id="@+id/exam_difficulty_spinner"
                 android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:theme="@style/AppTheme"
-                android:background="@drawable/spinner_background"
-                android:layout_gravity="center_vertical"
-                />
+                android:layout_height="70dp"
+                android:ems="10"
+                android:spinnerMode="dialog"
+                android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/saveTheExamButton"
-            android:text="Save"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:background="#ff0d47a1"
+        android:clickable="true"
+        android:id="@+id/saveMeButton"
+        android:gravity="bottom">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="@string/save_me_button"
+            android:id="@+id/saveMeTextView"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="50sp"
+            android:singleLine="false"
+            android:textStyle="bold"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/buttonshape"
-            android:shadowColor="#A8A8A8"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5" />
+            android:gravity="center" />
 
     </LinearLayout>
 </FrameLayout>
