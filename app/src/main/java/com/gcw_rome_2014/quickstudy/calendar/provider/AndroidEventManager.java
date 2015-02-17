@@ -86,7 +86,7 @@ public class AndroidEventManager implements EventManager {
     }
 
     //TODO: Finish this method.
-    public void deleteEvent(long eventId) {
+    public int deleteEvent(long eventId) {
         String DEBUG_TAG = "Deleting Event";
 
         ContentValues values = new ContentValues();
@@ -94,5 +94,6 @@ public class AndroidEventManager implements EventManager {
         deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
         int rows = contentResolver.delete(deleteUri, null, null);
         Log.i(DEBUG_TAG, "Rows deleted: " + rows);
+        return rows;
     }
 }

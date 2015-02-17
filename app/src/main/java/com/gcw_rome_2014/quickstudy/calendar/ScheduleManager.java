@@ -60,8 +60,8 @@ public class ScheduleManager {
 
     }
 
-    public void deleteExam(Exam exam) {
-        this.eventManager.deleteEvent(exam.getId());
+    public int deleteExam(Exam exam) {
+        return this.eventManager.deleteEvent(exam.getId());
     }
 
     /**

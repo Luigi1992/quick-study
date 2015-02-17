@@ -149,18 +149,13 @@ public class AddNewExamActivity extends ActionBarActivity {
         String examDifficultyString = examDifficultySpinner.getSelectedItem().toString();
 
         Difficulty difficulty;
-        switch (examDifficultyString) {
-            case "Easy":
-                difficulty = new Easy();
-                break;
-            case "Medium":
-                difficulty = new Medium();
-                break;
-            case "Hard":
-                difficulty = new Hard();
-                break;
-            default:
-                difficulty = new Medium();
+        // Try to instantiate Difficulty command
+        try {
+            String className = "com.gcw_rome_2014.quickstudy.model.difficulties.";
+            className += examDifficultyString;
+            difficulty = (Difficulty) Class.forName(className).newInstance();
+        } catch (Exception e) {
+            difficulty = new Medium();
         }
 
         return new Exam(examName, difficulty, calendar);

@@ -63,7 +63,7 @@ public class QuickStudyDatabase {
      * Delete an exam from table providing his id.
      * @param id The exam id
      */
-    public void deleteExam(long id) {
+    public int deleteExam(long id) {
         // Gets the data repository in write mode
         this.db = mDbHelper.getWritableDatabase();
 
@@ -72,7 +72,9 @@ public class QuickStudyDatabase {
         // Specify arguments in placeholder order.
         String[] selectionArgs = {String.valueOf(id)};
         // Issue SQL statement.
-        db.delete(QuickStudyReaderContract.ExamEntry.TABLE_NAME, selection, selectionArgs);
+        return db.delete(QuickStudyReaderContract.ExamEntry.TABLE_NAME,
+                selection,
+                selectionArgs);
     }
 
     /**

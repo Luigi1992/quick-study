@@ -55,15 +55,17 @@ public class QuickStudy {
         Log.i("QuickStudy", "Exam ID: " + exam.getId());
     }
 
-    public void deleteExam(Exam exam) {
+    public boolean deleteExam(Exam exam) {
         if(this.database == null || this.scheduleManager == null)
-            return;
+            return false;
 
         lazyLoad();
 
-        this.scheduleManager.deleteExam(exam);      //From Calendar
-        this.database.deleteExam(exam.getId());     //From Database
-        this.exams.remove(exam.getId());            //From list
+        boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
+        boolean database = this.database.deleteExam(exam.getId()) > 0;      //From Database
+        boolean list = this.exams.remove(exam.getId()) != null;             //From list
+
+        return calendar && database && list;
     }
 
     public Map<Long, Exam> getExams() {

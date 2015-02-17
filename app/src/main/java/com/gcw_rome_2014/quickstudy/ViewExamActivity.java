@@ -1,5 +1,6 @@
 package com.gcw_rome_2014.quickstudy;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -7,7 +8,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
@@ -70,8 +73,11 @@ public class ViewExamActivity extends ActionBarActivity {
                 //TODO
                 return true;
             case R.id.action_delete:
-                QuickStudy.getInstance().deleteExam(this.exam);
-                finish();
+                Boolean done = QuickStudy.getInstance().deleteExam(this.exam);
+                if(done)
+                    showToastMessage("Success! The Exam has been deleted");
+                else
+                    showToastMessage("There was an error during deleting the exam");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -92,6 +98,14 @@ public class ViewExamActivity extends ActionBarActivity {
                     // TODO
                     break;
         }
+    }
+
+    private void showToastMessage(String message) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, message, duration);
+        toast.show();
     }
 
 }

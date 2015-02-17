@@ -7,5 +7,5 @@ import java.util.Calendar;
  */
 public interface EventManager {
     public long addEvent(String eventName, String eventDescription, Calendar dateAndTime, int HoursPerDay);
-    public void deleteEvent(long eventId);
+    public int deleteEvent(long eventId);
 }
