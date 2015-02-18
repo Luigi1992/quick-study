@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".ExamActivity">
     <item
         android:id="@+id/action_calendar"
-        android:title="@string/action_settings"
+        android:title="Go to calendar"
         android:icon="@android:drawable/ic_menu_my_calendar"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>

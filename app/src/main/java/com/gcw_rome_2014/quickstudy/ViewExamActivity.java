@@ -1,6 +1,7 @@
 package com.gcw_rome_2014.quickstudy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -74,9 +75,11 @@ public class ViewExamActivity extends ActionBarActivity {
                 return true;
             case R.id.action_delete:
                 Boolean done = QuickStudy.getInstance().deleteExam(this.exam);
-                if(done)
+                if(done) {
                     showToastMessage("Success! The Exam has been deleted");
-                else
+                    Intent i = new Intent(this, ExamsActivity.class);
+                    startActivity(i);
+                } else
                     showToastMessage("There was an error during deleting the exam");
                 return true;
             default:
