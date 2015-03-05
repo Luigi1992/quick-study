@@ -49,13 +49,8 @@ public class AddNewExamActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_exam);
 
-        //Show icon in the Action Bar
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        //Show back button in the Action Bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //Set default values for settings
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         examNameEditText = (EditText) findViewById(R.id.examNameEditText);
         dateOfExamEditText = (EditText) findViewById(R.id.dateOfExamEditText);
@@ -222,6 +217,8 @@ public class AddNewExamActivity extends ActionBarActivity {
     private void setHourPicker() {
 
         final Calendar myCalendar = Calendar.getInstance();
+        myCalendar.set(Calendar.HOUR_OF_DAY, 9);
+        myCalendar.set(Calendar.MINUTE, 0);
 
         final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
 

@@ -1,127 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/background_color">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        card_view:cardCornerRadius="2dp"
-        card_view:cardElevation="1dp">
+        android:layout_height="80dp"
+        android:background="@color/main_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/details_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:context=".ExamDetailsActivity"
-            android:layout_gravity="center"
-            tools:ignore="MergeRootFrame">
+            android:layout_marginLeft="72dp"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginLeft="16dp"
+                tools:context=".ExamDetailsActivity"
+                tools:ignore="MergeRootFrame">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_margin="16dp">
+                    android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_height="match_parent"
-                        android:layout_width="wrap_content"
-                        android:text="Name: "
-                        android:textStyle="bold"
-                        android:textSize="18sp"/>
-
-                    <TextView
-                        android:id="@+id/details_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:textSize="18sp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_margin="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Date: "
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/ic_calendar"/>
 
                     <TextView
                         android:id="@+id/details_date"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
                         android:textSize="18sp"/>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_margin="16dp">
+                    android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Difficulty: "
-                        android:textStyle="bold"
-                        android:textSize="18sp"/>
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/ic_rate"/>
 
                     <TextView
                         android:id="@+id/details_difficulty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
                         android:textSize="18sp"/>
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center_vertical"
-                    android:layout_margin="16dp">
+                    android:layout_height="56dp"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="32dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/ic_notifications"
+                        android:layout_gravity="center_vertical"/>
 
                     <TextView
+                        android:id="@+id/details_registered"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Are you registered for this exam?"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        />
-                    <RadioGroup
-                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <RadioButton
-                            android:id="@+id/details_registered_yes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Yes" />
-                        <RadioButton
-                            android:id="@+id/details_registered_no"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="No" />
-                    </RadioGroup>
-
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="16dp"
+                        android:textSize="18sp"/>
                 </LinearLayout>
 
-        </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+            </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+</LinearLayout>

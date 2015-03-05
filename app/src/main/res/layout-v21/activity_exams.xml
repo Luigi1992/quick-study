@@ -13,22 +13,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="#3b83f3">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:text="@string/your_exams"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"/>
-
-        </LinearLayout>
-
         <!-- A RecyclerView with some commonly used attributes-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/exams_recycler_view"

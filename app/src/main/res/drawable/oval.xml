@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:top="2dp">
-        <shape
-            android:shape="oval">
-            <gradient
-                android:startColor="#919DB0"
-                android:endColor="@color/background_color"
-                android:type="radial"
-                android:gradientRadius="46"/>
-        </shape>
-    </item>
-    <item android:bottom="2dp" android:top="2dp" android:right="2dp" android:left="2dp">
-        <shape
-            android:shape="oval">
-            <solid android:color="#3b83f3"/>
-        </shape>
+    <item android:drawable="@drawable/fab">
     </item>
 </layer-list>

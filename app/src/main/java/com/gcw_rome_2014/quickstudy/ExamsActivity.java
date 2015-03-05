@@ -26,6 +26,7 @@ import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
 
 import java.util.Calendar;
+import java.util.Comparator;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -56,7 +57,7 @@ public class ExamsActivity extends ActionBarActivity {
 
         //Show icon in the Action Bar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        getSupportActionBar().setIcon(R.drawable.menu);
 
         //Set default values for settings
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -74,6 +75,11 @@ public class ExamsActivity extends ActionBarActivity {
 
         // specify an adapter (see also next example)
         mAdapter = new ExamAdapter(quickStudy.getArrayOfExams());
+
+        //Sort exams by date
+        mAdapter.sort();
+
+        mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

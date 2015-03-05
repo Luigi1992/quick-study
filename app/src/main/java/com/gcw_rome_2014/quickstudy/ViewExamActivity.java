@@ -26,8 +26,7 @@ public class ViewExamActivity extends ActionBarActivity {
     private TextView name_details;
     private TextView date_details;
     private TextView difficulty_details;
-    private RadioButton registered_details_yes;
-    private RadioButton registered_details_no;
+    private TextView registered_details;
     private Exam exam;
 
     @Override
@@ -40,22 +39,18 @@ public class ViewExamActivity extends ActionBarActivity {
         name_details = (TextView) findViewById(R.id.details_name);
         date_details = (TextView) findViewById(R.id.details_date);
         difficulty_details = (TextView) findViewById(R.id.details_difficulty);
-        registered_details_yes = (RadioButton) findViewById(R.id.details_registered_yes);
-        registered_details_no = (RadioButton) findViewById(R.id.details_registered_no);
+        registered_details = (TextView) findViewById(R.id.details_registered);
 
         name_details.setText(exam.getName());
-        date_details.setText(new SimpleDateFormat("EEE d MMM yyyy, HH:mm", Locale.ITALIAN).format(exam.getExamDate().getTime()));
+        date_details.setText(new SimpleDateFormat("EEE, d MMMM yyyy, HH:mm", Locale.ITALIAN).format(exam.getExamDate().getTime()));
         difficulty_details.setText(exam.getDifficulty().getName());
-        if (exam.isRegistered())
-            registered_details_yes.toggle();
+        if (exam.isRegistered()==true)
+            registered_details.setText("You've already signed up for this exam");
         else
-            registered_details_no.toggle();
+            registered_details.setText("You haven't signed up for this exam yet");
 
         //Show icon in the Action Bar
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setIcon(R.drawable.ic_launcher);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
 
     @Override
@@ -76,30 +71,14 @@ public class ViewExamActivity extends ActionBarActivity {
             case R.id.action_delete:
                 Boolean done = QuickStudy.getInstance().deleteExam(this.exam);
                 if(done) {
-                    showToastMessage("Success! The Exam has been deleted");
+                    showToastMessage("Success! The exam has been deleted");
                     Intent i = new Intent(this, ExamsActivity.class);
                     startActivity(i);
                 } else
-                    showToastMessage("There was an error during deleting the exam");
+                    showToastMessage("There was an error while deleting the exam");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.details_registered_yes:
-                if (checked)
-                    // TODO
-                    break;
-            case R.id.details_registered_no:
-                if (checked)
-                    // TODO
-                    break;
         }
     }
 

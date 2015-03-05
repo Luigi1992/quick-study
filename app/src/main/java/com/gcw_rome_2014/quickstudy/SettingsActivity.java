@@ -1,5 +1,7 @@
 package com.gcw_rome_2014.quickstudy;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +22,7 @@ public class SettingsActivity extends PreferenceActivity {
         LinearLayout root = (LinearLayout)findViewById(android.R.id.list).getParent().getParent().getParent();
         Toolbar bar = (Toolbar) LayoutInflater.from(this).inflate(R.layout.settings_toolbar, root, false);
         root.addView(bar, 0); // insert at top
+        bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#3b83f3")));
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

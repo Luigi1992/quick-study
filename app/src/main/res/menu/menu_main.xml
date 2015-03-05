@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_calendar"
         android:title="Go to calendar"
-        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:icon="@drawable/ic_my_calendar"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
     <item

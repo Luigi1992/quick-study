@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Locale;
 
 /**
@@ -102,4 +104,15 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     public int getItemCount() {
         return exams.length;
     }
+
+    public void sort() {
+        Arrays.sort(this.exams, new Comparator<Exam>() {
+            @Override
+            public int compare(Exam e1, Exam e2) {
+                return e1.getExamDate().compareTo(e2.getExamDate());
+            }
+        });
+    }
 }
+
+

@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Edit should appear as action button -->
     <item android:id="@+id/action_save"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Add"
+        android:title="Save"
         android:orderInCategory="1"
         app:showAsAction="always" />
 </menu>
