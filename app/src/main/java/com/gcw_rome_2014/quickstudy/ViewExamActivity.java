@@ -66,14 +66,15 @@ public class ViewExamActivity extends ActionBarActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_edit:
-                //TODO
+                Intent i = new Intent(this, EditExamActivity.class);
+                i.putExtra("exam", this.exam);
+                startActivity(i);
                 return true;
             case R.id.action_delete:
                 Boolean done = QuickStudy.getInstance().deleteExam(this.exam);
                 if(done) {
                     showToastMessage("Success! The exam has been deleted");
-                    Intent i = new Intent(this, ExamsActivity.class);
-                    startActivity(i);
+                    startActivity(new Intent(this, ExamsActivity.class));
                 } else
                     showToastMessage("There was an error while deleting the exam");
                 return true;

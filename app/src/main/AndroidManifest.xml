@@ -9,40 +9,60 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
-
-        <activity android:name="com.gcw_rome_2014.quickstudy.ExamsActivity"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".ExamsActivity"
             android:label="@string/your_exams"
             android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".AddNewExamActivity"
+        <activity
+            android:name=".AddNewExamActivity"
             android:label="@string/add_new_exam"
+            android:parentActivityName=".ExamsActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName="com.gcw_rome_2014.quickstudy.ExamsActivity">
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
-
-        <activity android:name="com.gcw_rome_2014.quickstudy.SettingsActivity"
-            android:theme="@style/Theme.AppCompat.Light">
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light" >
         </activity>
-
-        <activity android:name=".ViewExamActivity"
+        <activity
+            android:name=".ViewExamActivity"
             android:label="@string/view_exam"
-            android:theme="@style/AppTheme"
-            android:parentActivityName="com.gcw_rome_2014.quickstudy.ExamsActivity">
+            android:parentActivityName=".ExamsActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
-
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/title_activity_feed"
+            android:parentActivityName=".ExamsActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
+        </activity>
+        <activity
+            android:name=".EditExamActivity"
+            android:label="@string/title_activity_edit_exam"
+            android:parentActivityName=".ExamsActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
+        </activity>
     </application>
 
 </manifest>

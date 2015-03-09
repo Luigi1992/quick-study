@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/container"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    tools:context=".AddNewExamActivity" tools:ignore="MergeRootFrame"
+    tools:context=".EditExamActivity" tools:ignore="MergeRootFrame"
     android:background="@color/background_color">
 
 
@@ -29,11 +29,10 @@
                     android:background="@drawable/ic_label"/>
 
                 <EditText
-                    android:id="@+id/examNameEditText"
+                    android:id="@+id/edit_examName"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:hint="@string/exam_name"
                     android:background="@null"
                     android:inputType="textCapSentences"/>
 
@@ -58,12 +57,11 @@
                     android:background="@drawable/ic_calendar"/>
 
                 <EditText
-                    android:id="@+id/dateOfExamEditText"
+                    android:id="@+id/edit_examDate"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:inputType="date"
-                    android:hint="@string/date_of_exam"
                     android:focusable="false"
                     android:background="@null"
                     android:enabled="true"/>
@@ -89,14 +87,13 @@
                     android:background="@drawable/ic_clock"/>
 
                 <EditText
-                    android:id="@+id/hourOfExamEditText"
+                    android:id="@+id/edit_examHour"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:inputType="none"
+                    android:inputType="time"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="@string/hour_of_exam"
                     android:enabled="true"/>
             </LinearLayout>
 
@@ -119,7 +116,7 @@
                     android:background="@drawable/ic_rate"/>
 
                 <Spinner
-                    android:id="@+id/exam_difficulty_spinner"
+                    android:id="@+id/edit_examDifficulty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_marginLeft="16dp"
@@ -134,8 +131,26 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="56dp"
-                android:layout_marginBottom="32dp"
                 android:background="@android:color/darker_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <CheckBox
+                    android:id="@+id/edit_examRegistered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="56dp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Signed up"
+                    android:textColor="@color/dark_text_color"
+                    android:textSize="18sp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

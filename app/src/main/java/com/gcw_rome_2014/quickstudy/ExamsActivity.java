@@ -50,8 +50,7 @@ public class ExamsActivity extends ActionBarActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, AddNewExamActivity.class);
-                startActivity(i);
+                startActivity(new Intent(context, AddNewExamActivity.class));
             }
         });
 
@@ -111,9 +110,11 @@ public class ExamsActivity extends ActionBarActivity {
                 intent.setData(Uri.parse("content://com.android.calendar/time"));
                 startActivity(intent);
                 break;
+            case R.id.action_feedback:
+                startActivity(new Intent(this, FeedActivity.class));
+                break;
             case R.id.action_settings:
-                Intent i = new Intent(this, SettingsActivity.class);
-                startActivityForResult(i, RESULT_SETTINGS);
+                startActivityForResult(new Intent(this, SettingsActivity.class), RESULT_SETTINGS);
                 break;
         }
         return true;

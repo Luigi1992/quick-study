@@ -1,31 +1,24 @@
 package com.gcw_rome_2014.quickstudy;
 
-import android.app.*;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.text.InputType;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
-import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
-import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
-import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
 import java.text.DateFormat;
@@ -36,24 +29,27 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 
-public class AddNewExamActivity extends ActionBarActivity {
+public class EditExamActivity extends ActionBarActivity {
 
     EditText examNameEditText;
     EditText dateOfExamEditText;
     EditText hourOfExamEditText;
     Spinner examDifficultySpinner;
+    CheckBox examRegisteredCheckBox;
+    Exam exam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_exam);
+        setContentView(R.layout.activity_edit_exam);
 
-        examNameEditText = (EditText) findViewById(R.id.examNameEditText);
-        dateOfExamEditText = (EditText) findViewById(R.id.dateOfExamEditText);
-        hourOfExamEditText = (EditText) findViewById(R.id.hourOfExamEditText);
-        examDifficultySpinner = (Spinner) findViewById(R.id.exam_difficulty_spinner);
+        examNameEditText = (EditText) findViewById(R.id.edit_examName);
+        dateOfExamEditText = (EditText) findViewById(R.id.edit_examDate);
+        hourOfExamEditText = (EditText) findViewById(R.id.edit_examHour);
+        examDifficultySpinner = (Spinner) findViewById(R.id.edit_examDifficulty);
+        examRegisteredCheckBox = (CheckBox) findViewById(R.id.edit_examRegistered);
 
-        this.clearAllFields();
+        this.exam = (Exam) getIntent().getSerializableExtra("exam");
 
         // To prevent opening keyboard before date/time dialog
         dateOfExamEditText.setInputType(InputType.TYPE_NULL);
@@ -71,6 +67,12 @@ public class AddNewExamActivity extends ActionBarActivity {
 
         setDatePicker();
         setHourPicker();
+
+        examNameEditText.setText(exam.getName());
+        updateDateLabel(exam.getExamDate());
+        updateTimeLabel(exam.getExamDate());
+        examDifficultySpinner.setSelection(adapter.getPosition(exam.getDifficulty().getName()));
+        examRegisteredCheckBox.setChecked(exam.isRegistered());
 
     }
 
@@ -94,7 +96,7 @@ public class AddNewExamActivity extends ActionBarActivity {
                     new Thread(new Runnable() {
                         public void run() {
 
-                            saveNewExamEvent(newExam);
+                            editExam(newExam);
                         }
                     }).start();
                 }
@@ -152,7 +154,6 @@ public class AddNewExamActivity extends ActionBarActivity {
         } catch (Exception e) {
             // The error here would be caught in isExamValid method.
         }
-
         //Set calendar for an easy management of time.
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -173,7 +174,7 @@ public class AddNewExamActivity extends ActionBarActivity {
     }
 
     public void setDatePicker() {
-        final Calendar myCalendar = Calendar.getInstance();
+        final Calendar myCalendar = exam.getExamDate();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -190,7 +191,7 @@ public class AddNewExamActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePicker = new DatePickerDialog(AddNewExamActivity.this, date,
+                DatePickerDialog datePicker = new DatePickerDialog(EditExamActivity.this, date,
                         myCalendar.get(Calendar.YEAR),
                         myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
@@ -201,9 +202,7 @@ public class AddNewExamActivity extends ActionBarActivity {
 
     private void setHourPicker() {
 
-        final Calendar myCalendar = Calendar.getInstance();
-        myCalendar.set(Calendar.HOUR_OF_DAY, 9);
-        myCalendar.set(Calendar.MINUTE, 0);
+        final Calendar myCalendar = exam.getExamDate();
 
         final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
 
@@ -219,7 +218,7 @@ public class AddNewExamActivity extends ActionBarActivity {
 
             @Override
             public void onClick(View v) {
-                TimePickerDialog timePickerDialog = new TimePickerDialog(AddNewExamActivity.this, time,
+                TimePickerDialog timePickerDialog = new TimePickerDialog(EditExamActivity.this, time,
                         myCalendar.get(Calendar.HOUR_OF_DAY),
                         myCalendar.get(Calendar.MINUTE), true);
                 hourOfExamEditText.setInputType(InputType.TYPE_NULL);
@@ -244,24 +243,13 @@ public class AddNewExamActivity extends ActionBarActivity {
         dateOfExamEditText.setText(sdf.format(myCalendar.getTime()));
     }
 
-
-
     /**
      * This function is called when the save button is tapped.
      *
      * @param exam Exam to be saved.
      */
-    public void saveNewExamEvent(Exam exam) {
-        QuickStudy.getInstance().putExam(exam);
-
-        Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
-        startActivity(i);
-
-        /*//Open calendarProvider calender with an intent to show the inserted event.
-        Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
-        Intent intent = new Intent(Intent.ACTION_VIEW)
-                .setData(uri);
-        startActivity(intent);*/
+    public void editExam(Exam exam) {
+        //TODO
     }
 
     private void showErrorToast(String message) {
@@ -273,13 +261,6 @@ public class AddNewExamActivity extends ActionBarActivity {
         toast.show();
     }
 
-    /**
-     * Clear all the fields.
-     */
-    private void clearAllFields() {
-        examNameEditText.setText("");
-        dateOfExamEditText.setText("");
-        hourOfExamEditText.setText("");
-    }
+
 
 }
