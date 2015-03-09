@@ -166,7 +166,7 @@ public class QuickStudyDatabase {
 
     private Exam processExam(Cursor cursor) {
         long examId = cursor.getLong(
-                cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry._ID)
+                cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID)
         );
 
         String examName = cursor.getString(
