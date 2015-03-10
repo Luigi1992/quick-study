@@ -37,5 +37,25 @@
                 android:title="@string/sunday"
                 android:defaultValue="true"/>
         </PreferenceScreen>
+        <PreferenceScreen
+            android:title="@string/pref_hours_number_tittle"
+            android:summary="@string/pref_hours_number_summary"
+            android:persistent="false">
+            <EditTextPreference
+                android:key="preference_easy"
+                android:title="@string/difficulty_easy"
+                android:numeric="integer"
+                android:defaultValue="1"/>
+            <EditTextPreference
+                android:key="preference_medium"
+                android:title="@string/difficulty_medium"
+                android:numeric="integer"
+                android:defaultValue="3"/>
+            <EditTextPreference
+                android:key="preference_hard"
+                android:title="@string/difficulty_hard"
+                android:numeric="integer"
+                android:defaultValue="6"/>
+        </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>
