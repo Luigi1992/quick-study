@@ -46,10 +46,10 @@ public class SettingsActivity extends PreferenceActivity {
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 DIFFICULTY_HOURS_EASY = Integer.parseInt(preferenceEasy.getText());
                 DIFFICULTY_HOURS_MEDIUM = Integer.parseInt(preferenceMedium.getText());
                 DIFFICULTY_HOURS_HARD = Integer.parseInt(preferenceHard.getText());
+                finish();
             }
         });
 
@@ -68,6 +68,8 @@ public class SettingsActivity extends PreferenceActivity {
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 int numberOfHours = Integer.parseInt(newValue.toString());
                 if (numberOfHours >= 1 && numberOfHours <= 12) {
+                    // Updating summary
+                    preference.setSummary(String.valueOf(numberOfHours));
                     return true;
                 } else {
                     // Invalid value

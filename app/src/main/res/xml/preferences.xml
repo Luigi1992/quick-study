@@ -45,17 +45,20 @@
                 android:key="preference_easy"
                 android:title="@string/difficulty_easy"
                 android:numeric="integer"
-                android:defaultValue="1"/>
+                android:defaultValue="1"
+                android:summary="1"/>
             <EditTextPreference
                 android:key="preference_medium"
                 android:title="@string/difficulty_medium"
                 android:numeric="integer"
-                android:defaultValue="3"/>
+                android:defaultValue="3"
+                android:summary="3"/>
             <EditTextPreference
                 android:key="preference_hard"
                 android:title="@string/difficulty_hard"
                 android:numeric="integer"
-                android:defaultValue="6"/>
+                android:defaultValue="6"
+                android:summary="6"/>
         </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>
