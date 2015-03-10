@@ -6,10 +6,11 @@ import android.content.Context;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidEventManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.CalendarManager;
+import com.gcw_rome_2014.quickstudy.model.events.Event;
 import com.gcw_rome_2014.quickstudy.calendar.provider.EventManager;
-import com.gcw_rome_2014.quickstudy.database.QuickStudyDatabase;
 import com.gcw_rome_2014.quickstudy.model.Exam;
-import com.gcw_rome_2014.quickstudy.model.QuickStudy;
+import com.gcw_rome_2014.quickstudy.model.events.ExamEvent;
+import com.gcw_rome_2014.quickstudy.model.events.StudySessionEvent;
 
 import java.util.Calendar;
 
@@ -23,7 +24,6 @@ public class ScheduleManager {
     private CalendarManager calendarManager;
     private EventManager eventManager;
     private Context context;
-    private static final String appName = "Quick Study ";
 
     public ScheduleManager(ContentResolver contentResolver, Context context) {
         this.calendarManager = new AndroidCalendarManager(contentResolver);
@@ -35,33 +35,37 @@ public class ScheduleManager {
      * Add all the events
      * @param exam An object representing the exams.
      */
-    public long addExam(Exam exam) {
-        long eventID = this.eventManager.addEvent(exam.getName() + " Exam", appName + "Automatic Planner", exam.getExamDate(), 0);
-        exam.setId(eventID);    // The Exam id is the Calendar Id
+    public Event addExam(Exam exam) {
+        //Event event = this.eventManager.addEvent(exam.getName() + " Exam", appName + "Automatic Planner", exam.getExamDate(), 0);
+        Event event = new ExamEvent(exam);
+        this.eventManager.addEvent(event);
 
         Calendar now = this.getCurrentDate();
-        this.addStudyEvents(exam, now, exam.getDifficulty().getHoursOfStudy());
+        this.addStudySessionEvents(exam, now, exam.getDifficulty().getHoursOfStudy());
 
-        return eventID;
+        return event;
     }
 
-    private void addStudyEvents(Exam exam, Calendar startDate, int hoursOfStudy) {
+    public int updateExam(Exam exam) {
+        //return this.eventManager.updateEvent();
+        return 0;
+    }
+
+    public int deleteExam(Exam exam) {
+        return this.eventManager.deleteEvent(exam.getId());
+    }
+
+    private void addStudySessionEvents(Exam exam, Calendar startDate, int hoursOfStudy) {
         System.out.println("START: " + startDate.getTime());
         System.out.println("END: " + exam.getLastStudyDate().getTime() + "\n");
 
         if(startDate.before(exam.getLastStudyDate())) {
             startDate.add(Calendar.DATE, 1);
-            this.eventManager.addEvent("Study " + exam.getName(),
-                    appName + exam.getName() + " Study Session",
-                    startDate,
-                    hoursOfStudy);
-            this.addStudyEvents(exam, startDate, hoursOfStudy);
+            Event event = new StudySessionEvent(exam, startDate, hoursOfStudy);
+            this.eventManager.addEvent(event);
+            this.addStudySessionEvents(exam, startDate, hoursOfStudy);
         }
 
-    }
-
-    public int deleteExam(Exam exam) {
-        return this.eventManager.deleteEvent(exam.getId());
     }
 
     /**

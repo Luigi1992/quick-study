@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
 
+import com.gcw_rome_2014.quickstudy.model.events.Event;
+
 import java.util.Calendar;
 
 /**
@@ -25,13 +27,13 @@ public class AndroidEventManager implements EventManager {
      * Add an event to the calendar.
      * Remember that months start from zero.
      *
-     * @param eventName         The event name.
-     * @param eventDescription  The event description.
-     * @param dateAndTime       A Calendar Object, containing both Date and Time of the Exam
-     * @param duration          The duration of the event, expressed in hours.
+     * @param event        The event.
      * @return Returns the added event ID.
      */
-    public long addEvent(String eventName, String eventDescription, Calendar dateAndTime, int duration) {
+    @Override
+    public long addEvent(Event event) {
+        Calendar dateAndTime = event.getDateAndTime();
+
         long calID = 1;
         long startMillis = 0;
         long endMillis = 0;
@@ -42,7 +44,7 @@ public class AndroidEventManager implements EventManager {
         startMillis = beginTime.getTimeInMillis();
         Calendar endTime = Calendar.getInstance();
         endTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY) + duration,
+                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY) + event.getDuration(),
                 dateAndTime.get(Calendar.MINUTE));
         endMillis = endTime.getTimeInMillis();
 
@@ -52,8 +54,8 @@ public class AndroidEventManager implements EventManager {
         ContentValues values = new ContentValues();
         values.put(CalendarContract.Events.DTSTART, startMillis);
         values.put(CalendarContract.Events.DTEND, endMillis);
-        values.put(CalendarContract.Events.TITLE, eventName);
-        values.put(CalendarContract.Events.DESCRIPTION, eventDescription);
+        values.put(CalendarContract.Events.TITLE, event.getName());
+        values.put(CalendarContract.Events.DESCRIPTION, event.getDescription());
         values.put(CalendarContract.Events.CALENDAR_ID, calID);
         values.put(CalendarContract.Events.EVENT_TIMEZONE, "Europe/Rome");  //TODO: This should be automatic.
         Uri uri = contentResolver.insert(CalendarContract.Events.CONTENT_URI, values);
@@ -65,13 +67,15 @@ public class AndroidEventManager implements EventManager {
         //
         //
 
-        //TODO: remove in the final version.
         Log.i("AndroidEventManager","EventID: " + eventID);
+        event.setId(eventID); //Important! Without this the exam has no ID!
+
         return eventID;
     }
 
     //TODO: Finish this method.
-    public void updateEvent(long eventID) {
+    @Override
+    public int updateEvent(Event event) {
         String DEBUG_TAG = "MyActivity";
         //long eventID = 188;
         //...
@@ -80,18 +84,25 @@ public class AndroidEventManager implements EventManager {
         Uri updateUri = null;
         // The new title for the event
         values.put(CalendarContract.Events.TITLE, "Kickboxing");
-        updateUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
+        updateUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId());
         int rows = contentResolver.update(updateUri, values, null, null);
         Log.i(DEBUG_TAG, "Rows updated: " + rows);
+
+        return rows;
     }
 
-    //TODO: Finish this method.
-    public int deleteEvent(long eventId) {
+    /**
+     * Delete the event providing the id.
+     * @param eventID The event id.
+     * @return The number of rows deleted. It should be 0 or 1.
+     */
+    @Override
+    public int deleteEvent(long eventID) {
         String DEBUG_TAG = "Deleting Event";
 
         ContentValues values = new ContentValues();
         Uri deleteUri = null;
-        deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventId);
+        deleteUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
         int rows = contentResolver.delete(deleteUri, null, null);
         Log.i(DEBUG_TAG, "Rows deleted: " + rows);
         return rows;

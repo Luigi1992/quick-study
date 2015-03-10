@@ -1,6 +1,9 @@
 package com.gcw_rome_2014.quickstudy.model;
 
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
+import com.gcw_rome_2014.quickstudy.model.events.Event;
+import com.gcw_rome_2014.quickstudy.model.events.ExamEvent;
+import com.gcw_rome_2014.quickstudy.model.events.StudySessionEvent;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -17,13 +20,13 @@ public class Exam implements Serializable {
     // The Exam name
     private String name;
 
-    // The exam difficulty. It is a integer representing an image.
+    // The exam difficulty. It's a integer representing an image.
     private Difficulty difficulty;
 
     // The exam date
     private Calendar examDate;
 
-    // A flag that it is used to check if the user remembered to reserve for the exam test.
+    // A flag that it's used to check if the user remembered to reserve for the exam test.
     private boolean isRegistered;
 
     public Exam(String name, Difficulty difficulty, Calendar examDate) {
