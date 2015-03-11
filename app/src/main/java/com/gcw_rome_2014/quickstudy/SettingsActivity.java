@@ -35,6 +35,10 @@ public class SettingsActivity extends PreferenceActivity {
         final EditTextPreference preferenceMedium = (EditTextPreference)getPreferenceScreen().findPreference("preference_medium");
         final EditTextPreference preferenceHard = (EditTextPreference)getPreferenceScreen().findPreference("preference_hard");
 
+        preferenceEasy.setSummary(preferenceEasy.getText()+" hours");
+        preferenceMedium.setSummary(preferenceMedium.getText()+" hours");
+        preferenceHard.setSummary(preferenceHard.getText()+" hours");
+
         setNumberOfHoursValidation(preferenceEasy);
         setNumberOfHoursValidation(preferenceMedium);
         setNumberOfHoursValidation(preferenceHard);
@@ -69,11 +73,11 @@ public class SettingsActivity extends PreferenceActivity {
                 int numberOfHours = Integer.parseInt(newValue.toString());
                 if (numberOfHours >= 1 && numberOfHours <= 12) {
                     // Updating summary
-                    preference.setSummary(String.valueOf(numberOfHours));
+                    preference.setSummary(String.valueOf(numberOfHours)+" hours");
                     return true;
                 } else {
                     // Invalid value
-                    showErrorToast("The value should be between 1 and 12");
+                    showErrorToast("Insert a value between 1 and 12");
                     return false;
                 }
             }

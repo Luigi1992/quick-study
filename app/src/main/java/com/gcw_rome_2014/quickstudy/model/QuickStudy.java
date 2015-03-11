@@ -22,6 +22,8 @@ public class QuickStudy {
     ScheduleManager scheduleManager = null;
     private Map<Long, Exam> exams = null;
 
+    private static final String appName = "Quick Study";
+
     public static QuickStudy getInstance() {
         return instance;
     }
@@ -35,17 +37,23 @@ public class QuickStudy {
         this.scheduleManager = new ScheduleManager(contentResolver, context);
     }
 
+    /**
+     * Return The exam.     * @param id The Exam id
+     * @return The Exam. May return null if the class is not initialized.
+     */
     public Exam getExam(Long id) {
-        if(this.database == null)
-            return null;
+        if (!isInitialized()) return null;
 
         lazyLoad();
         return this.exams.get(id);
     }
 
+    /**
+     * This method add an Exam to database, calendar and the temp list
+     * @param exam The exam to add.
+     */
     public void putExam(Exam exam) {
-        if(this.database == null || this.scheduleManager == null)
-            return;
+        if (!isInitialized()) return;
 
         lazyLoad();
         this.scheduleManager.addExam(exam);     //Into Calendar
@@ -55,10 +63,18 @@ public class QuickStudy {
         Log.i("QuickStudy", "Exam ID: " + exam.getId());
     }
 
-    public boolean deleteExam(Exam exam) {
-        if(this.database == null || this.scheduleManager == null)
-            return false;
 
+    public void updateExam(Exam exam) {
+        if (!isInitialized()) return;
+
+        lazyLoad();
+        this.scheduleManager.updateExam(exam);     //Into Calendar
+        //this.database.updateExam(exam);            //Into Database
+        //this.exams.updateExam(exam.getId(), exam);     //Into List
+    }
+
+    public boolean deleteExam(Exam exam) {
+        if (!isInitialized()) return false;
         lazyLoad();
 
         boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
@@ -66,6 +82,14 @@ public class QuickStudy {
         boolean list = this.exams.remove(exam.getId()) != null;             //From list
 
         return calendar && database && list;
+    }
+
+    /**
+     * Check if the init function was called at least once.
+     * @return Initialized
+     */
+    private boolean isInitialized() {
+        return (this.database != null && this.scheduleManager != null);
     }
 
     public Map<Long, Exam> getExams() {
@@ -78,6 +102,10 @@ public class QuickStudy {
 
     public void setExams(Map<Long, Exam> exams) {
         this.exams = exams;
+    }
+
+    public static String getAppName() {
+        return appName;
     }
 
     public Exam[] getArrayOfExams() {

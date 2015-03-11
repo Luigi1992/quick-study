@@ -14,7 +14,7 @@
     <string name="pref_days_title">Days of the week</string>
     <string name="pref_days_summary">Choose the days of the week you want to study.</string>
     <string name="pref_hours_number_tittle">Customize difficulties</string>
-    <string name="pref_hours_number_summary">Choose number of hours for study sections for difficulties.</string>
+    <string name="pref_hours_number_summary">Set the hours of study sessions according to difficulty.</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -23,8 +23,8 @@
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
     <string name="title_activity_list">QuickStudy</string>
-    <string name="exam_is_registered">Registered</string>
-    <string name="exam_not_registered">Not registered</string>
+    <string name="exam_is_registered">Signed up</string>
+    <string name="exam_not_registered">Not signed up</string>
     <string name="view_exam"></string>
     <string name="select_difficulties">Select the exam\'s level</string>
     <string name="details">Details</string>
@@ -40,8 +40,8 @@
     <string name="feedbacktype3">Suggestion</string>
     <string name="feedbacktype4">Bug</string>
     <string name="title_activity_edit_exam">Edit exam</string>
-    <string name="difficulty_easy">Easy</string>
-    <string name="difficulty_medium">Medium</string>
-    <string name="difficulty_hard">Hard</string>
+    <string name="difficulty_easy">Easy study session</string>
+    <string name="difficulty_medium">Medium study session</string>
+    <string name="difficulty_hard">Hard study session</string>
 
 </resources>
