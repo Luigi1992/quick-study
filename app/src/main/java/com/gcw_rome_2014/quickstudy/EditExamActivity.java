@@ -3,6 +3,7 @@ package com.gcw_rome_2014.quickstudy;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -18,6 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
@@ -249,7 +251,10 @@ public class EditExamActivity extends ActionBarActivity {
      * @param exam Exam to be saved.
      */
     public void editExam(Exam exam) {
-        //TODO
+        QuickStudy.getInstance().updateExam(exam);
+
+        Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
+        startActivity(i);
     }
 
     private void showErrorToast(String message) {

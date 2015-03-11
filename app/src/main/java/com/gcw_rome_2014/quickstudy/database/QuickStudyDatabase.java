@@ -78,6 +78,15 @@ public class QuickStudyDatabase {
     }
 
     /**
+     * This is fake edid exam function. It deletes the exam from database and inserts it again.
+     * @param exam The exam to be updated
+     */
+    public long updateExam(Exam exam) {
+        deleteExam(exam.getId());
+        return putExam(exam);
+    }
+
+    /**
      * This function return the Exam object found in database with the specified id.
      * @param id The exam id
      * @return Return the instantiated Exam object.

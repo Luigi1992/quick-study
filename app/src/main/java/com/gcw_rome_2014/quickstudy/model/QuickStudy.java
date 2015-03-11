@@ -69,8 +69,10 @@ public class QuickStudy {
 
         lazyLoad();
         this.scheduleManager.updateExam(exam);     //Into Calendar
-        //this.database.updateExam(exam);            //Into Database
-        //this.exams.updateExam(exam.getId(), exam);     //Into List
+        this.database.updateExam(exam);            //Into Database
+        this.exams.remove(exam.getId());           //Into List
+        this.exams.put(exam.getId(), exam);
+
     }
 
     public boolean deleteExam(Exam exam) {
