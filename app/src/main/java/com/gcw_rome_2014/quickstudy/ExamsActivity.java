@@ -1,32 +1,22 @@
 package com.gcw_rome_2014.quickstudy;
 
-import android.content.ComponentName;
-import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidInstanceManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
-import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
-import com.gcw_rome_2014.quickstudy.model.difficulties.Hard;
-import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
-import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
-
-import java.util.Calendar;
-import java.util.Comparator;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -77,6 +67,7 @@ public class ExamsActivity extends ActionBarActivity {
 
         //Sort exams by date
         mAdapter.sort();
+
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
