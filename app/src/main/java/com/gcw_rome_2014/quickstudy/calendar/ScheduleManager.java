@@ -6,9 +6,9 @@ import android.content.Context;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidEventManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.CalendarManager;
-import com.gcw_rome_2014.quickstudy.model.events.Event;
 import com.gcw_rome_2014.quickstudy.calendar.provider.EventManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcw_rome_2014.quickstudy.model.events.Event;
 import com.gcw_rome_2014.quickstudy.model.events.ExamEvent;
 import com.gcw_rome_2014.quickstudy.model.events.StudySessionEvent;
 

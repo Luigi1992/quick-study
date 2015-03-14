@@ -12,9 +12,7 @@ import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**

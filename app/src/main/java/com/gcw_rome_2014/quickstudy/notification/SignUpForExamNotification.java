@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.ExamsActivity;
 import com.gcw_rome_2014.quickstudy.R;
-import com.gcw_rome_2014.quickstudy.SettingsActivity;
 
 import java.util.Calendar;
 

@@ -1,8 +1,5 @@
 package com.gcw_rome_2014.quickstudy.model.difficulties;
 
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-
 import com.gcw_rome_2014.quickstudy.R;
 import com.gcw_rome_2014.quickstudy.SettingsActivity;
 

@@ -1,16 +1,12 @@
 package com.gcw_rome_2014.quickstudy;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;

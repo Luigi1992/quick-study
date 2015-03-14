@@ -1,9 +1,6 @@
 package com.gcw_rome_2014.quickstudy.model;
 
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
-import com.gcw_rome_2014.quickstudy.model.events.Event;
-import com.gcw_rome_2014.quickstudy.model.events.ExamEvent;
-import com.gcw_rome_2014.quickstudy.model.events.StudySessionEvent;
 
 import java.io.Serializable;
 import java.util.Calendar;

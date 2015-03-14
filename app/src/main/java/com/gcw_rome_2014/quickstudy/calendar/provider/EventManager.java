@@ -2,8 +2,6 @@ package com.gcw_rome_2014.quickstudy.calendar.provider;
 
 import com.gcw_rome_2014.quickstudy.model.events.Event;
 
-import java.util.Calendar;
-
 /**
  * Created by Luigi on 03/01/2015.
  */
