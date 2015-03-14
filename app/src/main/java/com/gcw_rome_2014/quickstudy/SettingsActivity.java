@@ -22,8 +22,8 @@ import android.widget.Toast;
 public class SettingsActivity extends PreferenceActivity {
 
     public static int DIFFICULTY_HOURS_EASY = 1;
-    public static int DIFFICULTY_HOURS_MEDIUM = 3;
-    public static int DIFFICULTY_HOURS_HARD = 6;
+    public static int DIFFICULTY_HOURS_MEDIUM = 2;
+    public static int DIFFICULTY_HOURS_HARD = 4;
 
     @Override
     @SuppressWarnings("deprecation")
