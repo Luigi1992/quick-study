@@ -73,4 +73,19 @@ public abstract class Event {
     public void setExam(Exam exam) {
         this.exam = exam;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Event)) return false;
+
+        Event event = (Event) o;
+
+        return exam.equals(event.exam);
+    }
+
+    @Override
+    public int hashCode() {
+        return exam.hashCode();
+    }
 }
