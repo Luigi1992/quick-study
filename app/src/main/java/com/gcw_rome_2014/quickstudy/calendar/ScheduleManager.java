@@ -47,8 +47,7 @@ public class ScheduleManager {
     }
 
     public int updateExam(Exam exam) {
-        //return this.eventManager.updateEvent();
-        return 0;
+        return this.eventManager.updateEvent(new ExamEvent(exam));
     }
 
     public int deleteExam(Exam exam) {

@@ -14,7 +14,7 @@ public class ExamEvent extends Event {
     public ExamEvent(Exam exam) {
         super(exam,
                 exam.getName() + " Exam",
-                QuickStudy.getAppName() + "Automatic Planner",
+                QuickStudy.getAppName() + " Automatic Planner",
                 0);
     }
 

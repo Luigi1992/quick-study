@@ -119,10 +119,7 @@ public class AddNewExamActivity extends ActionBarActivity {
         Calendar startDate = new GregorianCalendar();
         startDate.setTime(date);
 
-        if(startDate.before(Calendar.getInstance()))
-            return false;
-
-        return true;
+        return !startDate.before(Calendar.getInstance());
     }
 
     private boolean isExamValid(View v) {
@@ -256,12 +253,6 @@ public class AddNewExamActivity extends ActionBarActivity {
 
         Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
         startActivity(i);
-
-        /*//Open calendarProvider calender with an intent to show the inserted event.
-        Uri uri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
-        Intent intent = new Intent(Intent.ACTION_VIEW)
-                .setData(uri);
-        startActivity(intent);*/
     }
 
     private void showErrorToast(String message) {

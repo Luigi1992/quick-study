@@ -95,6 +95,7 @@ public class EditExamActivity extends ActionBarActivity {
                     showErrorToast("All fields are required");
                 } else {
                     final Exam newExam = parseExam(v);
+                    newExam.setId(this.exam.getId());
                     new Thread(new Runnable() {
                         public void run() {
 
@@ -123,10 +124,7 @@ public class EditExamActivity extends ActionBarActivity {
         Calendar startDate = new GregorianCalendar();
         startDate.setTime(date);
 
-        if(startDate.before(Calendar.getInstance()))
-            return false;
-
-        return true;
+        return !startDate.before(Calendar.getInstance());
     }
 
     private boolean isExamValid(View v) {
@@ -259,10 +257,9 @@ public class EditExamActivity extends ActionBarActivity {
 
     private void showErrorToast(String message) {
         Context context = getApplicationContext();
-        CharSequence text = message;
         int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(context, message, duration);
         toast.show();
     }
 

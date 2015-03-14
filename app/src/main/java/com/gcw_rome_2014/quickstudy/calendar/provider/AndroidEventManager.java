@@ -35,18 +35,8 @@ public class AndroidEventManager implements EventManager {
         Calendar dateAndTime = event.getDateAndTime();
 
         long calID = 1;
-        long startMillis = 0;
-        long endMillis = 0;
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY),
-                dateAndTime.get(Calendar.MINUTE));
-        startMillis = beginTime.getTimeInMillis();
-        Calendar endTime = Calendar.getInstance();
-        endTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY) + event.getDuration(),
-                dateAndTime.get(Calendar.MINUTE));
-        endMillis = endTime.getTimeInMillis();
+        long startMillis = this.getStartMillis(dateAndTime);
+        long endMillis = getEndMillis(dateAndTime, event.getDuration());
 
         //...
 
@@ -73,18 +63,28 @@ public class AndroidEventManager implements EventManager {
         return eventID;
     }
 
-    //TODO: Finish this method.
+    /**
+     * Update the event
+     * @param event the event to update in calendar
+     * @return The number of update row. It should be 0 or 1
+     */
     @Override
     public int updateEvent(Event event) {
         String DEBUG_TAG = "MyActivity";
-        //long eventID = 188;
-        //...
+
+        long startMillis = this.getStartMillis(event.getDateAndTime());
+        long endMillis = getEndMillis(event.getDateAndTime(), event.getDuration());
 
         ContentValues values = new ContentValues();
         Uri updateUri = null;
+
         // The new title for the event
-        values.put(CalendarContract.Events.TITLE, "Kickboxing");
+        values.put(CalendarContract.Events.DTSTART, startMillis);
+        values.put(CalendarContract.Events.DTEND, endMillis);
+        values.put(CalendarContract.Events.TITLE, event.getName());
+        values.put(CalendarContract.Events.DESCRIPTION, event.getDescription());
         updateUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, event.getId());
+
         int rows = contentResolver.update(updateUri, values, null, null);
         Log.i(DEBUG_TAG, "Rows updated: " + rows);
 
@@ -106,5 +106,29 @@ public class AndroidEventManager implements EventManager {
         int rows = contentResolver.delete(deleteUri, null, null);
         Log.i(DEBUG_TAG, "Rows deleted: " + rows);
         return rows;
+    }
+
+    private long getStartMillis(Calendar dateAndTime) {
+        long startMillis = 0;
+
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
+                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY),
+                dateAndTime.get(Calendar.MINUTE));
+        startMillis = beginTime.getTimeInMillis();
+
+        return startMillis;
+    }
+
+    private long getEndMillis(Calendar dateAndTime, int duration) {
+        long endMillis = 0;
+
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(dateAndTime.get(Calendar.YEAR), dateAndTime.get(Calendar.MONTH),
+                dateAndTime.get(Calendar.DAY_OF_MONTH), dateAndTime.get(Calendar.HOUR_OF_DAY) + duration,
+                dateAndTime.get(Calendar.MINUTE));
+        endMillis = endTime.getTimeInMillis();
+
+        return endMillis;
     }
 }

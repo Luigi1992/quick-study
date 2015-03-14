@@ -37,17 +37,7 @@ public class QuickStudyDatabase {
         this.db = mDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
-        ContentValues values = new ContentValues();
-        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID, exam.getId());
-        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_NAME, exam.getName());
-        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DIFFICULTY, exam.getDifficulty().getName());
-
-        // Converting Date to string for SQLite format
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String dateString = sdf.format(exam.getExamDate().getTime());
-
-        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, dateString);
-        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED, exam.isRegistered());
+        ContentValues values = this.examToContentValues(exam);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
@@ -82,8 +72,22 @@ public class QuickStudyDatabase {
      * @param exam The exam to be updated
      */
     public long updateExam(Exam exam) {
-        deleteExam(exam.getId());
-        return putExam(exam);
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // New value for one column
+        ContentValues values = this.examToContentValues(exam);
+
+        // Which row to update, based on the ID
+        String selection = QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID + " LIKE ?";
+        String[] selectionArgs = { String.valueOf(exam.getId()) };
+
+        return db.update(
+                QuickStudyReaderContract.ExamEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+        //deleteExam(exam.getId());
+        //return putExam(exam);
     }
 
     /**
@@ -171,6 +175,28 @@ public class QuickStudyDatabase {
         }
 
         return exams;
+    }
+
+    /**
+     * Process an exam to return its content values.
+     * @param exam The exam to process
+     * @return The correspondent content value
+     */
+    private ContentValues examToContentValues(Exam exam) {
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_ENTRY_ID, exam.getId());
+        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_NAME, exam.getName());
+        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DIFFICULTY, exam.getDifficulty().getName());
+
+        // Converting Date to string for SQLite format
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dateString = sdf.format(exam.getExamDate().getTime());
+
+        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, dateString);
+        values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED, exam.isRegistered());
+
+        return values;
     }
 
     private Exam processExam(Cursor cursor) {
