@@ -31,7 +31,7 @@
     <string name="title_activity_feed">Feedback</string>
     <string name="enter_feedback">Enter feedback details to send to the developer:</string>
     <string name="name">Name</string>
-    <string name="email">Email</string>
+    <string name="email">Your email</string>
     <string name="send_feedback">Send feedback</string>
     <string name="feedback_response">Would you like an email response?</string>
     <string name="feedbacktype">Feedback type</string>

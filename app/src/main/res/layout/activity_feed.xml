@@ -22,7 +22,7 @@
         <EditText
             android:id="@+id/feed_name"
             android:layout_height="48dp"
-            android:hint="@string/name"
+            android:hint="Your name"
             android:layout_marginLeft="12dp"
             android:inputType="textPersonName"
             android:layout_width="fill_parent"

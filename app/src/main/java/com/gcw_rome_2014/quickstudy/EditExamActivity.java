@@ -170,7 +170,11 @@ public class EditExamActivity extends ActionBarActivity {
             difficulty = new Medium();
         }
 
-        return new Exam(examName, difficulty, calendar);
+        Exam ex = new Exam(examName, difficulty, calendar);
+        if (examRegisteredCheckBox.isChecked())
+            ex.setRegistered(true);
+
+        return ex;
     }
 
     public void setDatePicker() {
