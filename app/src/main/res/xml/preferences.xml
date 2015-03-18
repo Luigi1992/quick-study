@@ -4,58 +4,17 @@
     <PreferenceCategory
         android:key="button_pref_sessions_category_key"
         android:title="@string/pref_sessions">
-        <PreferenceScreen
+        <Preference
             android:title="@string/pref_days_title"
             android:summary="@string/pref_days_summary"
             android:persistent="false">
-            <CheckBoxPreference
-                android:key="preference_monday"
-                android:title="@string/monday"
-                android:defaultValue="true"/>
-            <CheckBoxPreference
-                android:key="preference_tuesday"
-                android:title="@string/tuesday"
-                android:defaultValue="true"/>
-            <CheckBoxPreference
-                android:key="preference_wednesday"
-                android:title="@string/wednesday"
-                android:defaultValue="true"/>
-            <CheckBoxPreference
-                android:key="preference_thursday"
-                android:title="@string/thursday"
-                android:defaultValue="true"/>
-            <CheckBoxPreference
-                android:key="preference_friday"
-                android:title="@string/friday"
-                android:defaultValue="true"/>
-            <CheckBoxPreference
-                android:key="preference_saturday"
-                android:title="@string/saturday"
-                android:defaultValue="true"/>
-            <CheckBoxPreference
-                android:key="preference_sunday"
-                android:title="@string/sunday"
-                android:defaultValue="true"/>
-        </PreferenceScreen>
-        <PreferenceScreen
+            <intent android:action="SetDays"/>
+        </Preference>
+        <Preference
             android:title="@string/pref_hours_number_tittle"
             android:summary="@string/pref_hours_number_summary"
             android:persistent="false">
-            <EditTextPreference
-                android:key="preference_easy"
-                android:title="@string/difficulty_easy"
-                android:numeric="integer"
-                android:defaultValue="1"/>
-            <EditTextPreference
-                android:key="preference_medium"
-                android:title="@string/difficulty_medium"
-                android:numeric="integer"
-                android:defaultValue="2"/>
-            <EditTextPreference
-                android:key="preference_hard"
-                android:title="@string/difficulty_hard"
-                android:numeric="integer"
-                android:defaultValue="4"/>
-        </PreferenceScreen>
+            <intent android:action="SetCustomDiff"/>
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

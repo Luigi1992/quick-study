@@ -15,7 +15,7 @@
             android:name=".ExamsActivity"
             android:label="@string/your_exams"
             android:theme="@style/AppTheme" >
-            <intent-filter android:label="@string/app_name">
+            <intent-filter android:label="@string/app_name" >
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,9 +30,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
+
+
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
         <activity
@@ -59,13 +61,130 @@
             android:label="@string/title_activity_edit_exam"
             android:parentActivityName=".ExamsActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
-        <service android:name="com.gcw_rome_2014.quickstudy.notification.ScheduleService" />
-        <service android:name="com.gcw_rome_2014.quickstudy.notification.NotifyService" />
+
+        <service android:name=".notification.ScheduleService" />
+        <service android:name=".notification.NotifyService" />
+
+
+        <activity
+            android:name=".settings.SetCustomDiffActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SettingsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SettingsActivity" />
+            <intent-filter>
+                <action android:name="SetCustomDiff" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SetWeekActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SettingsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SettingsActivity" />
+            <intent-filter>
+                <action android:name="SetDays" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SetMondayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetMonday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SetTuesdayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetTuesday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".settings.SetWednesdayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetWednesday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SetThursdayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetThursday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".settings.SetFridayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetFriday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SetSaturdayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetSaturday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".settings.SetSundayActivity"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".settings.SetWeekActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".settings.SetWeekActivity" />
+            <intent-filter>
+                <action android:name="SetSunday" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/monday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_monday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"
+            />
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_monday">
+            <intent android:action="SetMonday"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/tuesday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_tuesday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"/>
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_tuesday">
+            <intent android:action="SetTuesday"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/wednesday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_wednesday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"/>
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_wednesday">
+            <intent android:action="SetWednesday"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/thursday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_thursday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"/>
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_thursday">
+            <intent android:action="SetThursday"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/friday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_friday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"/>
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_friday">
+            <intent android:action="SetFriday"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/saturday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_saturday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"/>
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_saturday">
+            <intent android:action="SetSaturday"/>
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/sunday"
+        android:layout="@layout/pref_category_layout">
+        <CheckBoxPreference
+            android:key="preference_sunday"
+            android:title="@string/study_day"
+            android:summary="@string/enable_day"
+            android:defaultValue="true"/>
+        <Preference
+            android:title="@string/time_slot"
+            android:summary="@string/set_time_slot"
+            android:persistent="false"
+            android:dependency="preference_sunday">
+            <intent android:action="SetSunday"/>
+        </Preference>
+    </PreferenceCategory>
+
+</PreferenceScreen>

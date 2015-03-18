@@ -17,6 +17,7 @@ import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidInstanceManager;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
+import com.gcw_rome_2014.quickstudy.settings.SettingsActivity;
 
 /**
  * Created by Luigi on 18/01/2015.
