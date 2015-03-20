@@ -23,24 +23,25 @@ public class Exam implements Serializable {
     private Difficulty difficulty;
 
     // The exam date
-    private Calendar examDate;
+    private Calendar date;
 
     // A flag that it's used to check if the user remembered to reserve for the exam test.
     private boolean isRegistered;
 
+    //Store the exam's study sessions
     private Set<Long> studySessionIds;
 
-    public Exam(String name, Difficulty difficulty, Calendar examDate) {
+    public Exam(String name, Difficulty difficulty, Calendar date) {
         this.id = DEFAULT_ID;
         this.name = name;
         this.difficulty = difficulty;
-        this.examDate = examDate;
+        this.date = date;
         this.isRegistered = false;
         this.studySessionIds = new HashSet<>();
     }
 
-    public Exam(long id, String name, Difficulty difficulty, Calendar examDate, boolean isRegistered) {
-        this(name, difficulty, examDate);
+    public Exam(long id, String name, Difficulty difficulty, Calendar date, boolean isRegistered) {
+        this(name, difficulty, date);
         this.id = id;
         this.isRegistered = isRegistered;
     }
@@ -73,18 +74,18 @@ public class Exam implements Serializable {
         this.name = name;
     }
 
-    public Calendar getExamDate() {
-        return examDate;
+    public Calendar getDate() {
+        return date;
     }
 
     public Calendar getLastStudyDate() {
-        Calendar lastDay = (Calendar) this.examDate.clone();
+        Calendar lastDay = (Calendar) this.date.clone();
         lastDay.add(Calendar.DATE, -2);
         return lastDay;
     }
 
-    public void setExamDate(Calendar examDate) {
-        this.examDate = examDate;
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 
     public boolean isRegistered() {
@@ -104,7 +105,7 @@ public class Exam implements Serializable {
 
         if (id != exam.id) return false;
         if (isRegistered != exam.isRegistered) return false;
-        if (!examDate.equals(exam.examDate)) return false;
+        if (!date.equals(exam.date)) return false;
         if (!name.equals(exam.name)) return false;
 
         return true;

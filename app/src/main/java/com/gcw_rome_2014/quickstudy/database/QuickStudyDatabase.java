@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -250,7 +249,7 @@ public class QuickStudyDatabase {
 
         // Converting Date to string for SQLite format
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String dateString = sdf.format(exam.getExamDate().getTime());
+        String dateString = sdf.format(exam.getDate().getTime());
 
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, dateString);
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED, exam.isRegistered());

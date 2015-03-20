@@ -33,12 +33,12 @@ import java.util.Locale;
 
 public class EditExamActivity extends ActionBarActivity {
 
-    EditText examNameEditText;
-    EditText dateOfExamEditText;
-    EditText hourOfExamEditText;
-    Spinner examDifficultySpinner;
-    CheckBox examRegisteredCheckBox;
-    Exam exam;
+    private EditText examNameEditText;
+    private EditText dateOfExamEditText;
+    private EditText hourOfExamEditText;
+    private Spinner examDifficultySpinner;
+    private CheckBox examRegisteredCheckBox;
+    private Exam exam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +71,8 @@ public class EditExamActivity extends ActionBarActivity {
         setHourPicker();
 
         examNameEditText.setText(exam.getName());
-        updateDateLabel(exam.getExamDate());
-        updateTimeLabel(exam.getExamDate());
+        updateDateLabel(exam.getDate());
+        updateTimeLabel(exam.getDate());
         examDifficultySpinner.setSelection(adapter.getPosition(exam.getDifficulty().getName()));
         examRegisteredCheckBox.setChecked(exam.isRegistered());
 
@@ -94,12 +94,10 @@ public class EditExamActivity extends ActionBarActivity {
                 if (!isExamValid(v)) {
                     showErrorToast("All fields are required");
                 } else {
-                    final Exam newExam = parseExam(v);
-                    newExam.setId(this.exam.getId());
+                    parseExam(v);
                     new Thread(new Runnable() {
                         public void run() {
-
-                            editExam(newExam);
+                            editExam(exam);
                         }
                     }).start();
                 }
@@ -143,7 +141,7 @@ public class EditExamActivity extends ActionBarActivity {
         return true;
     }
 
-    private Exam parseExam(View v) {
+    private void parseExam(View v) {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy-HH:mm", Locale.getDefault());
         String examName = examNameEditText.getText().toString();
 
@@ -170,15 +168,14 @@ public class EditExamActivity extends ActionBarActivity {
             difficulty = new Medium();
         }
 
-        Exam ex = new Exam(examName, difficulty, calendar);
-        if (examRegisteredCheckBox.isChecked())
-            ex.setRegistered(true);
-
-        return ex;
+        this.exam.setName(examName);
+        this.exam.setDifficulty(difficulty);
+        this.exam.setDate(calendar);
+        this.exam.setRegistered(examRegisteredCheckBox.isChecked());
     }
 
     public void setDatePicker() {
-        final Calendar myCalendar = exam.getExamDate();
+        final Calendar myCalendar = exam.getDate();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -206,7 +203,7 @@ public class EditExamActivity extends ActionBarActivity {
 
     private void setHourPicker() {
 
-        final Calendar myCalendar = exam.getExamDate();
+        final Calendar myCalendar = exam.getDate();
 
         final TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
 

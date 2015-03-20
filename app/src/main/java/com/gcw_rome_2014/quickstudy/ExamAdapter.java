@@ -94,9 +94,9 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         else
             holder.mExamIsRegistered.setText(R.string.exam_not_registered);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN);
-        holder.mExamDateView.setText(sdf.format(exams[position].getExamDate().getTime()));
+        holder.mExamDateView.setText(sdf.format(exams[position].getDate().getTime()));
         SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.ITALIAN);
-        holder.mExamTimeView.setText(sdf1.format(exams[position].getExamDate().getTime()));
+        holder.mExamTimeView.setText(sdf1.format(exams[position].getDate().getTime()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -109,7 +109,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         Arrays.sort(this.exams, new Comparator<Exam>() {
             @Override
             public int compare(Exam e1, Exam e2) {
-                return e1.getExamDate().compareTo(e2.getExamDate());
+                return e1.getDate().compareTo(e2.getDate());
             }
         });
     }

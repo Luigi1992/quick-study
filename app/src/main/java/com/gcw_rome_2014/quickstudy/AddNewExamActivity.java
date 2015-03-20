@@ -32,10 +32,10 @@ import java.util.Locale;
 
 public class AddNewExamActivity extends ActionBarActivity {
 
-    EditText examNameEditText;
-    EditText dateOfExamEditText;
-    EditText hourOfExamEditText;
-    Spinner examDifficultySpinner;
+    private EditText examNameEditText;
+    private EditText dateOfExamEditText;
+    private EditText hourOfExamEditText;
+    private Spinner examDifficultySpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -24,7 +24,7 @@ public abstract class Event {
     }
 
     public Event(Exam exam, String name, String description, int duration) {
-        this(exam, name, description, exam.getExamDate(), duration);
+        this(exam, name, description, exam.getDate(), duration);
     }
 
     public long getId() {

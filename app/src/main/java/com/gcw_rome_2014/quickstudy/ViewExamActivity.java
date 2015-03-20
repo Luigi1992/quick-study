@@ -39,7 +39,7 @@ public class ViewExamActivity extends ActionBarActivity {
         registered_details = (TextView) findViewById(R.id.details_registered);
 
         name_details.setText(exam.getName());
-        date_details.setText(new SimpleDateFormat("EEE, d MMMM yyyy, HH:mm", Locale.ITALIAN).format(exam.getExamDate().getTime()));
+        date_details.setText(new SimpleDateFormat("EEE, d MMMM yyyy, HH:mm", Locale.ITALIAN).format(exam.getDate().getTime()));
         difficulty_details.setText(exam.getDifficulty().getName());
         if (exam.isRegistered())
             registered_details.setText("You've already signed up for this exam");
