@@ -80,7 +80,7 @@ public class Exam implements Serializable {
 
     public Calendar getLastStudyDate() {
         Calendar lastDay = (Calendar) this.date.clone();
-        lastDay.add(Calendar.DATE, -2);
+        lastDay.add(Calendar.DATE, -1);
         return lastDay;
     }
 
