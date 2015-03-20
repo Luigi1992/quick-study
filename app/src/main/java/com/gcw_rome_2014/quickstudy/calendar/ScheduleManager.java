@@ -2,6 +2,7 @@ package com.gcw_rome_2014.quickstudy.calendar;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.util.Log;
 
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidEventManager;
@@ -36,9 +37,9 @@ public class ScheduleManager {
      * @param exam An object representing the exams.
      */
     public Event addExam(Exam exam) {
-        //Event event = this.eventManager.addEvent(exam.getName() + " Exam", appName + "Automatic Planner", exam.getExamDate(), 0);
         Event event = new ExamEvent(exam);
-        this.eventManager.addEvent(event);
+        Long eventID = this.eventManager.addEvent(event);
+        exam.setId(eventID); //Important! Without this the exam has no ID!
 
         Calendar now = this.getCurrentDate();
         this.addStudySessionEvents(exam, now, exam.getDifficulty().getHoursOfStudy());
@@ -51,7 +52,12 @@ public class ScheduleManager {
     }
 
     public int deleteExam(Exam exam) {
-        return this.eventManager.deleteEvent(exam.getId());
+        int row = this.eventManager.deleteEvent(exam.getId());
+
+        for(long id : exam.getStudySessionIds())
+            row += this.eventManager.deleteEvent(id);
+
+        return row;
     }
 
     private void addStudySessionEvents(Exam exam, Calendar startDate, int hoursOfStudy) {
@@ -61,7 +67,8 @@ public class ScheduleManager {
         if(startDate.before(exam.getLastStudyDate())) {
             startDate.add(Calendar.DATE, 1);
             Event event = new StudySessionEvent(exam, startDate, hoursOfStudy);
-            this.eventManager.addEvent(event);
+            long sessionId = this.eventManager.addEvent(event);
+            exam.addSessionId(sessionId);
             this.addStudySessionEvents(exam, startDate, hoursOfStudy);
         }
 

@@ -13,7 +13,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Luigi on 16/02/2015.
@@ -35,14 +38,25 @@ public class QuickStudyDatabase {
         this.db = mDbHelper.getWritableDatabase();
 
         // Create a new map of values, where column names are the keys
-        ContentValues values = this.examToContentValues(exam);
+        ContentValues examValues = this.examToContentValues(exam);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
         newRowId = db.insert(
                 QuickStudyReaderContract.ExamEntry.TABLE_NAME,
                 "null",
-                values);
+                examValues);
+
+        for(Long id : exam.getStudySessionIds()) {
+            // Create a new map of values for the sessions, where column names are the keys
+            ContentValues studySessionValues = this.sessionToContentValues(exam.getId(), id);
+
+            // Insert the new row, returning the primary key value of the new row
+            newRowId += db.insert(
+                    QuickStudyReaderContract.StudySessionEntry.TABLE_NAME,
+                    "null",
+                    studySessionValues);
+        }
 
         return newRowId;
     }
@@ -84,8 +98,6 @@ public class QuickStudyDatabase {
                 values,
                 selection,
                 selectionArgs);
-        //deleteExam(exam.getId());
-        //return putExam(exam);
     }
 
     /**
@@ -169,10 +181,59 @@ public class QuickStudyDatabase {
 
         while(cursor.moveToNext()) {
             Exam exam = processExam(cursor);
+            Set<Long> sessionIds = this.readSessionsOfExam(exam.getId());
+            exam.setStudySessionIds(sessionIds);
             exams.put(exam.getId(), exam);
         }
 
         return exams;
+    }
+
+    /**
+     * This function return the Exam object found in database with the specified id.
+     * @return Return the instantiated Exam object.
+     */
+    public Set<Long> readSessionsOfExam(long examID) {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
+        String[] projection = {
+                QuickStudyReaderContract.StudySessionEntry._ID,
+                QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_EXAM_ID,
+                QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_SESSION_ID,
+        };
+
+        // The columns for the WHERE clause
+        String selection = QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_EXAM_ID + " = ?";
+
+        // The values for the WHERE clause
+        String[] selectionArgs = {
+                String.valueOf(examID)
+        };
+
+        // How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_EXAM_ID + " DESC";
+
+        Cursor cursor = db.query(
+                QuickStudyReaderContract.StudySessionEntry.TABLE_NAME,  // The table to query
+                projection,                               // The columns to return
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        Set<Long> sessionIDs = new HashSet<>();
+
+        while(cursor.moveToNext()) {
+            long sessionId = processSession(cursor);
+            sessionIDs.add(sessionId);
+        }
+
+        return sessionIDs;
     }
 
     /**
@@ -193,6 +254,15 @@ public class QuickStudyDatabase {
 
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, dateString);
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED, exam.isRegistered());
+
+        return values;
+    }
+
+    private ContentValues sessionToContentValues(long examId, long sessionId) {
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_EXAM_ID, examId);
+        values.put(QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_SESSION_ID, sessionId);
 
         return values;
     }
@@ -237,6 +307,12 @@ public class QuickStudyDatabase {
         }
 
         return new Exam(examId, examName, difficulty, examDate, isRegistered);
+    }
+
+    private Long processSession(Cursor cursor) {
+        return cursor.getLong(
+                cursor.getColumnIndexOrThrow(QuickStudyReaderContract.StudySessionEntry.COLUMN_NAME_SESSION_ID)
+        );
     }
 
 }

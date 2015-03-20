@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 /**
  * Created by Luigi on 09/03/2015.
+ * Event class.
  */
 public abstract class Event {
     private String name;
@@ -28,10 +29,6 @@ public abstract class Event {
 
     public long getId() {
         return exam.getId();
-    }
-
-    public void setId(long id) {
-        this.exam.setId(id);
     }
 
     public String getName() {

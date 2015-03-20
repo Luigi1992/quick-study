@@ -58,7 +58,6 @@ public class AndroidEventManager implements EventManager {
         //
 
         Log.i("AndroidEventManager","EventID: " + eventID);
-        event.setId(eventID); //Important! Without this the exam has no ID!
 
         return eventID;
     }

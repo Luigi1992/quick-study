@@ -20,4 +20,11 @@ public final class QuickStudyReaderContract {
         public static final String COLUMN_NAME_REGISTERED = "exam_registered";
     }
 
+    /* Inner class that defines the table contents */
+    public static abstract class StudySessionEntry implements BaseColumns {
+        public static final String TABLE_NAME = "study_sessions";
+        public static final String COLUMN_NAME_SESSION_ID = "session_id";
+        public static final String COLUMN_NAME_EXAM_ID = "exam_id";
+    }
+
 }

@@ -4,6 +4,8 @@ import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -26,12 +28,15 @@ public class Exam implements Serializable {
     // A flag that it's used to check if the user remembered to reserve for the exam test.
     private boolean isRegistered;
 
+    private Set<Long> studySessionIds;
+
     public Exam(String name, Difficulty difficulty, Calendar examDate) {
         this.id = DEFAULT_ID;
         this.name = name;
         this.difficulty = difficulty;
         this.examDate = examDate;
         this.isRegistered = false;
+        this.studySessionIds = new HashSet<>();
     }
 
     public Exam(long id, String name, Difficulty difficulty, Calendar examDate, boolean isRegistered) {
@@ -110,5 +115,17 @@ public class Exam implements Serializable {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         return result;
+    }
+
+    public void addSessionId(Long id) {
+        this.studySessionIds.add(id);
+    }
+
+    public Set<Long> getStudySessionIds() {
+        return studySessionIds;
+    }
+
+    public void setStudySessionIds(Set<Long> studySessionIds) {
+        this.studySessionIds = studySessionIds;
     }
 }
