@@ -1,6 +1,8 @@
 package com.gcw_rome_2014.quickstudy;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -68,12 +70,25 @@ public class ViewExamActivity extends ActionBarActivity {
                 startActivity(i);
                 return true;
             case R.id.action_delete:
-                Boolean done = QuickStudy.getInstance().deleteExam(this.exam);
-                if(done) {
-                    showToastMessage("Success! The exam has been deleted");
-                    startActivity(new Intent(this, ExamsActivity.class));
-                } else
-                    showToastMessage("There was an error while deleting the exam");
+                new AlertDialog.Builder(this)
+                        .setTitle("Delete exam")
+                        .setMessage("Are you sure you want to delete this exam?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Boolean done = QuickStudy.getInstance().deleteExam(ViewExamActivity.this.exam);
+                                if(done) {
+                                    showToastMessage("The exam has been deleted");
+                                    startActivity(new Intent(getApplicationContext(), ExamsActivity.class));
+                                } else
+                                    showToastMessage("An error occurred while deleting the exam");
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

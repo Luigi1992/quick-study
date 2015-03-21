@@ -47,14 +47,6 @@
     <string name="study_day">Study on this day</string>
     <string name="time_slot">Time slots</string>
     <string name="set_time_slot">Set time slots for this day</string>
-    <string-array name="menu_array">
-        <item>All exams</item>
-        <item>Incoming exams</item>
-        <item>Old exams</item>
-        <item>Settings</item>
-        <item>Help</item>
-        <item>Feedback</item>
-    </string-array>
     <string name="drawer_open">Open menu</string>
     <string name="drawer_close">Close menu</string>
 

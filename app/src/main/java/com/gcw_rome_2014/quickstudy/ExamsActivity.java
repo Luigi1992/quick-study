@@ -42,7 +42,21 @@ public class ExamsActivity extends ActionBarActivity {
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private String[] mMenuTitles;
+    private String[] mMenuTitles = {"All exams",
+            "Incoming exams",
+            "Old exams",
+            "Setting",
+            "Help",
+            "Feedback"
+    } ;
+    Integer[] imageId = {
+            R.drawable.ic_label,
+            R.drawable.ic_label,
+            R.drawable.ic_label,
+            R.drawable.ic_settings,
+            R.drawable.ic_help,
+            R.drawable.ic_feed
+    };
 
     private static final int RESULT_SETTINGS = 1;
 
@@ -101,16 +115,17 @@ public class ExamsActivity extends ActionBarActivity {
             }
         });
 
-        mMenuTitles = getResources().getStringArray(R.array.menu_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
+
+        CustomList adapter = new CustomList(this, mMenuTitles, imageId);
+
         mDrawerList = (ListView) findViewById(R.id.list_drawer);
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mMenuTitles));
+        mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
 
@@ -189,17 +204,23 @@ public class ExamsActivity extends ActionBarActivity {
     private void selectItem(int position) {
         switch (position) {
             case 0:
+                mDrawerLayout.closeDrawers();
                 break;
             case 1:
+                mDrawerLayout.closeDrawers();
                 break;
             case 2:
+                mDrawerLayout.closeDrawers();
                 break;
             case 3:
+                mDrawerLayout.closeDrawers();
                 startActivityForResult(new Intent(this, SettingsActivity.class), RESULT_SETTINGS);
                 break;
             case 4:
+                mDrawerLayout.closeDrawers();
                 break;
             case 5:
+                mDrawerLayout.closeDrawers();
                 startActivity(new Intent(this, FeedActivity.class));
                 break;
         }

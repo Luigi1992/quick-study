@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:choiceMode="singleChoice"
-            android:divider="@color/main_color"
+            android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"/>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>
