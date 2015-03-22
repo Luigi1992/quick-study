@@ -9,9 +9,9 @@ QuickStudy
 
 QuickStudy is an application that can save your life.  
 QuickStudy  
-* Organises the study plan
+* Organises for you the study plan
 * Shows when you should study
-* Keep an eye on you if you signed up your exams in time
+* Keeps an eye on you if you signed up your exams in time
 * Uses Google Calendar to show suggested planning sessions and exams
 
 
