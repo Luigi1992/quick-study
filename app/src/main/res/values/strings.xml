@@ -50,6 +50,5 @@
     <string name="drawer_open">Open menu</string>
     <string name="drawer_close">Close menu</string>
     <string name="title_activity_about">About</string>
-    <string name="about_quick_study">QuickStudy:\n-Organises the study plan,\n- Shows when you should study,\n- Keep an eye on you if you signed up your exams in time,\n- Uses Google Calendar to show suggested planning sessions and exams.\n\nAdd new exam and see QuickStudy's proposition of studying schedule in your Google Calendar!</string>
 
 </resources>
