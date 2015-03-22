@@ -241,6 +241,8 @@ public class ExamsActivity extends ActionBarActivity {
      */
     private void reloadExamsList() {
         this.mAdapter.setExams(QuickStudy.getInstance().getArrayOfExams());
+        //Sort exams by date
+        mAdapter.sort();
         this.mAdapter.notifyDataSetChanged();
     }
 
@@ -259,7 +261,7 @@ public class ExamsActivity extends ActionBarActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
+        // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
