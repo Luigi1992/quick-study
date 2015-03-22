@@ -4,6 +4,7 @@ import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -129,5 +130,13 @@ public class Exam implements Serializable {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         return result;
+    }
+
+    public boolean isOld() {
+        Date currentDate = new Date();
+        if (this.date.getTime().compareTo(currentDate)<0)
+            return true;
+        else
+            return false;
     }
 }
