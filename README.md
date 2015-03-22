@@ -1,3 +1,29 @@
+_The exams came. You had a problem with organising work. You did not pass as many exams as you planned again. You started panic and cannot focus on studying. You just hate exams. You promised yourself: next time you will start preparing much earlier and will not fail any of them!  Do you know this case? Does it describe you?_   
+_If the answer was: YES, you can sleep peacefully again._  
+_During next end-of-term examinations you will not have this problem._    
+_We are happy to present:_   
+
+
 QuickStudy
+=======
+
+QuickStudy is an application that can save your life.  
+QuickStudy  
+* Organises the study plan
+* Shows when you should study
+* Keep an eye on you if you signed up gor exams on time
+* Uses Google Calendar to show suggested planning sessions and exams
+
+
+Studying had never been so easy before.  
+TODO: add screenshots
+
+
+
+
+  
+    
+     
 ======
-QuickStudy is an Android application made for helping students to organise their study. The app takes into consideration the users' preferences and all of the tasks that are on their calendar in order to suggest the best free spaces of time in which to study. It also works with the Google Calendar if you have a Google Account associated with your smartphone.
+Created durining Google Technologies for Cloud and Web Development workshop (December 2014 - March 2015) 
+by Luigi Mortaro, Alessio Baldassarre and Alicja Baszak.
