@@ -22,6 +22,9 @@ import android.widget.ListView;
 
 import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidInstanceManager;
+import com.gcw_rome_2014.quickstudy.database.selectors.AllExamsSelector;
+import com.gcw_rome_2014.quickstudy.database.selectors.IncomingExamsSelector;
+import com.gcw_rome_2014.quickstudy.database.selectors.OldExamsSelectors;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.settings.SettingsActivity;
@@ -113,6 +116,8 @@ public class ExamsActivity extends ActionBarActivity {
             }
         });
 
+
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
 
@@ -149,9 +154,8 @@ public class ExamsActivity extends ActionBarActivity {
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)
             selectItem(0);
-        }
 
         AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
         instanceManager.queryInstance();
@@ -203,12 +207,18 @@ public class ExamsActivity extends ActionBarActivity {
         switch (position) {
             case 0:
                 mDrawerLayout.closeDrawers();
+                QuickStudy.getInstance().setSelector(new AllExamsSelector());
+                reloadExamsList();
                 break;
             case 1:
                 mDrawerLayout.closeDrawers();
+                QuickStudy.getInstance().setSelector(new IncomingExamsSelector());
+                reloadExamsList();
                 break;
             case 2:
                 mDrawerLayout.closeDrawers();
+                QuickStudy.getInstance().setSelector(new OldExamsSelectors());
+                reloadExamsList();
                 break;
             case 3:
                 mDrawerLayout.closeDrawers();
@@ -224,6 +234,14 @@ public class ExamsActivity extends ActionBarActivity {
                 break;
         }
 
+    }
+
+    /**
+     * Reload the exams list.
+     */
+    private void reloadExamsList() {
+        this.mAdapter.setExams(QuickStudy.getInstance().getArrayOfExams());
+        this.mAdapter.notifyDataSetChanged();
     }
 
     /**

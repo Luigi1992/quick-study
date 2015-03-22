@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.database.QuickStudyDatabase;
+import com.gcw_rome_2014.quickstudy.database.selectors.AllExamsSelector;
+import com.gcw_rome_2014.quickstudy.database.selectors.Selector;
 
 import java.util.Map;
 
@@ -19,8 +21,9 @@ import java.util.Map;
 public class QuickStudy {
     private static QuickStudy instance = new QuickStudy();
     private QuickStudyDatabase database = null;
-    ScheduleManager scheduleManager = null;
+    private ScheduleManager scheduleManager = null;
     private Map<Long, Exam> exams = null;
+    private Selector selector = null;
 
     private static final String appName = "Quick Study";
 
@@ -29,7 +32,7 @@ public class QuickStudy {
     }
 
     private QuickStudy() {
-
+        this.selector = new AllExamsSelector();
     }
 
     public void init(Context context, ContentResolver contentResolver) {
@@ -44,7 +47,7 @@ public class QuickStudy {
     public Exam getExam(Long id) {
         if (!isInitialized()) return null;
 
-        lazyLoad();
+        load();
         return this.exams.get(id);
     }
 
@@ -55,7 +58,7 @@ public class QuickStudy {
     public void putExam(Exam exam) {
         if (!isInitialized()) return;
 
-        lazyLoad();
+        load();
         this.scheduleManager.addExam(exam);     //Into Calendar
         this.database.putExam(exam);            //Into Database
         this.exams.put(exam.getId(), exam);     //Into List
@@ -67,7 +70,7 @@ public class QuickStudy {
     public void updateExam(Exam exam) {
         if (!isInitialized()) return;
 
-        lazyLoad();
+        load();
         this.scheduleManager.updateExam(exam);     //Into Calendar
         this.database.updateExam(exam);            //Into Database
         this.exams.put(exam.getId(), exam);        //Into List
@@ -75,7 +78,7 @@ public class QuickStudy {
 
     public boolean deleteExam(Exam exam) {
         if (!isInitialized()) return false;
-        lazyLoad();
+        load();
 
         boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
         boolean database = this.database.deleteExam(exam.getId()) > 0;      //From Database
@@ -96,12 +99,16 @@ public class QuickStudy {
         if(this.database == null)
             return null;
 
-        lazyLoad();
+        load();
         return exams;
     }
 
     public void setExams(Map<Long, Exam> exams) {
         this.exams = exams;
+    }
+
+    public void setSelector(Selector selector) {
+        this.selector = selector;
     }
 
     public static String getAppName() {
@@ -112,7 +119,7 @@ public class QuickStudy {
         if(this.database == null)
             return null;
 
-        lazyLoad();
+        load();
 
         Exam[] examsArray = new Exam[this.exams.values().size()];
         this.exams.values().toArray(examsArray);
@@ -123,8 +130,14 @@ public class QuickStudy {
     /**
      * Method for the lazy load.
      */
-    private void lazyLoad() {
-        if(this.exams == null)
-            this.exams = this.database.readAllExams();
+    private void load() {
+        this.exams = this.database.readAllExams(this.selector);
+    }
+
+    /**
+     * Load exams with a selector.
+     */
+    private void selectorLoad(Selector selector) {
+        this.exams = this.database.readAllExams(selector);
     }
 }

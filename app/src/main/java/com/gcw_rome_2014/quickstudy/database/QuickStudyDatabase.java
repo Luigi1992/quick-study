@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.gcw_rome_2014.quickstudy.database.selectors.AllExamsSelector;
+import com.gcw_rome_2014.quickstudy.database.selectors.IncomingExamsSelector;
+import com.gcw_rome_2014.quickstudy.database.selectors.Selector;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
@@ -149,6 +152,14 @@ public class QuickStudyDatabase {
      * @return Return the instantiated Exam object.
      */
     public Map<Long, Exam> readAllExams() {
+        return readAllExams(new AllExamsSelector());
+    }
+
+    /**
+     * This function return the Exam object found in database with the specified id.
+     * @return Return the instantiated Exam object.
+     */
+    public Map<Long, Exam> readAllExams(Selector selector) {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         // Define a projection that specifies which columns from the database
@@ -162,6 +173,12 @@ public class QuickStudyDatabase {
                 QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED
         };
 
+        // The columns for the WHERE clause
+        String selection = selector.getSelection();
+
+        // The values for the WHERE clause
+        String[] selectionArgs = selector.getSelectionArgs();
+
         // How you want the results sorted in the resulting Cursor
         String sortOrder =
                 QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " DESC";
@@ -169,8 +186,8 @@ public class QuickStudyDatabase {
         Cursor cursor = db.query(
                 QuickStudyReaderContract.ExamEntry.TABLE_NAME,  // The table to query
                 projection,                               // The columns to return
-                null,                                     // The columns for the WHERE clause
-                null,                                     // The values for the WHERE clause
+                selection,                                // The columns for the WHERE clause
+                selectionArgs,                            // The values for the WHERE clause
                 null,                                     // don't group the rows
                 null,                                     // don't filter by row groups
                 sortOrder                                 // The sort order

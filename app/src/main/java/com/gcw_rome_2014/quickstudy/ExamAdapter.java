@@ -69,6 +69,10 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         return exams;
     }
 
+    public void setExams(Exam[] exams) {
+        this.exams = exams;
+    }
+
     // Create new views (invoked by the layout manager)
     @Override
     public ExamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
