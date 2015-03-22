@@ -10,7 +10,7 @@ public class OldExamsSelectors implements Selector {
 
     @Override
     public String getSelection() {
-        return QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " < date('now')";
+        return QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " < datetime('now')";
     }
 
     @Override

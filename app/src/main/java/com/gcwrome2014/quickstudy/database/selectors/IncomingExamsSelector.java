@@ -14,7 +14,7 @@ public class IncomingExamsSelector implements Selector {
     @Override
     public String getSelection() {
         return QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " < date('now', '+1 month') AND " +
-                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " > date('now')";
+                QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE + " > datetime('now')";
     }
 
     /**
