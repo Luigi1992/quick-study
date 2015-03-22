@@ -9,5 +9,6 @@ public interface EventManager {
     //public long addEvent(String eventName, String eventDescription, Calendar dateAndTime, int HoursPerDay);
     public long addEvent(Event event);
     public int updateEvent(Event event);
+    public int updateEventName(long eventID, String newName);
     public int deleteEvent(long eventID);
 }

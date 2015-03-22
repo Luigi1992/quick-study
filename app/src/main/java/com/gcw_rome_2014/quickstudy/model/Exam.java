@@ -9,6 +9,7 @@ import java.util.Set;
 
 /**
  * Created by Luigi on 18/01/2015.
+ * This class represent the exam that the user has to study for the day of the test.
  */
 public class Exam implements Serializable {
     private static final long DEFAULT_ID = -1;
@@ -96,6 +97,18 @@ public class Exam implements Serializable {
         this.isRegistered = isRegistered;
     }
 
+    public void addSessionId(Long id) {
+        this.studySessionIds.add(id);
+    }
+
+    public Set<Long> getStudySessionIds() {
+        return studySessionIds;
+    }
+
+    public void setStudySessionIds(Set<Long> studySessionIds) {
+        this.studySessionIds = studySessionIds;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -116,17 +129,5 @@ public class Exam implements Serializable {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         return result;
-    }
-
-    public void addSessionId(Long id) {
-        this.studySessionIds.add(id);
-    }
-
-    public Set<Long> getStudySessionIds() {
-        return studySessionIds;
-    }
-
-    public void setStudySessionIds(Set<Long> studySessionIds) {
-        this.studySessionIds = studySessionIds;
     }
 }

@@ -48,7 +48,12 @@ public class ScheduleManager {
     }
 
     public int updateExam(Exam exam) {
-        return this.eventManager.updateEvent(new ExamEvent(exam));
+        int row = this.eventManager.updateEvent(new ExamEvent(exam));
+
+        for (long sessionID : exam.getStudySessionIds())
+            this.eventManager.updateEventName(sessionID, exam.getName());
+
+        return row;
     }
 
     public int deleteExam(Exam exam) {

@@ -90,6 +90,23 @@ public class AndroidEventManager implements EventManager {
         return rows;
     }
 
+    @Override
+    public int updateEventName(long eventID, String newName) {
+        String DEBUG_TAG = "MyActivity";
+
+        ContentValues values = new ContentValues();
+        Uri updateUri = null;
+
+        // The new title for the event
+        values.put(CalendarContract.Events.TITLE, "Study Session for " + newName);
+        updateUri = ContentUris.withAppendedId(CalendarContract.Events.CONTENT_URI, eventID);
+
+        int rows = contentResolver.update(updateUri, values, null, null);
+        Log.i(DEBUG_TAG, "Rows updated: " + rows);
+
+        return rows;
+    }
+
     /**
      * Delete the event providing the id.
      * @param eventID The event id.
