@@ -25,5 +25,5 @@ TODO: add screenshots
     
      
 ======
-Created durining Google Technologies for Cloud and Web Development workshop (December 2014 - March 2015) 
+Created during Google Technologies for Cloud and Web Development workshop (December 2014 - March 2015) 
 by Luigi Mortaro, Alessio Baldassarre and Alicja Baszak.
