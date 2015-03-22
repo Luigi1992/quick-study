@@ -12,4 +12,11 @@
         android:title="Delete"
         android:orderInCategory="2"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="3"
+        android:title="Share"
+        app:actionProviderClass= "android.support.v7.widget.ShareActionProvider" />
 </menu>
