@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
+import com.gcwrome2014.quickstudy.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;

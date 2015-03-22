@@ -8,7 +8,7 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.ExamsActivity;
-import com.gcw_rome_2014.quickstudy.R;
+import com.gcwrome2014.quickstudy.R;
 
 import java.util.Calendar;
 

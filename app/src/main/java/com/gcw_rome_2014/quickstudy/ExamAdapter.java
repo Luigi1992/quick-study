@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gcw_rome_2014.quickstudy.model.Exam;
+import com.gcwrome2014.quickstudy.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

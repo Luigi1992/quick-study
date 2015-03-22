@@ -1,16 +1,14 @@
 package com.gcw_rome_2014.quickstudy.notification;
 
+import java.util.Calendar;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.util.Calendar;
 
-/**
- * Created by alicja on 10/03/15.
- */
 public class ScheduleService extends Service {
 
     /**
@@ -23,8 +21,15 @@ public class ScheduleService extends Service {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d("ScheduleService", "On create");
+
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i("ScheduleService", "Received start id " + startId + ": " + intent);
+        Log.d("ScheduleService", "Received start id " + startId + ": " + intent);
 
         // We want this service to continue running until it is explicitly stopped, so return sticky.
         return START_STICKY;
@@ -32,6 +37,7 @@ public class ScheduleService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d("ScheduleService", "On bind");
         return mBinder;
     }
 

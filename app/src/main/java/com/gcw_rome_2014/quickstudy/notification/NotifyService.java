@@ -10,7 +10,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.gcw_rome_2014.quickstudy.ExamsActivity;
-import com.gcw_rome_2014.quickstudy.R;
+import com.gcwrome2014.quickstudy.R;
 
 /**
  * Created by alicja on 10/03/15.
@@ -62,7 +62,7 @@ public class NotifyService extends Service {
     /**
      * Creates a notification and shows it in the OS drag-down status bar
      */
-    private void showNotification() {
+    public void showNotification() {
         // This is the 'title' of the notification
         CharSequence title = "Alarm!!";
         // This is the icon to use on the notification
@@ -89,4 +89,5 @@ public class NotifyService extends Service {
         // Stop the service when we are finished
         stopSelf();
     }
+
 }

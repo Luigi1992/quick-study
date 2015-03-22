@@ -1,6 +1,6 @@
 package com.gcw_rome_2014.quickstudy.model.difficulties;
 
-import com.gcw_rome_2014.quickstudy.R;
+import com.gcwrome2014.quickstudy.R;
 import com.gcw_rome_2014.quickstudy.settings.SetCustomDiffActivity;
 
 /**

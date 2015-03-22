@@ -1,14 +1,10 @@
 package com.gcw_rome_2014.quickstudy;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gcw_rome_2014.quickstudy.mail.GMailSender;
+import com.gcwrome2014.quickstudy.R;
 
 
 public class FeedActivity extends ActionBarActivity {

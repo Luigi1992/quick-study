@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.gcw_rome_2014.quickstudy"
+        applicationId "com.gcwrome2014.quickstudy"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

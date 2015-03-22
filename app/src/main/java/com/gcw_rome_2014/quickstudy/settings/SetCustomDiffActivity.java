@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.gcw_rome_2014.quickstudy.R;
+import com.gcwrome2014.quickstudy.R;
 
 /**
  * Created by Alessio on 16/03/2015.

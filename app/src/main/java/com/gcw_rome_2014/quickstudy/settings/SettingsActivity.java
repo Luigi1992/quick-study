@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.gcw_rome_2014.quickstudy.R;
+import com.gcwrome2014.quickstudy.R;
 
 /**
  * Created by Alessio on 05/01/2015.

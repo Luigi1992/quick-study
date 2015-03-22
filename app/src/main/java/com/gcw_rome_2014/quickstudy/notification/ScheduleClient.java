@@ -1,17 +1,22 @@
 package com.gcw_rome_2014.quickstudy.notification;
 
+import java.util.Calendar;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import java.util.Calendar;
-
 /**
- * Created by alicja on 10/03/15.
+ * This is our service client, it is the 'middle-man' between the
+ * service and any activity that wants to connect to the service
+ *
+ * @author paul.blundell
  */
-public class ScheduleClient { // The hook into our service
+public class ScheduleClient {
+
+    // The hook into our service
     private ScheduleService mBoundService;
     // The context to start the service in
     private Context mContext;
@@ -22,24 +27,6 @@ public class ScheduleClient { // The hook into our service
         mContext = context;
     }
 
-
-
-    /**
-     * When you attempt to connect to the service, this connection will be called with the result.
-     * If we have successfully connected we instantiate our service object so that we can call methods on it.
-     */
-    public  ServiceConnection mConnection = new ServiceConnection() {
-            public void onServiceConnected(ComponentName className, IBinder service) {
-                // This is called when the connection with our service has been established,
-                // giving us the service object we can use to interact with our service.
-                mBoundService = ((ScheduleService.ServiceBinder) service).getService();
-            }
-
-            public void onServiceDisconnected(ComponentName className) {
-            mBoundService = null;
-        }
-     };
-
     /**
      * Call this to connect your activity to your service
      */
@@ -48,6 +35,22 @@ public class ScheduleClient { // The hook into our service
         mContext.bindService(new Intent(mContext, ScheduleService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
     }
+
+    /**
+     * When you attempt to connect to the service, this connection will be called with the result.
+     * If we have successfully connected we instantiate our service object so that we can call methods on it.
+     */
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // This is called when the connection with our service has been established,
+            // giving us the service object we can use to interact with our service.
+            mBoundService = ((ScheduleService.ServiceBinder) service).getService();
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            mBoundService = null;
+        }
+    };
 
     /**
      * Tell our service to set an alarm for the given date
@@ -69,4 +72,3 @@ public class ScheduleClient { // The hook into our service
         }
     }
 }
-

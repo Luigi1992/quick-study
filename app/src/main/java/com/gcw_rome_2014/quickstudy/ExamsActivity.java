@@ -27,7 +27,15 @@ import com.gcw_rome_2014.quickstudy.database.selectors.IncomingExamsSelector;
 import com.gcw_rome_2014.quickstudy.database.selectors.OldExamsSelectors;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
+import com.gcw_rome_2014.quickstudy.notification.NotifyService;
+import com.gcw_rome_2014.quickstudy.notification.ScheduleClient;
+import com.gcw_rome_2014.quickstudy.notification.ScheduleService;
 import com.gcw_rome_2014.quickstudy.settings.SettingsActivity;
+import com.gcwrome2014.quickstudy.R;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -42,6 +50,8 @@ public class ExamsActivity extends ActionBarActivity {
     private LinearLayout mDrawerLinearLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+
+    private ScheduleClient scheduleClient;
 
     private String[] mMenuTitles = {"All exams",
             "Incoming exams",
@@ -117,7 +127,6 @@ public class ExamsActivity extends ActionBarActivity {
         });
 
 
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
 
@@ -130,7 +139,6 @@ public class ExamsActivity extends ActionBarActivity {
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
 
 
         // ActionBarDrawerToggle ties together the the proper interactions
@@ -159,6 +167,45 @@ public class ExamsActivity extends ActionBarActivity {
 
         AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
         instanceManager.queryInstance();
+
+        // Start notification services
+//        Intent notificationServiceIntent = new Intent();
+//        notificationServiceIntent.setAction("com.gcw_rome_2014.quickstudy.notification.NotifyService");
+//        startService(notificationServiceIntent);
+//        Intent scheduleServiceIntent = new Intent();
+//        scheduleServiceIntent.setAction("com.gcw_rome_2014.quickstudy.notification.ScheduleService");
+//        startService(scheduleServiceIntent);
+
+
+        startService(new Intent(this, NotifyService.class));
+        startService(new Intent(this, ScheduleService.class));
+
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.doBindService();
+        scheduleClient.doBindService();
+        scheduleClient.doBindService();
+        scheduleClient.doBindService();
+
+        startService(new Intent(this, NotifyService.class));
+        startService(new Intent(this, ScheduleService.class));
+
+
+        final long ONE_MINUTE_IN_MILLIS=60000;
+        Date date = new Date();
+        long t = date.getTime();
+        Date inOneMinute = new Date(t+ONE_MINUTE_IN_MILLIS);
+        Calendar c = new GregorianCalendar();
+        c.setTime(inOneMinute);
+        scheduleClient.setAlarmForNotification(c);
+
+//        ScheduleService.ServiceBinder.getService();
+
+//        ScheduleService scheduleService = scheduleServiceIntent.getComponent();
+//        Date date = new Date();
+//        Calendar c = new GregorianCalendar();
+//        c.setTime(date);
+//        scheduleServiceIntent.setAlarmForNotification();
+
     }
 
     @Override
@@ -262,6 +309,5 @@ public class ExamsActivity extends ActionBarActivity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
 
 }

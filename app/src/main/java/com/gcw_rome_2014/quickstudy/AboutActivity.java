@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
+import com.gcwrome2014.quickstudy.R;
+
 /**
  * Created by alicja on 22/03/15.
  */

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gcw_rome_2014.quickstudy" >
+    package="com.gcwrome2014.quickstudy" >
 
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+
 
     <application
         android:allowBackup="true"
@@ -21,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".AddNewExamActivity"
             android:label="@string/add_new_exam"
@@ -30,13 +33,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
-
-
         </activity>
+
         <activity
             android:name=".settings.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light" >
         </activity>
+
         <activity
             android:name=".ViewExamActivity"
             android:label="@string/view_exam"
@@ -46,6 +49,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
+
         <activity
             android:name=".FeedActivity"
             android:label="@string/title_activity_feed"
@@ -56,6 +60,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
@@ -66,6 +71,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
+
         <activity
             android:name=".EditExamActivity"
             android:label="@string/title_activity_edit_exam"
@@ -76,10 +82,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
-
-        <service android:name=".notification.ScheduleService" />
-        <service android:name=".notification.NotifyService" />
-
 
         <activity
             android:name=".settings.SetCustomDiffActivity"
@@ -132,6 +134,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".settings.SetWednesdayActivity"
             android:theme="@style/Theme.AppCompat.Light"
@@ -157,6 +160,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".settings.SetFridayActivity"
             android:theme="@style/Theme.AppCompat.Light"
@@ -195,6 +199,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <service
+            android:name="com.gcwrome2014.quickstudy.notification.ScheduleService"
+            android:enabled="true"/>
+        <service
+            android:name="com.gcwrome2014.quickstudy.notification.NotifyService"
+            android:enabled="true"/>
+
     </application>
 
 </manifest>

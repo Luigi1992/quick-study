@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gcwrome2014.quickstudy.R;
+
 /**
  * Created by Alessio on 21/03/2015.
  */
