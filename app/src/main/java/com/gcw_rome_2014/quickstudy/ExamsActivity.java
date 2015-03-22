@@ -16,9 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -46,7 +44,7 @@ public class ExamsActivity extends ActionBarActivity {
             "Incoming exams",
             "Old exams",
             "Setting",
-            "Help",
+            "About",
             "Feedback"
     } ;
     Integer[] imageId = {
@@ -218,6 +216,7 @@ public class ExamsActivity extends ActionBarActivity {
                 break;
             case 4:
                 mDrawerLayout.closeDrawers();
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             case 5:
                 mDrawerLayout.closeDrawers();

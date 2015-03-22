@@ -57,6 +57,16 @@
                 android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
         </activity>
         <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".ExamsActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.gcw_rome_2014.quickstudy.ExamsActivity" />
+        </activity>
+        <activity
             android:name=".EditExamActivity"
             android:label="@string/title_activity_edit_exam"
             android:parentActivityName=".ExamsActivity"
