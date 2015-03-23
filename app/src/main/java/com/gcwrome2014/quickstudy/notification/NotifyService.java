@@ -68,7 +68,7 @@ public class NotifyService extends Service {
      */
     public void showNotification(String examName) {
         // This is the 'title' of the notification
-        CharSequence title = examName + " exam is coming,";
+        CharSequence title = examName + " in 10 days,";
         // This is the icon to use on the notification
         int icon = R.drawable.ic_calendar;
         // This is the scrolling text of the notification
