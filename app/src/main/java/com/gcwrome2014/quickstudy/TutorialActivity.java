@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.gcwrome2014.quickstudy.custom.CustomPagerAdapter;
 
@@ -36,8 +39,22 @@ public class TutorialActivity extends Activity {
             }
 
             public void onPageSelected(int position) {
-                if (position==3)
+                RelativeLayout bgElement = (RelativeLayout) findViewById(R.id.tutorial_container);
+                switch (position) {
+                    case 0:
+                        bgElement.setBackgroundColor(Color.WHITE);
+                        break;
+                    case 1:
+                        bgElement.setBackgroundColor(Color.parseColor("#2EFE9A"));
+                        break;
+                    case 2:
+                        bgElement.setBackgroundColor(Color.parseColor("#FFFF99"));
+                        break;
+                    case 3:
+                        bgElement.setBackgroundColor(Color.parseColor("#F5A9BC"));
                     startButton.setVisibility(View.VISIBLE);
+                        break;
+                    }
             }
         });
         startButton.setOnClickListener(new View.OnClickListener() {
