@@ -2,8 +2,8 @@ package com.gcwrome2014.quickstudy;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gcwrome2014.quickstudy.mail.GMailSender;
-import com.gcwrome2014.quickstudy.R;
 
 
 public class FeedActivity extends ActionBarActivity {

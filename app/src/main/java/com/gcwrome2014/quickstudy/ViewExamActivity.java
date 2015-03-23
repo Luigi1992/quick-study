@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.gcwrome2014.quickstudy.model.Exam;
 import com.gcwrome2014.quickstudy.model.QuickStudy;
-import com.gcwrome2014.quickstudy.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -134,9 +133,8 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
             shareIntent.setType("text/plain");
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "QuickStudy");
 
-            if (exam.isOld()) {
+            if (exam.isOld())
                 showDialog(shareIntent);
-            }
 
             else {
                 shareIntent.putExtra(Intent.EXTRA_TEXT, "I have an exam in " + name_details.getText() + " on the "

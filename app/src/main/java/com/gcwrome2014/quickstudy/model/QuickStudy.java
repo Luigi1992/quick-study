@@ -76,7 +76,7 @@ public class QuickStudy {
         this.exams.put(exam.getId(), exam);        //Into List
         this.scheduleManager.updateExam(exam);     //Into Calendar
         this.database.updateExam(exam);            //Into Database
-
+        Log.i("Exam isRegistered: ", "Boolean: " + exam.isRegistered());
     }
 
     public boolean deleteExam(Exam exam) {

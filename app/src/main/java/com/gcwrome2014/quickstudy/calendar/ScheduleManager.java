@@ -2,7 +2,6 @@ package com.gcwrome2014.quickstudy.calendar;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.util.Log;
 
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidEventManager;

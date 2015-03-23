@@ -1,7 +1,5 @@
 package com.gcwrome2014.quickstudy.notification;
 
-import java.util.Calendar;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -9,6 +7,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.gcwrome2014.quickstudy.model.Exam;
+
+import java.util.Calendar;
 
 
 public class ScheduleService extends Service {

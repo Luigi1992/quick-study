@@ -22,7 +22,6 @@ import com.gcwrome2014.quickstudy.model.Exam;
 import com.gcwrome2014.quickstudy.model.QuickStudy;
 import com.gcwrome2014.quickstudy.model.difficulties.Difficulty;
 import com.gcwrome2014.quickstudy.model.difficulties.Medium;
-import com.gcwrome2014.quickstudy.R;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
