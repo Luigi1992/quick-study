@@ -79,6 +79,7 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                 Intent i = new Intent(this, EditExamActivity.class);
                 i.putExtra("exam", this.exam);
                 startActivity(i);
+                finish();
                 return true;
             case R.id.action_delete:
                 new AlertDialog.Builder(this)
@@ -90,6 +91,7 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                                 if(done) {
                                     showToastMessage("The exam has been deleted");
                                     startActivity(new Intent(getApplicationContext(), ExamsActivity.class));
+                                    finish();
                                 } else
                                     showToastMessage("An error occurred while deleting the exam");
                             }
@@ -148,7 +150,7 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
         Button b1 = (Button) d.findViewById(R.id.button1);
         Button b2 = (Button) d.findViewById(R.id.button2);
         final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
-        np.setMaxValue(30);
+        np.setMaxValue(31);
         np.setMinValue(18);
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);

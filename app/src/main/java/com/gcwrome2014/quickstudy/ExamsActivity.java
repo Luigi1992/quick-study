@@ -1,6 +1,5 @@
 package com.gcwrome2014.quickstudy;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -32,11 +31,7 @@ import com.gcwrome2014.quickstudy.notification.NotifyService;
 import com.gcwrome2014.quickstudy.notification.ScheduleClient;
 import com.gcwrome2014.quickstudy.notification.ScheduleService;
 import com.gcwrome2014.quickstudy.settings.SettingsActivity;
-import com.gcwrome2014.quickstudy.R;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import com.gcwrome2014.quickstudy.custom.CustomList;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -84,6 +79,7 @@ public class ExamsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, AddNewExamActivity.class));
+                finish();
             }
         });
 
@@ -124,8 +120,10 @@ public class ExamsActivity extends ActionBarActivity {
                 Exam exam = mAdapter.getExams()[position];
                 i.putExtra("exam", exam);
                 startActivity(i);
+                finish();
             }
         });
+
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -140,6 +138,7 @@ public class ExamsActivity extends ActionBarActivity {
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
 
 
         // ActionBarDrawerToggle ties together the the proper interactions
@@ -166,7 +165,7 @@ public class ExamsActivity extends ActionBarActivity {
         if (savedInstanceState == null)
             selectItem(0);
 
-        AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
+        com.gcwrome2014.quickstudy.calendar.provider.AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
         instanceManager.queryInstance();
 
         // Start notification services
@@ -309,8 +308,9 @@ public class ExamsActivity extends ActionBarActivity {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
+        // Pass any configuration change to the drawer toggle
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
 
 }
