@@ -87,14 +87,20 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                         .setMessage("Are you sure you want to delete this exam?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Boolean done = QuickStudy.getInstance().deleteExam(ViewExamActivity.this.exam);
-                                if(done) {
-                                    showToastMessage("The exam has been deleted");
-                                    startActivity(new Intent(getApplicationContext(), ExamsActivity.class));
-                                    finish();
-                                } else
-                                    showToastMessage("An error occurred while deleting the exam");
+                                new Thread(new Runnable() {
+
+                                    public void run() {
+                                        Boolean done = QuickStudy.getInstance().deleteExam(ViewExamActivity.this.exam);
+                                        if(done) {
+                                            startActivity(new Intent(getApplicationContext(), ExamsActivity.class));
+                                        }
+                                    }
+
+                                }).start();
+                                finish();
+                                showToastMessage("The exam has been deleted");
                             }
+
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

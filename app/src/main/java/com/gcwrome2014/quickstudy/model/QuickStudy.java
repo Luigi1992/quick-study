@@ -71,18 +71,19 @@ public class QuickStudy {
         if (!isInitialized()) return;
 
         load();
+        this.exams.put(exam.getId(), exam);        //Into List
         this.scheduleManager.updateExam(exam);     //Into Calendar
         this.database.updateExam(exam);            //Into Database
-        this.exams.put(exam.getId(), exam);        //Into List
+
     }
 
     public boolean deleteExam(Exam exam) {
         if (!isInitialized()) return false;
-        load();
 
+        load();
+        boolean list = this.exams.remove(exam.getId()) != null;             //From list
         boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
         boolean database = this.database.deleteExam(exam.getId()) > 0;      //From Database
-        boolean list = this.exams.remove(exam.getId()) != null;             //From list
 
         return calendar && database && list;
     }
