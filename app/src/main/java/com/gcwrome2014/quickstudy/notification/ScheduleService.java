@@ -25,8 +25,6 @@ public class ScheduleService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("ScheduleService", "On create");
-
     }
 
     @Override
@@ -39,7 +37,6 @@ public class ScheduleService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d("ScheduleService", "On bind");
         return mBinder;
     }
 

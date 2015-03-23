@@ -37,8 +37,6 @@ public class ScheduleClient {
         // Establish a connection with our service
         mContext.bindService(new Intent(mContext, ScheduleService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
-        Log.d("ScheduleService", "mConnection == null: " + String.valueOf(mConnection == null));
-        Log.d("ScheduleService", "mBoundService == null: " + String.valueOf(mBoundService == null));
     }
 
     /**
@@ -49,7 +47,6 @@ public class ScheduleClient {
         public void onServiceConnected(ComponentName className, IBinder service) {
             // This is called when the connection with our service has been established,
             // giving us the service object we can use to interact with our service.
-            Log.d("ScheduleService", "W KONCU SCHEDULE CLIENT DOSTAL SERVICE!!!");
             mBoundService = ((ScheduleService.ServiceBinder) service).getService();
         }
 
