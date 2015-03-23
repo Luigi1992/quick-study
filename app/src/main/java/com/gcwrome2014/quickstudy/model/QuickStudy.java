@@ -9,6 +9,8 @@ import com.gcwrome2014.quickstudy.database.QuickStudyDatabase;
 import com.gcwrome2014.quickstudy.database.selectors.AllExamsSelector;
 import com.gcwrome2014.quickstudy.database.selectors.Selector;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -126,6 +128,14 @@ public class QuickStudy {
         this.exams.values().toArray(examsArray);
 
         return examsArray;
+    }
+
+    public List<Exam> getListOfExams() {
+        if(this.database == null)
+            return null;
+
+        load();
+        return new ArrayList<>(this.exams.values());
     }
 
     /**
