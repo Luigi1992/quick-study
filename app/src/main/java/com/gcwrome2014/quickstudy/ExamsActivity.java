@@ -79,7 +79,6 @@ public class ExamsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(context, AddNewExamActivity.class));
-                finish();
             }
         });
 
@@ -120,7 +119,6 @@ public class ExamsActivity extends ActionBarActivity {
                 Exam exam = mAdapter.getExams()[position];
                 i.putExtra("exam", exam);
                 startActivity(i);
-                finish();
             }
         });
 
