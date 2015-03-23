@@ -161,7 +161,7 @@ public class EditExamActivity extends ActionBarActivity {
         Difficulty difficulty;
         // Try to instantiate Difficulty command
         try {
-            String className = "com.gcw_rome_2014.quickstudy.model.difficulties.";
+            String className = "com.gcwrome2014.quickstudy.model.difficulties.";
             className += examDifficultyString;
             difficulty = (Difficulty) Class.forName(className).newInstance();
         } catch (Exception e) {

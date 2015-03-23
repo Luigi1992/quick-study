@@ -170,10 +170,10 @@ public class ExamsActivity extends ActionBarActivity {
 
         // Start notification services
 //        Intent notificationServiceIntent = new Intent();
-//        notificationServiceIntent.setAction("com.gcw_rome_2014.quickstudy.notification.NotifyService");
+//        notificationServiceIntent.setAction("com.gcwrome2014.quickstudy.notification.NotifyService");
 //        startService(notificationServiceIntent);
 //        Intent scheduleServiceIntent = new Intent();
-//        scheduleServiceIntent.setAction("com.gcw_rome_2014.quickstudy.notification.ScheduleService");
+//        scheduleServiceIntent.setAction("com.gcwrome2014.quickstudy.notification.ScheduleService");
 //        startService(scheduleServiceIntent);
 
 
