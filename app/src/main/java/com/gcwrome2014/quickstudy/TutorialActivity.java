@@ -24,7 +24,7 @@ public class TutorialActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //checkFirstExecution();
+        checkFirstExecution();
         setContentView(com.gcwrome2014.quickstudy.R.layout.activity_tutorial);
         viewPager = (ViewPager) findViewById(com.gcwrome2014.quickstudy.R.id.viewPager);
         startButton = (Button) findViewById(com.gcwrome2014.quickstudy.R.id.start_button);
