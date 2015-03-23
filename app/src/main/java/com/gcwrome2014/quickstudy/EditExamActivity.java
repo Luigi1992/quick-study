@@ -76,7 +76,6 @@ public class EditExamActivity extends ActionBarActivity {
         updateTimeLabel(exam.getDate());
         examDifficultySpinner.setSelection(adapter.getPosition(exam.getDifficulty().getName()));
         examRegisteredCheckBox.setChecked(exam.isRegistered());
-
     }
 
     @Override

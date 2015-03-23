@@ -10,6 +10,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -95,6 +96,7 @@ public class ExamsActivity extends ActionBarActivity {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
@@ -104,7 +106,7 @@ public class ExamsActivity extends ActionBarActivity {
         quickStudy.init(getApplicationContext(), getContentResolver());
 
         // specify an adapter (see also next example)
-        mAdapter = new ExamAdapter(quickStudy.getArrayOfExams());
+        mAdapter = new ExamAdapter(quickStudy.getListOfExams());
 
         //Sort exams by date
         mAdapter.sort();
@@ -116,7 +118,7 @@ public class ExamsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent i = new Intent(context, ViewExamActivity.class);
-                Exam exam = mAdapter.getExams()[position];
+                Exam exam = mAdapter.getExams().get(position);
                 i.putExtra("exam", exam);
                 startActivity(i);
             }
@@ -285,7 +287,7 @@ public class ExamsActivity extends ActionBarActivity {
      * Reload the exams list.
      */
     private void reloadExamsList() {
-        this.mAdapter.setExams(QuickStudy.getInstance().getArrayOfExams());
+        this.mAdapter.setExams(QuickStudy.getInstance().getListOfExams());
         //Sort exams by date
         mAdapter.sort();
         this.mAdapter.notifyDataSetChanged();
