@@ -4,9 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.gcwrome2014.quickstudy.database.selectors.AllExamsSelector;
-import com.gcwrome2014.quickstudy.database.selectors.IncomingExamsSelector;
 import com.gcwrome2014.quickstudy.database.selectors.Selector;
 import com.gcwrome2014.quickstudy.model.Exam;
 import com.gcwrome2014.quickstudy.model.difficulties.Difficulty;
@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -265,7 +266,7 @@ public class QuickStudyDatabase {
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DIFFICULTY, exam.getDifficulty().getName());
 
         // Converting Date to string for SQLite format
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         String dateString = sdf.format(exam.getDate().getTime());
 
         values.put(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE, dateString);
@@ -300,12 +301,12 @@ public class QuickStudyDatabase {
                 cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE)
         );
 
-        Boolean isRegistered = Boolean.parseBoolean( cursor.getString(
+        Boolean isRegistered = (cursor.getInt(
                 cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED)
-        ));
+        )) == 1;
 
         Calendar examDate = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         try {
             examDate.setTime(sdf.parse(examDateString));
         } catch (ParseException e) {
@@ -315,12 +316,14 @@ public class QuickStudyDatabase {
         Difficulty difficulty;
         // Try to instantiate Difficulty command
         try {
-            String className = "com.gcw_rome_2014.quickstudy.model.difficulties.";
+            String className = "com.gcwrome2014.quickstudy.model.difficulties.";
             className += difficultyName;
             difficulty = (Difficulty) Class.forName(className).newInstance();
         } catch (Exception e) {
             difficulty = new Easy();
         }
+
+        Log.i("Reading Exams Database:", "IsRegistered: " + isRegistered);
 
         return new Exam(examId, examName, difficulty, examDate, isRegistered);
     }

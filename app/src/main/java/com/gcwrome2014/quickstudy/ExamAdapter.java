@@ -8,10 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gcwrome2014.quickstudy.model.Exam;
-import com.gcwrome2014.quickstudy.R;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -116,7 +114,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
         Collections.sort(this.exams, new Comparator<Exam>() {
             @Override
             public int compare(Exam e1, Exam e2) {
-                return e2.getDate().compareTo(e1.getDate());
+                return e1.getDate().compareTo(e2.getDate());
             }
         });
 

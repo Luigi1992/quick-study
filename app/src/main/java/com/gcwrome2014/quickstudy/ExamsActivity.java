@@ -23,6 +23,7 @@ import android.widget.ListView;
 
 import com.gcwrome2014.quickstudy.ExamAdapter.OnItemClickListener;
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidInstanceManager;
+import com.gcwrome2014.quickstudy.custom.CustomList;
 import com.gcwrome2014.quickstudy.database.selectors.AllExamsSelector;
 import com.gcwrome2014.quickstudy.database.selectors.IncomingExamsSelector;
 import com.gcwrome2014.quickstudy.database.selectors.OldExamsSelectors;
@@ -32,7 +33,6 @@ import com.gcwrome2014.quickstudy.notification.NotifyService;
 import com.gcwrome2014.quickstudy.notification.ScheduleClient;
 import com.gcwrome2014.quickstudy.notification.ScheduleService;
 import com.gcwrome2014.quickstudy.settings.SettingsActivity;
-import com.gcwrome2014.quickstudy.custom.CustomList;
 
 /**
  * Created by Luigi on 18/01/2015.
@@ -53,7 +53,7 @@ public class ExamsActivity extends ActionBarActivity {
     private String[] mMenuTitles = {"All exams",
             "Incoming exams",
             "Old exams",
-            "Setting",
+            "Settings",
             "About",
             "Feedback"
     } ;
@@ -170,10 +170,10 @@ public class ExamsActivity extends ActionBarActivity {
 
         // Start notification services
 //        Intent notificationServiceIntent = new Intent();
-//        notificationServiceIntent.setAction("com.gcw_rome_2014.quickstudy.notification.NotifyService");
+//        notificationServiceIntent.setAction("com.gcwrome2014.quickstudy.notification.NotifyService");
 //        startService(notificationServiceIntent);
 //        Intent scheduleServiceIntent = new Intent();
-//        scheduleServiceIntent.setAction("com.gcw_rome_2014.quickstudy.notification.ScheduleService");
+//        scheduleServiceIntent.setAction("com.gcwrome2014.quickstudy.notification.ScheduleService");
 //        startService(scheduleServiceIntent);
 
 

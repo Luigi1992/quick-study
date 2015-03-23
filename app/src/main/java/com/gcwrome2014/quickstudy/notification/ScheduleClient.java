@@ -1,15 +1,14 @@
 package com.gcwrome2014.quickstudy.notification;
 
-import java.util.Calendar;
-
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.gcwrome2014.quickstudy.model.Exam;
+
+import java.util.Calendar;
 
 /**
  * This is our service client, it is the 'middle-man' between the

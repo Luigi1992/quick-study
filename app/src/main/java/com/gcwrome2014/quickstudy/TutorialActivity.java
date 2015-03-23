@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -20,6 +19,7 @@ public class TutorialActivity extends Activity {
 
     private ViewPager viewPager;
     private Button startButton;
+    private RelativeLayout bgElement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,7 @@ public class TutorialActivity extends Activity {
         setContentView(com.gcwrome2014.quickstudy.R.layout.activity_tutorial);
         viewPager = (ViewPager) findViewById(com.gcwrome2014.quickstudy.R.id.viewPager);
         startButton = (Button) findViewById(com.gcwrome2014.quickstudy.R.id.start_button);
+        bgElement = (RelativeLayout) findViewById(R.id.tutorial_container);
         PagerAdapter adapter = new CustomPagerAdapter(TutorialActivity.this);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -39,7 +40,6 @@ public class TutorialActivity extends Activity {
             }
 
             public void onPageSelected(int position) {
-                RelativeLayout bgElement = (RelativeLayout) findViewById(R.id.tutorial_container);
                 switch (position) {
                     case 0:
                         bgElement.setBackgroundColor(Color.WHITE);
@@ -59,6 +59,7 @@ public class TutorialActivity extends Activity {
         });
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                bgElement.setBackgroundColor(Color.WHITE);
                 start();
             }
         });
