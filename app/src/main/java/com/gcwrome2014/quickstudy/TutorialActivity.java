@@ -28,6 +28,7 @@ public class TutorialActivity extends Activity {
         setContentView(com.gcwrome2014.quickstudy.R.layout.activity_tutorial);
         viewPager = (ViewPager) findViewById(com.gcwrome2014.quickstudy.R.id.viewPager);
         startButton = (Button) findViewById(com.gcwrome2014.quickstudy.R.id.start_button);
+        bgElement = (RelativeLayout) findViewById(R.id.tutorial_container);
         PagerAdapter adapter = new CustomPagerAdapter(TutorialActivity.this);
         viewPager.setAdapter(adapter);
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -39,7 +40,6 @@ public class TutorialActivity extends Activity {
             }
 
             public void onPageSelected(int position) {
-                 bgElement = (RelativeLayout) findViewById(R.id.tutorial_container);
                 switch (position) {
                     case 0:
                         bgElement.setBackgroundColor(Color.WHITE);
@@ -59,6 +59,7 @@ public class TutorialActivity extends Activity {
         });
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                bgElement.setBackgroundColor(Color.WHITE);
                 start();
             }
         });
@@ -80,9 +81,8 @@ public class TutorialActivity extends Activity {
 
     public void start() {
         Intent intent = new Intent(this, ExamsActivity.class);
-        finish();
-        bgElement.setBackgroundColor(Color.WHITE);
         startActivity(intent);
+        finish();
     }
 
 }

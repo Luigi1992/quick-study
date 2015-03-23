@@ -53,7 +53,7 @@ public class ExamsActivity extends ActionBarActivity {
     private String[] mMenuTitles = {"All exams",
             "Incoming exams",
             "Old exams",
-            "Setting",
+            "Settings",
             "About",
             "Feedback"
     } ;

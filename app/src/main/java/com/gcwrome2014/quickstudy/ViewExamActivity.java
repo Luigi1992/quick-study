@@ -110,6 +110,7 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                 return true;
             case R.id.action_share:
                 mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+                if (mShareActionProvider != null)
                 setShareIntent();
                 return true;
             default:
