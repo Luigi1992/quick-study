@@ -1,4 +1,4 @@
-package com.gcwrome2014.quickstudy;
+package com.gcwrome2014.quickstudy.custom;
 
 import android.app.Activity;
 import android.view.LayoutInflater;

@@ -18,5 +18,5 @@
         app:showAsAction="never"
         android:orderInCategory="3"
         android:title="Share"
-        app:actionProviderClass= "android.support.v7.widget.ShareActionProvider" />
+         />
 </menu>

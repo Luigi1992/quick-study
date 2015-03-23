@@ -21,7 +21,6 @@ import com.gcwrome2014.quickstudy.model.Exam;
 import com.gcwrome2014.quickstudy.model.QuickStudy;
 import com.gcwrome2014.quickstudy.model.difficulties.Difficulty;
 import com.gcwrome2014.quickstudy.model.difficulties.Medium;
-import com.gcwrome2014.quickstudy.R;
 import com.gcwrome2014.quickstudy.notification.ScheduleClient;
 
 import java.text.DateFormat;
@@ -252,6 +251,7 @@ public class AddNewExamActivity extends ActionBarActivity {
         QuickStudy.getInstance().putExam(exam);
         Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
         startActivity(i);
+        finish();
 
         ScheduleClient scheduleClient = new ScheduleClient(this);
         scheduleClient.doBindService();

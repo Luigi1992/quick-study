@@ -252,9 +252,9 @@ public class EditExamActivity extends ActionBarActivity {
      */
     public void editExam(Exam exam) {
         QuickStudy.getInstance().updateExam(exam);
-
         Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
         startActivity(i);
+        finish();
     }
 
     private void showErrorToast(String message) {
