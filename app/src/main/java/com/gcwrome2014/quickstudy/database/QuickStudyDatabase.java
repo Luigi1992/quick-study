@@ -301,9 +301,9 @@ public class QuickStudyDatabase {
                 cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_DATE)
         );
 
-        Boolean isRegistered = Boolean.parseBoolean( cursor.getString(
+        Boolean isRegistered = (cursor.getInt(
                 cursor.getColumnIndexOrThrow(QuickStudyReaderContract.ExamEntry.COLUMN_NAME_REGISTERED)
-        ));
+        )) == 1;
 
         Calendar examDate = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
