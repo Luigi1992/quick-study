@@ -64,11 +64,9 @@ public class QuickStudy {
         if (!isInitialized()) return;
 
         load();
-        this.scheduleManager.addExam(exam);     //Into Calendar
         this.database.putExam(exam);            //Into Database
         this.exams.put(exam.getId(), exam);     //Into List
-
-        Log.i("QuickStudy", "Exam ID: " + exam.getId());
+        this.scheduleManager.addExam(exam);     //Into Calendar
     }
 
 
@@ -76,19 +74,18 @@ public class QuickStudy {
         if (!isInitialized()) return;
 
         load();
+        this.database.updateExam(exam);            //Into Database
         this.exams.put(exam.getId(), exam);        //Into List
         this.scheduleManager.updateExam(exam);     //Into Calendar
-        this.database.updateExam(exam);            //Into Database
-        Log.i("Exam isRegistered: ", "Boolean: " + exam.isRegistered());
     }
 
     public boolean deleteExam(Exam exam) {
         if (!isInitialized()) return false;
 
         load();
+        boolean database = this.database.deleteExam(exam.getId()) > 0;      //From Database
         boolean list = this.exams.remove(exam.getId()) != null;             //From list
         boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
-        boolean database = this.database.deleteExam(exam.getId()) > 0;      //From Database
 
         return calendar && database && list;
     }
