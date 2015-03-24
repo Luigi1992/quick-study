@@ -3,7 +3,6 @@ package com.gcwrome2014.quickstudy;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
@@ -254,8 +253,6 @@ public class AddNewExamActivity extends ActionBarActivity {
 
             public void run() {
                 QuickStudy.getInstance().putExam(exam);
-                Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
-                startActivity(i);
             }
         }).start();
         showErrorToast("The exam has been added!");
@@ -271,6 +268,8 @@ public class AddNewExamActivity extends ActionBarActivity {
         Calendar c = new GregorianCalendar();
         c.setTime(tenDaysAgo);
         scheduleClient.setAlarmForNotification(c, exam);
+
+        finish();
     }
 
     private void showErrorToast(String message) {
