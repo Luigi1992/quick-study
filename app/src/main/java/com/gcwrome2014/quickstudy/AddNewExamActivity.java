@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputType;
 import android.view.Menu;
@@ -247,10 +248,16 @@ public class AddNewExamActivity extends ActionBarActivity {
      *
      * @param exam Exam to be saved.
      */
-    public void saveNewExamEvent(Exam exam) throws InterruptedException {
-        QuickStudy.getInstance().putExam(exam);
+    public void saveNewExamEvent(final Exam exam) throws InterruptedException {
+        Looper.prepare();
+        new Thread(new Runnable() {
 
+            public void run() {
+                QuickStudy.getInstance().putExam(exam);
+            }
+        }).start();
         finish();
+        showErrorToast("The exam has been added!");
 
         ScheduleClient scheduleClient = new ScheduleClient(this);
         scheduleClient.doBindService();
