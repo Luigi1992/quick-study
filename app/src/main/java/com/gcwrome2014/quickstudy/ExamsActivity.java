@@ -27,6 +27,7 @@ import com.gcwrome2014.quickstudy.custom.CustomList;
 import com.gcwrome2014.quickstudy.database.selectors.AllExamsSelector;
 import com.gcwrome2014.quickstudy.database.selectors.IncomingExamsSelector;
 import com.gcwrome2014.quickstudy.database.selectors.OldExamsSelectors;
+import com.gcwrome2014.quickstudy.database.selectors.Selector;
 import com.gcwrome2014.quickstudy.model.Exam;
 import com.gcwrome2014.quickstudy.model.QuickStudy;
 import com.gcwrome2014.quickstudy.notification.NotifyService;
@@ -106,7 +107,7 @@ public class ExamsActivity extends ActionBarActivity {
         quickStudy.init(getApplicationContext(), getContentResolver());
 
         // specify an adapter (see also next example)
-        mAdapter = new ExamAdapter(quickStudy.getListOfExams());
+        mAdapter = quickStudy.getExamAdapter();
 
         //Sort exams by date
         mAdapter.sort();
@@ -254,18 +255,15 @@ public class ExamsActivity extends ActionBarActivity {
         switch (position) {
             case 0:
                 mDrawerLayout.closeDrawers();
-                QuickStudy.getInstance().setSelector(new AllExamsSelector());
-                reloadExamsList();
+                QuickStudy.getInstance().reloadExamsList(new AllExamsSelector());
                 break;
             case 1:
                 mDrawerLayout.closeDrawers();
-                QuickStudy.getInstance().setSelector(new IncomingExamsSelector());
-                reloadExamsList();
+                QuickStudy.getInstance().reloadExamsList(new IncomingExamsSelector());
                 break;
             case 2:
                 mDrawerLayout.closeDrawers();
-                QuickStudy.getInstance().setSelector(new OldExamsSelectors());
-                reloadExamsList();
+                QuickStudy.getInstance().reloadExamsList(new OldExamsSelectors());
                 break;
             case 3:
                 mDrawerLayout.closeDrawers();
@@ -281,16 +279,6 @@ public class ExamsActivity extends ActionBarActivity {
                 break;
         }
 
-    }
-
-    /**
-     * Reload the exams list.
-     */
-    private void reloadExamsList() {
-        this.mAdapter.setExams(QuickStudy.getInstance().getListOfExams());
-        //Sort exams by date
-        mAdapter.sort();
-        this.mAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -315,8 +303,7 @@ public class ExamsActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        QuickStudy.getInstance().setSelector(new AllExamsSelector());
-        reloadExamsList();
+        QuickStudy.getInstance().reloadExamsList(new AllExamsSelector());
     }
 
 

@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.util.Log;
 
+import com.gcwrome2014.quickstudy.ExamAdapter;
 import com.gcwrome2014.quickstudy.calendar.ScheduleManager;
 import com.gcwrome2014.quickstudy.database.QuickStudyDatabase;
 import com.gcwrome2014.quickstudy.database.selectors.AllExamsSelector;
@@ -26,6 +27,7 @@ public class QuickStudy {
     private ScheduleManager scheduleManager = null;
     private Map<Long, Exam> exams = null;
     private Selector selector = null;
+    private ExamAdapter examAdapter = null;
 
     private static final String appName = "Quick Study";
 
@@ -40,6 +42,7 @@ public class QuickStudy {
     public void init(Context context, ContentResolver contentResolver) {
         this.database = new QuickStudyDatabase(context);
         this.scheduleManager = new ScheduleManager(contentResolver, context);
+        this.examAdapter = new ExamAdapter(this.getListOfExams());
     }
 
     /**
@@ -150,5 +153,24 @@ public class QuickStudy {
      */
     private void selectorLoad(Selector selector) {
         this.exams = this.database.readAllExams(selector);
+    }
+
+    /**
+     * Reload the exams list.
+     */
+    public void reloadExamsList(Selector selector) {
+        QuickStudy.getInstance().setSelector(selector);
+        this.examAdapter.setExams(QuickStudy.getInstance().getListOfExams());
+        //Sort exams by date
+        this.examAdapter.sort();
+        this.examAdapter.notifyDataSetChanged();
+    }
+
+    public ExamAdapter getExamAdapter() {
+        return examAdapter;
+    }
+
+    public void setExamAdapter(ExamAdapter examAdapter) {
+        this.examAdapter = examAdapter;
     }
 }
