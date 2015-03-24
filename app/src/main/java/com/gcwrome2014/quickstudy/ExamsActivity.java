@@ -312,5 +312,11 @@ public class ExamsActivity extends ActionBarActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        reloadExamsList();
+    }
+
 
 }

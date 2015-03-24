@@ -249,8 +249,7 @@ public class AddNewExamActivity extends ActionBarActivity {
      */
     public void saveNewExamEvent(Exam exam) throws InterruptedException {
         QuickStudy.getInstance().putExam(exam);
-        Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
-        startActivity(i);
+
         finish();
 
         ScheduleClient scheduleClient = new ScheduleClient(this);

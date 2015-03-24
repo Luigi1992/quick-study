@@ -68,11 +68,11 @@ public class NotifyService extends Service {
      */
     public void showNotification(String examName) {
         // This is the 'title' of the notification
-        CharSequence title = examName + " in 10 days,";
+        CharSequence title = examName + " incoming";
         // This is the icon to use on the notification
         int icon = R.drawable.ic_calendar;
         // This is the scrolling text of the notification
-        CharSequence text = "don't forget to sigh up!";
+        CharSequence text = "Remember to sign up!";
         // What time to show on the notification
         long time = System.currentTimeMillis();
 
