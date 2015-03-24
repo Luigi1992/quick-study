@@ -2,6 +2,7 @@ package com.gcwrome2014.quickstudy.calendar;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidEventManager;
@@ -19,7 +20,7 @@ import java.util.Calendar;
  * This class represents the user schedule.
  * It implements all the CRUD operation of the user schedule.
  */
-public class ScheduleManager {
+public class ScheduleManager extends AsyncTask {
     //Manager variables
     private CalendarManager calendarManager;
     private EventManager eventManager;
@@ -65,17 +66,14 @@ public class ScheduleManager {
     }
 
     private void addStudySessionEvents(Exam exam, Calendar startDate, int hoursOfStudy) {
-        System.out.println("START: " + startDate.getTime());
-        System.out.println("END: " + exam.getLastStudyDate().getTime() + "\n");
-
-        if(startDate.before(exam.getLastStudyDate())) {
+        while(startDate.before(exam.getLastStudyDate())) {
+            System.out.println("START: " + startDate.getTime());
+            System.out.println("END: " + exam.getLastStudyDate().getTime() + "\n");
             startDate.add(Calendar.DATE, 1);
             Event event = new StudySessionEvent(exam, startDate, hoursOfStudy);
             long sessionId = this.eventManager.addEvent(event);
             exam.addSessionId(sessionId);
-            this.addStudySessionEvents(exam, startDate, hoursOfStudy);
         }
-
     }
 
     /**
@@ -89,5 +87,10 @@ public class ScheduleManager {
         now.set(Calendar.SECOND, 0);
 
         return now;
+    }
+
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        return null;
     }
 }
