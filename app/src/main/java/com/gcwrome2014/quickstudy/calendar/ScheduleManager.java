@@ -3,12 +3,16 @@ package com.gcwrome2014.quickstudy.calendar;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidCalendarManager;
 import com.gcwrome2014.quickstudy.calendar.provider.AndroidEventManager;
 import com.gcwrome2014.quickstudy.calendar.provider.CalendarManager;
 import com.gcwrome2014.quickstudy.calendar.provider.EventManager;
 import com.gcwrome2014.quickstudy.model.Exam;
+import com.gcwrome2014.quickstudy.model.difficulties.Easy;
+import com.gcwrome2014.quickstudy.model.difficulties.Hard;
+import com.gcwrome2014.quickstudy.model.difficulties.Medium;
 import com.gcwrome2014.quickstudy.model.events.Event;
 import com.gcwrome2014.quickstudy.model.events.ExamEvent;
 import com.gcwrome2014.quickstudy.model.events.StudySessionEvent;
@@ -21,6 +25,11 @@ import java.util.Calendar;
  * It implements all the CRUD operation of the user schedule.
  */
 public class ScheduleManager extends AsyncTask {
+
+    private static final int NUMBER_OF_DAYS_TO_STUDY_FOR_HARD_EXAM = 15;
+    private static final int NUMBER_OF_DAYS_TO_STUDY_FOR_MEDIUM_EXAM = 10;
+    private static final int NUMBER_OF_DAYS_TO_STUDY_FOR_EASY_EXAM = 5;
+
     //Manager variables
     private CalendarManager calendarManager;
     private EventManager eventManager;
@@ -42,7 +51,22 @@ public class ScheduleManager extends AsyncTask {
         exam.setId(eventID); //Important! Without this the exam has no ID!
 
         Calendar now = this.getCurrentDate();
-        this.addStudySessionEvents(exam, now, exam.getDifficulty().getHoursOfStudy());
+        Calendar startStudyingDate = this.getCurrentDate();
+        int numberOfDaysOfStudying = 5;
+
+        switch (exam.getDifficulty().getName()) {
+            case "Hard":
+                numberOfDaysOfStudying = NUMBER_OF_DAYS_TO_STUDY_FOR_HARD_EXAM;
+                break;
+            case "Medium":
+                numberOfDaysOfStudying = NUMBER_OF_DAYS_TO_STUDY_FOR_MEDIUM_EXAM;
+                break;
+            default:
+                numberOfDaysOfStudying = NUMBER_OF_DAYS_TO_STUDY_FOR_EASY_EXAM;
+                break;
+        }
+
+        this.addStudySessionEvents(exam, numberOfDaysOfStudying, exam.getDifficulty().getHoursOfStudy());
 
         return event;
     }
@@ -65,14 +89,17 @@ public class ScheduleManager extends AsyncTask {
         return row;
     }
 
-    private void addStudySessionEvents(Exam exam, Calendar startDate, int hoursOfStudy) {
-        while(startDate.before(exam.getLastStudyDate())) {
-            System.out.println("START: " + startDate.getTime());
-            System.out.println("END: " + exam.getLastStudyDate().getTime() + "\n");
-            startDate.add(Calendar.DATE, 1);
+    private void addStudySessionEvents(Exam exam, int numberOfDaysOfStudying, int hoursOfStudy) {
+        Log.d("ScheduleManager", "CREATING NEW SCHEDULE, EXAM DATE: " + exam.getDate().getTime());
+        Calendar startDate = exam.getDate();
+        Calendar now = this.getCurrentDate();
+        while(numberOfDaysOfStudying > 0 && now.before(startDate)) {
+            Log.d("ScheduleManager", "Schedule for date: " + startDate.getTime());
+            startDate.add(Calendar.DATE, -1);
             Event event = new StudySessionEvent(exam, startDate, hoursOfStudy);
             long sessionId = this.eventManager.addEvent(event);
             exam.addSessionId(sessionId);
+            numberOfDaysOfStudying--;
         }
     }
 
