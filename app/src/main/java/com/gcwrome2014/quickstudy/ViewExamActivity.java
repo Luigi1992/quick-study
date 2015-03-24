@@ -96,7 +96,6 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                                     }
 
                                 }).start();
-                                finish();
                                 showToastMessage("The exam has been deleted");
                             }
 
