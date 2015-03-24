@@ -315,6 +315,7 @@ public class ExamsActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
+        QuickStudy.getInstance().setSelector(new AllExamsSelector());
         reloadExamsList();
     }
 

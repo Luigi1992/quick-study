@@ -91,7 +91,6 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                                     public void run() {
                                         Boolean done = QuickStudy.getInstance().deleteExam(ViewExamActivity.this.exam);
                                         if(done) {
-                                            showToastMessage("The exam has been deleted");
                                         }
                                     }
 
