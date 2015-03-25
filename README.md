@@ -16,7 +16,6 @@ QuickStudy
 
 
 Studying had never been so easy before.  
-TODO: add screenshots
 
 
 
