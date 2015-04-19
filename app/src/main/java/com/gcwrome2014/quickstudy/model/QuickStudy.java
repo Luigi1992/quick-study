@@ -64,8 +64,8 @@ public class QuickStudy {
         if (!isInitialized()) return;
 
         load();
-        this.database.putExam(exam);            //Into Database
         this.exams.put(exam.getId(), exam);     //Into List
+        this.database.putExam(exam);            //Into Database
         this.scheduleManager.addExam(exam);     //Into Calendar
     }
 
