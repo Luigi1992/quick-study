@@ -34,9 +34,9 @@ public class SetCustomDiffActivity extends PreferenceActivity {
         final EditTextPreference preferenceMedium = (EditTextPreference) getPreferenceScreen().findPreference("preference_medium");
         final EditTextPreference preferenceHard = (EditTextPreference) getPreferenceScreen().findPreference("preference_hard");
 
-        preferenceEasy.setSummary(preferenceEasy.getText() + " hours");
-        preferenceMedium.setSummary(preferenceMedium.getText() + " hours");
-        preferenceHard.setSummary(preferenceHard.getText() + " hours");
+        preferenceEasy.setSummary(preferenceEasy.getText() + " " + getResources().getString(R.string.hours));
+        preferenceMedium.setSummary(preferenceMedium.getText() + " " + getResources().getString(R.string.hours));
+        preferenceHard.setSummary(preferenceHard.getText() + " " + getResources().getString(R.string.hours));
 
         setNumberOfHoursValidation(preferenceEasy);
         setNumberOfHoursValidation(preferenceMedium);

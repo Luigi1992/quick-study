@@ -10,8 +10,9 @@ import android.widget.TextView;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -19,7 +20,7 @@ import java.util.Locale;
  */
 public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
 
-    private Exam[] exams;
+    private List<Exam> exams;
     private OnItemClickListener mItemClickListener;
 
     // Provide a reference to the views for each data item
@@ -61,15 +62,15 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ExamAdapter(Exam[] exams) {
+    public ExamAdapter(List<Exam> exams) {
         this.exams = exams;
     }
 
-    public Exam[] getExams() {
+    public List<Exam> getExams() {
         return exams;
     }
 
-    public void setExams(Exam[] exams) {
+    public void setExams(List<Exam> exams) {
         this.exams = exams;
     }
 
@@ -91,31 +92,32 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(exams[position].getName());
-        holder.mExamImageView.setImageResource(exams[position].getDifficulty().getImageValue());
-        if (exams[position].isRegistered())
+        holder.mTextView.setText(exams.get(position).getName());
+        holder.mExamImageView.setImageResource(exams.get(position).getDifficulty().getImageValue());
+        if (exams.get(position).isRegistered())
             holder.mExamIsRegistered.setText(R.string.exam_is_registered);
         else
             holder.mExamIsRegistered.setText(R.string.exam_not_registered);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN);
-        holder.mExamDateView.setText(sdf.format(exams[position].getDate().getTime()));
+        holder.mExamDateView.setText(sdf.format(exams.get(position).getDate().getTime()));
         SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm", Locale.ITALIAN);
-        holder.mExamTimeView.setText(sdf1.format(exams[position].getDate().getTime()));
+        holder.mExamTimeView.setText(sdf1.format(exams.get(position).getDate().getTime()));
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return exams.length;
+        return exams.size();
     }
 
     public void sort() {
-        Arrays.sort(this.exams, new Comparator<Exam>() {
+        Collections.sort(this.exams, new Comparator<Exam>() {
             @Override
             public int compare(Exam e1, Exam e2) {
-                return e2.getDate().compareTo(e1.getDate());
+                return e1.getDate().compareTo(e2.getDate());
             }
         });
+
     }
 }
 

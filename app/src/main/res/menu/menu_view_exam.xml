@@ -4,12 +4,12 @@
     <!-- Edit should appear as action button -->
     <item android:id="@+id/action_edit"
         android:icon="@drawable/ic_action_edit"
-        android:title="Edit"
+        android:title="@string/edit"
         android:orderInCategory="1"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/action_delete"
         android:icon="@drawable/ic_action_delete"
-        android:title="Delete"
+        android:title="@string/delete"
         android:orderInCategory="2"
         app:showAsAction="ifRoom" />
     <item
@@ -17,6 +17,6 @@
         android:icon="@drawable/ic_share"
         app:showAsAction="never"
         android:orderInCategory="3"
-        android:title="Share"
+        android:title="@string/share"
         app:actionProviderClass= "android.support.v7.widget.ShareActionProvider" />
 </menu>

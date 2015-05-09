@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Edit should appear as action button -->
     <item android:id="@+id/action_save"
-        android:title="Save"
+        android:title="@string/save"
         android:orderInCategory="1"
         app:showAsAction="always" />
 </menu>

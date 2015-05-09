@@ -2,6 +2,7 @@ package com.gcw_rome_2014.quickstudy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -19,9 +21,11 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.gcw_rome_2014.quickstudy.ExamAdapter.OnItemClickListener;
 import com.gcw_rome_2014.quickstudy.calendar.provider.AndroidInstanceManager;
+import com.gcw_rome_2014.quickstudy.custom.CustomList;
 import com.gcw_rome_2014.quickstudy.database.selectors.AllExamsSelector;
 import com.gcw_rome_2014.quickstudy.database.selectors.IncomingExamsSelector;
 import com.gcw_rome_2014.quickstudy.database.selectors.OldExamsSelectors;
@@ -37,19 +41,16 @@ public class ExamsActivity extends ActionBarActivity {
     private ExamAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageButton fab;
+    private TextView emptyView;
 
     private DrawerLayout mDrawerLayout;
     private LinearLayout mDrawerLinearLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private SharedPreferences prefs;
 
-    private String[] mMenuTitles = {"All exams",
-            "Incoming exams",
-            "Old exams",
-            "Setting",
-            "About",
-            "Feedback"
-    } ;
+    private String[] mMenuTitles;
+
     Integer[] imageId = {
             R.drawable.ic_label,
             R.drawable.ic_label,
@@ -66,6 +67,7 @@ public class ExamsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exams);
         mRecyclerView = (RecyclerView) findViewById(R.id.exams_recycler_view);
+        emptyView = (TextView) findViewById(R.id.empty_view);
 
         fab = (ImageButton) findViewById(R.id.fab);
         final Context context = this;
@@ -89,6 +91,7 @@ public class ExamsActivity extends ActionBarActivity {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
@@ -98,7 +101,7 @@ public class ExamsActivity extends ActionBarActivity {
         quickStudy.init(getApplicationContext(), getContentResolver());
 
         // specify an adapter (see also next example)
-        mAdapter = new ExamAdapter(quickStudy.getArrayOfExams());
+        mAdapter = quickStudy.getExamAdapter();
 
         //Sort exams by date
         mAdapter.sort();
@@ -110,13 +113,24 @@ public class ExamsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent i = new Intent(context, ViewExamActivity.class);
-                Exam exam = mAdapter.getExams()[position];
+                Exam exam = mAdapter.getExams().get(position);
                 i.putExtra("exam", exam);
                 startActivity(i);
             }
         });
 
+        if (mAdapter.getExams().isEmpty()) {
+            mRecyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
 
+        //Manage drawer
+        mMenuTitles = getResources().getStringArray(R.array.drawer_menu);
+        prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLinearLayout = (LinearLayout) findViewById(R.id.left_drawer);
@@ -143,22 +157,37 @@ public class ExamsActivity extends ActionBarActivity {
                 R.string.drawer_close  //"close drawer" description for accessibility
         ) {
             public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle("Your exams");
+                checkSelector();
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle("QuickStudy");
+                getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null)
-            selectItem(0);
-
         AndroidInstanceManager instanceManager = new AndroidInstanceManager(getContentResolver());
         instanceManager.queryInstance();
+
+        checkSelector();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mAdapter.getExams().isEmpty()) {
+            mRecyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
+
+        checkSelector();
     }
 
     @Override
@@ -204,21 +233,26 @@ public class ExamsActivity extends ActionBarActivity {
     }
 
     private void selectItem(int position) {
+        SharedPreferences.Editor ed = prefs.edit();
+
         switch (position) {
             case 0:
                 mDrawerLayout.closeDrawers();
-                QuickStudy.getInstance().setSelector(new AllExamsSelector());
-                reloadExamsList();
+                QuickStudy.getInstance().reloadExamsList(new AllExamsSelector());
+                ed.putInt("selector", 1);
+                ed.commit();
                 break;
             case 1:
                 mDrawerLayout.closeDrawers();
-                QuickStudy.getInstance().setSelector(new IncomingExamsSelector());
-                reloadExamsList();
+                QuickStudy.getInstance().reloadExamsList(new IncomingExamsSelector());
+                ed.putInt("selector", 2);
+                ed.commit();
                 break;
             case 2:
                 mDrawerLayout.closeDrawers();
-                QuickStudy.getInstance().setSelector(new OldExamsSelectors());
-                reloadExamsList();
+                QuickStudy.getInstance().reloadExamsList(new OldExamsSelectors());
+                ed.putInt("selector", 3);
+                ed.commit();
                 break;
             case 3:
                 mDrawerLayout.closeDrawers();
@@ -234,16 +268,6 @@ public class ExamsActivity extends ActionBarActivity {
                 break;
         }
 
-    }
-
-    /**
-     * Reload the exams list.
-     */
-    private void reloadExamsList() {
-        this.mAdapter.setExams(QuickStudy.getInstance().getArrayOfExams());
-        //Sort exams by date
-        mAdapter.sort();
-        this.mAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -263,6 +287,23 @@ public class ExamsActivity extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private void checkSelector() {
+        switch (prefs.getInt("selector", 0)) {
+            case 1:
+                QuickStudy.getInstance().reloadExamsList(new AllExamsSelector());
+                getSupportActionBar().setTitle(getResources().getString(R.string.your_exams));
+                break;
+            case 2:
+                QuickStudy.getInstance().reloadExamsList(new IncomingExamsSelector());
+                getSupportActionBar().setTitle(getResources().getString(R.string.incoming));
+                break;
+            case 3:
+                QuickStudy.getInstance().reloadExamsList(new OldExamsSelectors());
+                getSupportActionBar().setTitle(getResources().getString(R.string.old));
+                break;
+        }
     }
 
 

@@ -134,9 +134,6 @@ public class Exam implements Serializable {
 
     public boolean isOld() {
         Date currentDate = new Date();
-        if (this.date.getTime().compareTo(currentDate)<0)
-            return true;
-        else
-            return false;
+        return this.date.getTime().compareTo(currentDate) < 0;
     }
 }

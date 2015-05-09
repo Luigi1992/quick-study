@@ -82,7 +82,7 @@ public class AddNewExamActivity extends ActionBarActivity {
                 // Validation of fields and saving exam in new thread.
                 View v = new View(getApplicationContext());
                 if (!isExamValid(v)) {
-                    showErrorToast("All fields are required");
+                    showErrorToast(getResources().getString(R.string.fields_required));
                 } else {
                     final Exam newExam = parseExam(v);
                     new Thread(new Runnable() {
@@ -148,7 +148,18 @@ public class AddNewExamActivity extends ActionBarActivity {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
-        String examDifficultyString = examDifficultySpinner.getSelectedItem().toString();
+        String examDifficultyString = "";
+        switch (examDifficultySpinner.getSelectedItemPosition()) {
+            case 0:
+                examDifficultyString = "Easy";
+                break;
+            case 1:
+                examDifficultyString = "Medium";
+                break;
+            case 2:
+                examDifficultyString = "Hard";
+                break;
+        }
 
         Difficulty difficulty;
         // Try to instantiate Difficulty command
@@ -245,8 +256,7 @@ public class AddNewExamActivity extends ActionBarActivity {
     public void saveNewExamEvent(Exam exam) {
         QuickStudy.getInstance().putExam(exam);
 
-        Intent i = new Intent(getApplicationContext(), ExamsActivity.class);
-        startActivity(i);
+        finish();
     }
 
     private void showErrorToast(String message) {

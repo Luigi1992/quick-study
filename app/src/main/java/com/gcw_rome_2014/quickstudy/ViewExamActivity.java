@@ -51,11 +51,24 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
 
         name_details.setText(exam.getName());
         date_details.setText(new SimpleDateFormat("EEE, d MMMM yyyy, HH:mm", Locale.ITALIAN).format(exam.getDate().getTime()));
-        difficulty_details.setText(exam.getDifficulty().getName());
+
+        switch (exam.getDifficulty().getName()) {
+            case "Easy":
+                difficulty_details.setText(getResources().getString(R.string.easy));
+                break;
+            case "Medium":
+                difficulty_details.setText(getResources().getString(R.string.medium));
+                break;
+            case "Hard":
+                difficulty_details.setText(getResources().getString(R.string.hard));
+                break;
+        }
+
+
         if (exam.isRegistered())
-            registered_details.setText("You've already signed up for this exam");
+            registered_details.setText(getResources().getString(R.string.signed));
         else
-            registered_details.setText("You haven't signed up for this exam yet");
+            registered_details.setText(getResources().getString(R.string.not_signed));
 
         //Show icon in the Action Bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -78,19 +91,20 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                 Intent i = new Intent(this, EditExamActivity.class);
                 i.putExtra("exam", this.exam);
                 startActivity(i);
+                finish();
                 return true;
             case R.id.action_delete:
                 new AlertDialog.Builder(this)
-                        .setTitle("Delete exam")
-                        .setMessage("Are you sure you want to delete this exam?")
+                        .setTitle(getResources().getString(R.string.delete_exam))
+                        .setMessage(getResources().getString(R.string.confirm_delete))
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Boolean done = QuickStudy.getInstance().deleteExam(ViewExamActivity.this.exam);
                                 if(done) {
-                                    showToastMessage("The exam has been deleted");
-                                    startActivity(new Intent(getApplicationContext(), ExamsActivity.class));
+                                    showToastMessage(getResources().getString(R.string.success_delete));
+                                    finish();
                                 } else
-                                    showToastMessage("An error occurred while deleting the exam");
+                                    showToastMessage(getResources().getString(R.string.failed_delete));
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -102,7 +116,8 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                 return true;
             case R.id.action_share:
                 mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-                setShareIntent();
+                if (mShareActionProvider != null)
+                    setShareIntent();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -130,10 +145,10 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
             }
 
             else {
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "I have an exam in " + name_details.getText() + " on the "
-                        + new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN).format(exam.getDate().getTime())
-                        + ", wish me good luck!");
-                startActivity(Intent.createChooser(shareIntent, "Share exam with..."));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_1) + " " + name_details.getText() + " " + getResources().getString(R.string.share_2)
+                        + " " + new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN).format(exam.getDate().getTime())
+                        + ", " + getResources().getString(R.string.share_3));
+                startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_with)));
             }
 
         }
@@ -142,12 +157,12 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
     public void showDialog(final Intent shareIntent) {
 
         final Dialog d = new Dialog(ViewExamActivity.this);
-        d.setTitle("What score did you get?");
+        d.setTitle(getResources().getString(R.string.what_score));
         d.setContentView(R.layout.dialog);
         Button b1 = (Button) d.findViewById(R.id.button1);
         Button b2 = (Button) d.findViewById(R.id.button2);
         final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
-        np.setMaxValue(30);
+        np.setMaxValue(31);
         np.setMinValue(18);
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
@@ -157,10 +172,10 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
             public void onClick(View v) {
                 score = np.getValue();
                 d.dismiss();
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "I passed the exam in " + name_details.getText() + " of the "
-                        + new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN).format(exam.getDate().getTime())
-                        + " with a score of " + score + "!");
-                startActivity(Intent.createChooser(shareIntent, "Share exam with..."));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_a) + " " + name_details.getText() + " " + getResources().getString(R.string.share_b)
+                        + " " + new SimpleDateFormat("dd/MM/yyyy", Locale.ITALIAN).format(exam.getDate().getTime())
+                        + " " + getResources().getString(R.string.share_c) + " " + score + "!");
+                startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_with)));
             }
         });
         b2.setOnClickListener(new View.OnClickListener()

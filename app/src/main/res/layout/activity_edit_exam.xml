@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="56dp"
                     android:layout_gravity="center_vertical"
-                    android:text="Signed up"
+                    android:text="@string/signed_up"
                     android:textColor="@color/dark_text_color"
                     android:textSize="18sp"/>
 

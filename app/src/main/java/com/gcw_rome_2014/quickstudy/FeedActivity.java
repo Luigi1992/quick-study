@@ -1,14 +1,10 @@
 package com.gcw_rome_2014.quickstudy;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -54,10 +50,10 @@ public class FeedActivity extends ActionBarActivity {
                     sendFeedback("QuickStudy User Feedback: "+feedType,
                             "User: "+user+"\n" + "Email: "+email+"\n"+ message+"\n"+response);
                     finish();
-                    showToast("Thanks for your help!");
+                    showToast(getResources().getString(R.string.thank_you));
                 }
                 else
-                    showToast("All fields are required");
+                    showToast(getResources().getString(R.string.fields_required));
             }
         });
 

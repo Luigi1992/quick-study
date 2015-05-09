@@ -4,11 +4,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.util.Log;
 
+import com.gcw_rome_2014.quickstudy.ExamAdapter;
 import com.gcw_rome_2014.quickstudy.calendar.ScheduleManager;
 import com.gcw_rome_2014.quickstudy.database.QuickStudyDatabase;
 import com.gcw_rome_2014.quickstudy.database.selectors.AllExamsSelector;
 import com.gcw_rome_2014.quickstudy.database.selectors.Selector;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +27,7 @@ public class QuickStudy {
     private ScheduleManager scheduleManager = null;
     private Map<Long, Exam> exams = null;
     private Selector selector = null;
+    private ExamAdapter examAdapter = null;
 
     private static final String appName = "Quick Study";
 
@@ -38,6 +42,7 @@ public class QuickStudy {
     public void init(Context context, ContentResolver contentResolver) {
         this.database = new QuickStudyDatabase(context);
         this.scheduleManager = new ScheduleManager(contentResolver, context);
+        this.examAdapter = new ExamAdapter(this.getListOfExams());
     }
 
     /**
@@ -71,18 +76,18 @@ public class QuickStudy {
         if (!isInitialized()) return;
 
         load();
-        this.scheduleManager.updateExam(exam);     //Into Calendar
         this.database.updateExam(exam);            //Into Database
         this.exams.put(exam.getId(), exam);        //Into List
+        this.scheduleManager.updateExam(exam);     //Into Calendar
     }
 
     public boolean deleteExam(Exam exam) {
         if (!isInitialized()) return false;
         load();
 
-        boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
         boolean database = this.database.deleteExam(exam.getId()) > 0;      //From Database
         boolean list = this.exams.remove(exam.getId()) != null;             //From list
+        boolean calendar = this.scheduleManager.deleteExam(exam) > 0;       //From Calendar
 
         return calendar && database && list;
     }
@@ -127,6 +132,14 @@ public class QuickStudy {
         return examsArray;
     }
 
+    public List<Exam> getListOfExams() {
+        if(this.database == null)
+            return null;
+
+        load();
+        return new ArrayList<>(this.exams.values());
+    }
+
     /**
      * Method for the lazy load.
      */
@@ -139,5 +152,24 @@ public class QuickStudy {
      */
     private void selectorLoad(Selector selector) {
         this.exams = this.database.readAllExams(selector);
+    }
+
+    /**
+     * Reload the exams list.
+     */
+    public void reloadExamsList(Selector selector) {
+        QuickStudy.getInstance().setSelector(selector);
+        this.examAdapter.setExams(QuickStudy.getInstance().getListOfExams());
+        //Sort exams by date
+        this.examAdapter.sort();
+        this.examAdapter.notifyDataSetChanged();
+    }
+
+    public ExamAdapter getExamAdapter() {
+        return examAdapter;
+    }
+
+    public void setExamAdapter(ExamAdapter examAdapter) {
+        this.examAdapter = examAdapter;
     }
 }

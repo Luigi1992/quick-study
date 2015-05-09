@@ -1,4 +1,4 @@
-package com.gcw_rome_2014.quickstudy;
+package com.gcw_rome_2014.quickstudy.custom;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.gcw_rome_2014.quickstudy.R;
 
 /**
  * Created by Alessio on 21/03/2015.

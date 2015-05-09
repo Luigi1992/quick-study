@@ -10,13 +10,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_color"
+
         tools:context=".ExamsActivity"
         tools:ignore="MergeRootFrame">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/background_color"
             android:orientation="vertical">
 
             <!-- A RecyclerView with some commonly used attributes-->
@@ -26,6 +27,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:text="@string/no_data_available" />
 
         </LinearLayout>
 

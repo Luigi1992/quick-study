@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="difficulty_array">
-        <item>Easy</item>
-        <item>Medium</item>
-        <item>Hard</item>
+        <item>@string/easy</item>
+        <item>@string/medium</item>
+        <item>@string/hard</item>
     </string-array>
     <string-array name="feedbacktype_list">
         <item>@string/feedbacktype1</item>
         <item>@string/feedbacktype2</item>
         <item>@string/feedbacktype3</item>
         <item>@string/feedbacktype4</item>
+    </string-array>
+    <string-array name="drawer_menu">
+        <item>@string/all</item>
+        <item>@string/incoming</item>
+        <item>@string/old</item>
+        <item>@string/action_settings</item>
+        <item>@string/title_activity_about</item>
+        <item>@string/title_activity_feed</item>
     </string-array>
 </resources>
