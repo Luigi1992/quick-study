@@ -21,6 +21,7 @@
     <string name="email">Il tuo indirizzo e-mail</string>
     <string name="enable_day">Abilita sessioni di studio</string>
     <string name="enter_feedback">Inserisci il tuo commento da inviare agli sviluppatori:</string>
+    <string name="exam_in">Esame di</string>
     <string name="exam_is_registered">Registrato</string>
     <string name="exam_name">Nome esame</string>
     <string name="exam_not_registered">Non registrato</string>
@@ -66,6 +67,7 @@
     <string name="signed">Sei registrato per questo esame</string>
     <string name="signed_up">Registrato</string>
     <string name="start_now" translatable="false">Inizia ora</string>
+    <string name="study">Studiare</string>
     <string name="study_day">Studia in questo giorno</string>
     <string name="success_delete">L\'esame è stato eliminato</string>
     <string name="sunday">Domenica</string>

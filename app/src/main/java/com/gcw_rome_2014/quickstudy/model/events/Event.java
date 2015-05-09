@@ -1,5 +1,7 @@
 package com.gcw_rome_2014.quickstudy.model.events;
 
+import android.content.Context;
+
 import com.gcw_rome_2014.quickstudy.model.Exam;
 
 import java.util.Calendar;
@@ -14,6 +16,7 @@ public abstract class Event {
     private Calendar dateAndTime;
     private int duration;
     private Exam exam;
+    private static Context context;
 
     public Event(Exam exam, String name, String description, Calendar dateAndTime, int duration) {
         this.exam = exam;
@@ -69,6 +72,13 @@ public abstract class Event {
 
     public void setExam(Exam exam) {
         this.exam = exam;
+    }
+
+    public static Context getContext() { return context; }
+
+    public static void setContext(Context mcontext) {
+        if (context == null)
+            context = mcontext;
     }
 
     @Override

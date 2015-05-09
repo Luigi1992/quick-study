@@ -31,6 +31,7 @@ import com.gcw_rome_2014.quickstudy.database.selectors.IncomingExamsSelector;
 import com.gcw_rome_2014.quickstudy.database.selectors.OldExamsSelectors;
 import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.QuickStudy;
+import com.gcw_rome_2014.quickstudy.model.events.Event;
 import com.gcw_rome_2014.quickstudy.settings.SettingsActivity;
 
 /**
@@ -106,6 +107,7 @@ public class ExamsActivity extends ActionBarActivity {
         //Sort exams by date
         mAdapter.sort();
 
+        Event.setContext(getApplicationContext());
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -119,14 +121,7 @@ public class ExamsActivity extends ActionBarActivity {
             }
         });
 
-        if (mAdapter.getExams().isEmpty()) {
-            mRecyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        }
-        else {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        }
+        checkExams();
 
         //Manage drawer
         mMenuTitles = getResources().getStringArray(R.array.drawer_menu);
@@ -177,17 +172,8 @@ public class ExamsActivity extends ActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-
-        if (mAdapter.getExams().isEmpty()) {
-            mRecyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        }
-        else {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        }
-
         checkSelector();
+        checkExams();
     }
 
     @Override
@@ -267,6 +253,7 @@ public class ExamsActivity extends ActionBarActivity {
                 startActivity(new Intent(this, FeedActivity.class));
                 break;
         }
+        checkExams();
 
     }
 
@@ -303,6 +290,17 @@ public class ExamsActivity extends ActionBarActivity {
                 QuickStudy.getInstance().reloadExamsList(new OldExamsSelectors());
                 getSupportActionBar().setTitle(getResources().getString(R.string.old));
                 break;
+        }
+    }
+
+    public void checkExams() {
+        if (QuickStudy.getInstance().getExamAdapter().getExams().isEmpty()) {
+            mRecyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
         }
     }
 
