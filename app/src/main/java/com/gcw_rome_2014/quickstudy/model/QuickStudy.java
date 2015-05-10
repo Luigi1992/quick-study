@@ -29,7 +29,7 @@ public class QuickStudy {
     private Selector selector = null;
     private ExamAdapter examAdapter = null;
 
-    private static final String appName = "Quick Study";
+    private static final String appName = "QuickStudy";
 
     public static QuickStudy getInstance() {
         return instance;
