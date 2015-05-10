@@ -39,6 +39,7 @@
     <string name="hour_of_exam">Ora</string>
     <string name="hours_per_day">Ore al giorno</string>
     <string name="incoming">Prossimi esami</string>
+    <string name="insert_value">Inserisci un valore tra 1 e 12</string>
     <string name="medium">Medio</string>
     <string name="monday">Lunedì</string>
     <string name="no_data_available">Tocca il pulsante sottostante per aggiungere un esame!</string>
