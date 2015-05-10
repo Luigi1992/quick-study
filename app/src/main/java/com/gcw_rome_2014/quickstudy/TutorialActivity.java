@@ -59,7 +59,7 @@ public class    TutorialActivity extends Activity {
         });
         startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                bgElement.setBackgroundColor(Color.WHITE);
+                bgElement.setBackgroundColor(Color.parseColor("#F5F5F5"));
                 start();
             }
         });
