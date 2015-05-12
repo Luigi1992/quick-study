@@ -87,7 +87,7 @@ public class ExamsActivity extends ActionBarActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         //Set default values for settings
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        PreferenceManager.setDefaultValues(this, R.xml.pref_days_week, false);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -277,7 +277,7 @@ public class ExamsActivity extends ActionBarActivity {
     }
 
     private void checkSelector() {
-        switch (prefs.getInt("selector", 0)) {
+        switch (prefs.getInt("selector", 1)) {
             case 1:
                 QuickStudy.getInstance().reloadExamsList(new AllExamsSelector());
                 getSupportActionBar().setTitle(getResources().getString(R.string.your_exams));
@@ -303,6 +303,5 @@ public class ExamsActivity extends ActionBarActivity {
             emptyView.setVisibility(View.GONE);
         }
     }
-
 
 }

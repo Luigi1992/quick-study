@@ -1,17 +1,20 @@
 package com.gcw_rome_2014.quickstudy.settings;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gcw_rome_2014.quickstudy.ExamsActivity;
 import com.gcw_rome_2014.quickstudy.R;
 
 /**
@@ -22,6 +25,7 @@ public class SetCustomDiffActivity extends PreferenceActivity {
     public static int DIFFICULTY_HOURS_EASY = 1;
     public static int DIFFICULTY_HOURS_MEDIUM = 2;
     public static int DIFFICULTY_HOURS_HARD = 4;
+    SharedPreferences prefs;
 
     @Override
     @SuppressWarnings("deprecation")
@@ -50,9 +54,6 @@ public class SetCustomDiffActivity extends PreferenceActivity {
         bar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DIFFICULTY_HOURS_EASY = Integer.parseInt(preferenceEasy.getText());
-                DIFFICULTY_HOURS_MEDIUM = Integer.parseInt(preferenceMedium.getText());
-                DIFFICULTY_HOURS_HARD = Integer.parseInt(preferenceHard.getText());
                 finish();
             }
         });
@@ -62,14 +63,19 @@ public class SetCustomDiffActivity extends PreferenceActivity {
         preference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
+                prefs= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                DIFFICULTY_HOURS_EASY = Integer.parseInt(prefs.getString("preference_easy", "1"));
+                DIFFICULTY_HOURS_MEDIUM = Integer.parseInt(prefs.getString("preference_medium", "2"));
+                DIFFICULTY_HOURS_HARD = Integer.parseInt(prefs.getString("preference_hard", "4"));
+
                 int numberOfHours = Integer.parseInt(newValue.toString());
                 if (numberOfHours >= 1 && numberOfHours <= 12) {
                     // Updating summary
-                    preference.setSummary(String.valueOf(numberOfHours)+" hours");
+                    preference.setSummary(String.valueOf(numberOfHours)+ " " + getResources().getString(R.string.hours));
                     return true;
                 } else {
                     // Invalid value
-                    showErrorToast("Insert a value between 1 and 12");
+                    showErrorToast(getResources().getString(R.string.insert_value));
                     return false;
                 }
             }
