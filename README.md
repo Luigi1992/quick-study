@@ -1,25 +1,22 @@
-_The exams came. You had a problem with organising work. You did not pass as many exams as you planned again. You started panic and cannot focus on studying. You just hate exams. You promised yourself: next time you will start preparing much earlier and will not fail any of them!  Do you know this case? Does it describe you?_   
-_If the answer was: YES, you can sleep peacefully again._  
-_During next end-of-term examinations you will not have this problem._    
-_We are happy to present:_   
-
 
 QuickStudy
 =======
 
-QuickStudy is an application that can save your life.  
-QuickStudy  
-* Organises for you the study plan
-* Shows when you should study
-* Keeps an eye on you if you signed up your exams in time
-* Uses Google Calendar to show suggested planning sessions and exams
+_Stop worrying about planning your study! QuickStudy is here for you_   
+
+![](https://github.com/Luigi1992/quick-study/blob/final/app/src/main/res/drawable-xxhdpi/ic_launcher.png)
+
+QuickStudy is an Android application made for helping students to organise their study. The app takes into consideration the users' preferences in order to suggest the best spaces of time in which to study. Your study plan will be created directly on your smartphone's calendar, so you can check it on there. It also works with the Google Calendar if you have a Google Account associated with your smartphone.
 
 
-Studying had never been so easy before.  
-TODO: add screenshots
+Studying has never been easier.  
 
 
 
+Milestones presentations:
+* [First Milestone](https://github.com/Luigi1992/quick-study/blob/slide/concept/Save%20Me%20Milestone%201%20-%20Proof%20of%20Concept.pptx)
+* [Second Milestone](https://docs.google.com/presentation/d/1zEiJECv6l1cFBLZgWNqED9QrPDdX8GXaJhZec9WviaA/edit?usp=sharing)
+* [Third Milestone](https://docs.google.com/presentation/d/1lhGPPD2guvkjarVIpF2HW3_VB56UgWYKI9gQ-s4bbS0/edit?usp=sharing)
 
   
     
