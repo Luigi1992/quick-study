@@ -1,21 +1,20 @@
-_The exams came. You had a problem with organising work. You did not pass as many exams as you planned again. You started panic and cannot focus on studying. You just hate exams. You promised yourself: next time you will start preparing much earlier and will not fail any of them!  Do you know this case? Does it describe you?_   
-_If the answer was: YES, you can sleep peacefully again._  
-_During next end-of-term examinations you will not have this problem._    
-_We are happy to present:_   
-
 
 QuickStudy
 =======
 
-QuickStudy is an application that can save your life.  
-QuickStudy  
-* Organises for you the study plan
+_Stop worrying about planning your study! QuickStudy is here for you_   
+
+![](https://github.com/Luigi1992/quick-study/blob/final/app/src/main/res/drawable-xxhdpi/ic_launcher.png)
+
+QuickStudy is the application that can help you organise your studying time. Just select your preferences and put in your exams to get your study plan on your phone's calendar.
+
+* Create for you the study plan
 * Shows when you should study
 * Keeps an eye on you if you signed up your exams in time
 * Uses Google Calendar to show suggested planning sessions and exams
 
 
-Studying had never been so easy before.  
+Studying has never been easier.  
 
 
 
