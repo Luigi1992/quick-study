@@ -127,7 +127,6 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                                         QuickStudy.getInstance().updateExam(ViewExamActivity.this.exam);
                                     }
                                 }).start();
-                                finish();
                                 showToastMessage(getResources().getString(R.string.success_reschedule));
                             }
                         })
@@ -149,7 +148,6 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                                         QuickStudy.getInstance().deleteSessions(ViewExamActivity.this.exam);
                                     }
                                 }).start();
-                                finish();
                                 showToastMessage(getResources().getString(R.string.success_del_sessions));
                             }
                         })
