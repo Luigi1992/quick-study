@@ -11,8 +11,10 @@ import com.gcw_rome_2014.quickstudy.database.selectors.AllExamsSelector;
 import com.gcw_rome_2014.quickstudy.database.selectors.Selector;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Luigi on 15/02/2015.
@@ -76,9 +78,12 @@ public class QuickStudy {
         if (!isInitialized()) return;
 
         load();
-        this.database.updateExam(exam);            //Into Database
-        this.exams.put(exam.getId(), exam);        //Into List
-        this.scheduleManager.updateExam(exam);     //Into Calendar
+
+        deleteExam(exam);
+        putExam(exam);
+        //exam = this.scheduleManager.updateExam(exam);     //Into Calendar
+        //this.database.updateExam(exam);            //Into Database
+        //this.exams.put(exam.getId(), exam);        //Into List
     }
 
     public boolean deleteExam(Exam exam) {
@@ -163,6 +168,15 @@ public class QuickStudy {
         //Sort exams by date
         this.examAdapter.sort();
         this.examAdapter.notifyDataSetChanged();
+    }
+
+    public boolean deleteSessions(Exam exam) {
+        if (!isInitialized()) return false;
+        load();
+
+        boolean calendar = this.scheduleManager.deleteStudySessions(exam) > 0;       //From Calendar
+
+        return calendar;
     }
 
     public ExamAdapter getExamAdapter() {

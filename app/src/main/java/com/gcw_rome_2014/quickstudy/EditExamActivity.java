@@ -73,7 +73,17 @@ public class EditExamActivity extends ActionBarActivity {
         examNameEditText.setText(exam.getName());
         updateDateLabel(exam.getDate());
         updateTimeLabel(exam.getDate());
-        examDifficultySpinner.setSelection(adapter.getPosition(exam.getDifficulty().getName()));
+        switch (exam.getDifficulty().getName()) {
+            case "Easy":
+                examDifficultySpinner.setSelection(adapter.getPosition(getResources().getString(R.string.easy)));
+                break;
+            case "Medium":
+                examDifficultySpinner.setSelection(adapter.getPosition(getResources().getString(R.string.medium)));
+                break;
+            case "Hard":
+                examDifficultySpinner.setSelection(adapter.getPosition(getResources().getString(R.string.hard)));
+                break;
+        }
         examRegisteredCheckBox.setChecked(exam.isRegistered());
 
     }

@@ -114,6 +114,50 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
                         })
                         .setIcon(android.R.drawable.ic_dialog_alert).show();
                 return true;
+            case R.id.action_reschedule:
+                new AlertDialog.Builder(this)
+                        .setTitle(getResources().getString(R.string.reschedule_sessions))
+                        .setMessage(getResources().getString(R.string.confirm_reschedule))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        QuickStudy.getInstance().updateExam(ViewExamActivity.this.exam);
+                                    }
+                                }).start();
+                                finish();
+                                showToastMessage(getResources().getString(R.string.success_reschedule));
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert).show();
+                return true;
+            case R.id.action_delete_sessions:
+                new AlertDialog.Builder(this)
+                        .setTitle(getResources().getString(R.string.delete_sessions))
+                        .setMessage(getResources().getString(R.string.confirm_del_sessions))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        QuickStudy.getInstance().deleteSessions(ViewExamActivity.this.exam);
+                                    }
+                                }).start();
+                                finish();
+                                showToastMessage(getResources().getString(R.string.success_del_sessions));
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert).show();
+                return true;
             case R.id.action_share:
                 mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
                 if (mShareActionProvider != null)

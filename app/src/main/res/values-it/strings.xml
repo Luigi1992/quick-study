@@ -6,9 +6,12 @@
     <string name="all">Tutti gli esami</string>
     <string name="cancel">Annulla</string>
     <string name="confirm_delete">Sei sicuro di voler eliminare questo esame?</string>
+    <string name="confirm_del_sessions">Sei sicuro di voler eliminare le sessioni di studio? (L\'esame rimarrà comunque in memoria)</string>
+    <string name="confirm_reschedule">Sei sicuro di voler pianificare nuovamente le sessioni di studio?</string>
     <string name="date_of_exam">Data</string>
     <string name="delete">Elimina</string>
     <string name="delete_exam">Elimina esame</string>
+    <string name="delete_sessions">Elimina le sessioni di studio</string>
     <string name="details">Dettagli</string>
     <string name="difficulty_easy">Sessione di studio facile</string>
     <string name="difficulty_hard">Sessione di studio difficile</string>
@@ -50,6 +53,8 @@
     <string name="pref_hours_number_summary">Imposta la durata delle sessioni di studio in base alle difficoltà</string>
     <string name="pref_hours_number_tittle">Personalizza difficoltà</string>
     <string name="pref_sessions">Preferenze per le sessioni di studio</string>
+    <string name="reschedule">Aggiorna sessioni di studio</string>
+    <string name="reschedule_sessions">Aggiorna sessioni di studio</string>
     <string name="saturday">Sabato</string>
     <string name="save">Salva</string>
     <string name="save_me_button">Salva</string>
@@ -71,6 +76,8 @@
     <string name="study">Studiare</string>
     <string name="study_day">Studia in questo giorno</string>
     <string name="success_delete">L\'esame è stato eliminato</string>
+    <string name="success_del_sessions">Le sessioni di studio sono state eliminate</string>
+    <string name="success_reschedule">L\'aggiornamento è stato effettuato</string>
     <string name="sunday">Domenica</string>
     <string name="thank_you">Grazie per il tuo supporto!</string>
     <string name="thursday">Giovedì</string>

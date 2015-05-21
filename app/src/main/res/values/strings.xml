@@ -105,6 +105,13 @@
     <string name="study">Study</string>
 
     <string name="insert_value">Insert a value between 1 and 12</string>
+    <string name="reschedule">Reschedule</string>
+    <string name="success_reschedule">Rescheduling succeeded!</string>
+    <string name="success_del_sessions">Study sessions has been successfully deleted</string>
+    <string name="confirm_reschedule">Do you want to reschedule your study sessions?</string>
+    <string name="confirm_del_sessions">Do you really want to delete your study sessions? (The exam will remain)</string>
+    <string name="reschedule_sessions">Reschedule study sessions</string>
+    <string name="delete_sessions">Delete study sessions</string>
 
     <string name="about_quick_study">QuickStudy:\n-Organises the study plan\n -Shows when you should study\n -Keep an eye on you if you signed up your exams in time,\n- Uses calendar to show suggested planning sessions and exams.\n\nAdd new exam and see QuickStudy\'s proposition of studying schedule in your calendar!</string>
 

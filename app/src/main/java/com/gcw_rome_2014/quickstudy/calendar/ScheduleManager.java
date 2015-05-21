@@ -53,13 +53,13 @@ public class ScheduleManager {
         return event;
     }
 
-    public int updateExam(Exam exam) {
+    public Exam updateExam(Exam exam) {
         int row = this.eventManager.updateEvent(new ExamEvent(exam));
 
         for (long sessionID : exam.getStudySessionIds())
             this.eventManager.updateEventName(sessionID, exam.getName());
 
-        return row;
+        return exam;
     }
 
     public int deleteExam(Exam exam) {
@@ -71,12 +71,22 @@ public class ScheduleManager {
         return row;
     }
 
+    public int deleteStudySessions(Exam exam) {
+        int row = 0;
+
+        for(long id : exam.getStudySessionIds())
+            row += this.eventManager.deleteEvent(id);
+
+        return row;
+    }
+
     private void addStudySessionEvents(Exam exam, Calendar startDate, int hoursOfStudy) {
         System.out.println("START: " + startDate.getTime());
         System.out.println("END: " + exam.getLastStudyDate().getTime() + "\n");
         System.out.println(hoursOfStudy);
-
-        if(startDate.before(exam.getLastStudyDate())) {
+        Calendar endDate = startDate;
+        endDate.add(Calendar.HOUR_OF_DAY, hoursOfStudy);
+        if(endDate.before(exam.getLastStudyDate())) {
             startDate.add(Calendar.DATE, 1);
             switch (startDate.get(Calendar.DAY_OF_WEEK)) {
                 case Calendar.MONDAY:
@@ -165,6 +175,7 @@ public class ScheduleManager {
             duration = 1;
         Event event = new StudySessionEvent(exam, session, duration);
         long sessionId = this.eventManager.addEvent(event);
+        System.out.println("Adding " + sessionId);
         exam.addSessionId(sessionId);
 
     }
