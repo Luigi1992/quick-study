@@ -22,6 +22,7 @@ import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
+import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -89,6 +90,7 @@ public class AddNewExamActivity extends ActionBarActivity {
                         public void run() {
 
                             saveNewExamEvent(newExam);
+                            finish();
                         }
                     }).start();
                 }
@@ -166,9 +168,10 @@ public class AddNewExamActivity extends ActionBarActivity {
         try {
             String className = "com.gcw_rome_2014.quickstudy.model.difficulties.";
             className += examDifficultyString;
-            difficulty = (Difficulty) Class.forName(className).newInstance();
+            Constructor c = Class.forName(className).getConstructor(Context.class);
+            difficulty = (Difficulty) c.newInstance(getApplicationContext());
         } catch (Exception e) {
-            difficulty = new Medium();
+            difficulty = new Medium(getApplicationContext());
         }
 
         return new Exam(examName, difficulty, calendar);
@@ -255,8 +258,6 @@ public class AddNewExamActivity extends ActionBarActivity {
      */
     public void saveNewExamEvent(Exam exam) {
         QuickStudy.getInstance().putExam(exam);
-
-        finish();
     }
 
     private void showErrorToast(String message) {

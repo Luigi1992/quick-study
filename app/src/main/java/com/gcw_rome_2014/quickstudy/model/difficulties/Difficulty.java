@@ -1,5 +1,7 @@
 package com.gcw_rome_2014.quickstudy.model.difficulties;
 
+import android.content.Context;
+
 import java.io.Serializable;
 
 /**
@@ -9,10 +11,12 @@ public abstract class Difficulty implements Serializable{
 
     private String name;
     private int imageValue;
+    private Context context;
 
-    public Difficulty(String name, int value) {
+    public Difficulty(String name, int value, Context context) {
         this.name = name;
         this.imageValue = value;
+        this.context = context;
     }
 
     public int getImageValue() {
@@ -29,6 +33,14 @@ public abstract class Difficulty implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 
     public abstract int getHoursOfStudy();

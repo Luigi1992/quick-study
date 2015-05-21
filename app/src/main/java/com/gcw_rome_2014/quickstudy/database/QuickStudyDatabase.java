@@ -12,6 +12,7 @@ import com.gcw_rome_2014.quickstudy.model.Exam;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Easy;
 
+import java.lang.reflect.Constructor;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,9 +32,11 @@ import java.util.Set;
 public class QuickStudyDatabase {
     private QuickStudyReaderDbHelper mDbHelper;
     private SQLiteDatabase db;
+    private Context context;
 
     public QuickStudyDatabase (Context context) {
         this.mDbHelper = new QuickStudyReaderDbHelper(context);
+        this.context = context;
     }
 
     public long putExam(Exam exam) {
@@ -318,9 +321,10 @@ public class QuickStudyDatabase {
         try {
             String className = "com.gcw_rome_2014.quickstudy.model.difficulties.";
             className += difficultyName;
-            difficulty = (Difficulty) Class.forName(className).newInstance();
+            Constructor c = Class.forName(className).getConstructor(Context.class);
+            difficulty = (Difficulty) c.newInstance(context);
         } catch (Exception e) {
-            difficulty = new Easy();
+            difficulty = new Easy(context);
         }
 
         return new Exam(examId, examName, difficulty, examDate, isRegistered);

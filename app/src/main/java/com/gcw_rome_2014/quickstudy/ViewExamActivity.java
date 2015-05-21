@@ -42,7 +42,9 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_exam);
 
-        this.exam = (Exam) getIntent().getSerializableExtra("exam");
+        long examID = (long) getIntent().getSerializableExtra("examID");
+        QuickStudy quickStudy = QuickStudy.getInstance();
+        this.exam = quickStudy.getExam(examID);
 
         name_details = (TextView) findViewById(R.id.details_name);
         date_details = (TextView) findViewById(R.id.details_date);
@@ -89,7 +91,7 @@ public class ViewExamActivity extends ActionBarActivity implements NumberPicker.
         switch (item.getItemId()) {
             case R.id.action_edit:
                 Intent i = new Intent(this, EditExamActivity.class);
-                i.putExtra("exam", this.exam);
+                i.putExtra("examID", this.exam.getId());
                 startActivity(i);
                 finish();
                 return true;

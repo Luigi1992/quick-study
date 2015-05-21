@@ -116,7 +116,7 @@ public class ExamsActivity extends ActionBarActivity {
             public void onItemClick(View view, int position) {
                 Intent i = new Intent(context, ViewExamActivity.class);
                 Exam exam = mAdapter.getExams().get(position);
-                i.putExtra("exam", exam);
+                i.putExtra("examID", exam.getId());
                 startActivity(i);
             }
         });

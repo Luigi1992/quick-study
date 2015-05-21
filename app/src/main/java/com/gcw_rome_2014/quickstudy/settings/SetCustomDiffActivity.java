@@ -22,9 +22,6 @@ import com.gcw_rome_2014.quickstudy.R;
  */
 public class SetCustomDiffActivity extends PreferenceActivity {
 
-    public static int DIFFICULTY_HOURS_EASY = 1;
-    public static int DIFFICULTY_HOURS_MEDIUM = 2;
-    public static int DIFFICULTY_HOURS_HARD = 4;
     SharedPreferences prefs;
 
     @Override
@@ -64,9 +61,6 @@ public class SetCustomDiffActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 prefs= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                DIFFICULTY_HOURS_EASY = Integer.parseInt(prefs.getString("preference_easy", "1"));
-                DIFFICULTY_HOURS_MEDIUM = Integer.parseInt(prefs.getString("preference_medium", "2"));
-                DIFFICULTY_HOURS_HARD = Integer.parseInt(prefs.getString("preference_hard", "4"));
 
                 int numberOfHours = Integer.parseInt(newValue.toString());
                 if (numberOfHours >= 1 && numberOfHours <= 12) {

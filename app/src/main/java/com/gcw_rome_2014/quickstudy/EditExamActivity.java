@@ -23,6 +23,7 @@ import com.gcw_rome_2014.quickstudy.model.QuickStudy;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Difficulty;
 import com.gcw_rome_2014.quickstudy.model.difficulties.Medium;
 
+import java.lang.reflect.Constructor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -51,7 +52,9 @@ public class EditExamActivity extends ActionBarActivity {
         examDifficultySpinner = (Spinner) findViewById(R.id.edit_examDifficulty);
         examRegisteredCheckBox = (CheckBox) findViewById(R.id.edit_examRegistered);
 
-        this.exam = (Exam) getIntent().getSerializableExtra("exam");
+        long examID = (long) getIntent().getSerializableExtra("examID");
+        QuickStudy quickStudy = QuickStudy.getInstance();
+        this.exam = quickStudy.getExam(examID);
 
         // To prevent opening keyboard before date/time dialog
         dateOfExamEditText.setInputType(InputType.TYPE_NULL);
@@ -184,9 +187,10 @@ public class EditExamActivity extends ActionBarActivity {
         try {
             String className = "com.gcw_rome_2014.quickstudy.model.difficulties.";
             className += examDifficultyString;
-            difficulty = (Difficulty) Class.forName(className).newInstance();
+            Constructor c = Class.forName(className).getConstructor(Context.class);
+            difficulty = (Difficulty) c.newInstance(getApplicationContext());
         } catch (Exception e) {
-            difficulty = new Medium();
+            difficulty = new Medium(getApplicationContext());
         }
 
         this.exam.setName(examName);
