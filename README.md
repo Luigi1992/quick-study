@@ -8,7 +8,7 @@ _Stop worrying about planning your study! QuickStudy is here for you_
 
 QuickStudy is an Android application made for helping students to organise their study. The app takes into consideration the users' preferences in order to suggest the best spaces of time in which to study. Your study plan will be created directly on your smartphone's calendar, so you can check it on there. It also works with the Google Calendar if you have a Google Account associated with your smartphone.
 
-[Download here](https://rawgit.com/Luigi1992/quick-study/develop/app/app-release-unaligned.apk)
+[Download QuickStudy here](https://rawgit.com/Luigi1992/quick-study/develop/app/app-release-unaligned.apk)
 
 
 Studying has never been easier.  
